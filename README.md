@@ -7,6 +7,9 @@ After Lyubo
 
 Some kind of mistake might appear
 
+<<<<<<< Updated upstream
 bla
 
 I made this for youu
+=======
+>>>>>>> Stashed changes
