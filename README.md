@@ -8,8 +8,11 @@ After Lyubo
 Some kind of mistake might appear
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 bla
 
 I made this for youu
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
