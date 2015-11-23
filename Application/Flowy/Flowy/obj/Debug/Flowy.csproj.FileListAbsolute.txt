@@ -8,3 +8,6 @@ E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowy\Flo
 E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowy\Flowy\obj\Debug\Flowy.csproj.GenerateResource.Cache
 E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowy\Flowy\obj\Debug\Flowy.exe
 E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowy\Flowy\obj\Debug\Flowy.pdb
+E:\Uni\Programming C#\OOD2\gitProject\pipe-line\Application\Flowy\Flowy\bin\Debug\Flowy.exe.config
+E:\Uni\Programming C#\OOD2\gitProject\pipe-line\Application\Flowy\Flowy\obj\Debug\Flowy.exe
+E:\Uni\Programming C#\OOD2\gitProject\pipe-line\Application\Flowy\Flowy\obj\Debug\Flowy.pdb
