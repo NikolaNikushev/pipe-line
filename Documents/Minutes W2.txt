@@ -1,0 +1,14 @@
+
+	* For introduction has to be more formal about the Requirements
+	* elements and components is different. change it to components
+	* on user interface we have to show what toolbox is
+	* Specify that the system draws new element. We dont pick it! We can say click, double-click , or dragging. First we click on toolbox and after that where. System depicts the element on the grid. System checks for overlapping. Message is needed to say that element is not added if it overlaps and the user clicks. Adding again and again after clicking once is not good.
+	* We should choose between clicking and dragging
+	* From output to input.. Following the clicks from output to input. Graphics - drawline -> Drawlines(array)... DrawCurves(....) ,
+	* The user double-clicks. system calculates if its adjustable splitter. System adjusts the splitter not the user.  -- 1.User double clicks on the grid. 2. System calculates if its a adjustable splitter. 
+	* File open - asks the user for saving before opening the new one
+	* No MDI window . One window one network at a time ! - thats the must.
+	* Should we do one undo or more ? - preferably just a single one
+	* Nonfunctional requirements many fixes - connected with the GUI
+	* Specify the operational system - Win 7,8,10; - Nonfunctional req.
+
