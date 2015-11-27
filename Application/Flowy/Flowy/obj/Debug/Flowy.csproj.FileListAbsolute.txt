@@ -13,3 +13,9 @@ E:\Uni\Programming C#\OOD2\gitProject\pipe-line\Application\Flowy\Flowy\obj\Debu
 E:\Uni\Programming C#\OOD2\gitProject\pipe-line\Application\Flowy\Flowy\obj\Debug\Flowy.pdb
 G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowy\Flowy\obj\Debug\Flowy.exe
 G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowy\Flowy\obj\Debug\Flowy.pdb
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowy\Flowy\bin\Debug\Flowy.exe
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowy\Flowy\bin\Debug\Flowy.pdb
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowy\Flowy\obj\Debug\Flowy.csprojResolveAssemblyReference.cache
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowy\Flowy\obj\Debug\Flowy.Form1.resources
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowy\Flowy\obj\Debug\Flowy.Properties.Resources.resources
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowy\Flowy\obj\Debug\Flowy.csproj.GenerateResource.Cache
