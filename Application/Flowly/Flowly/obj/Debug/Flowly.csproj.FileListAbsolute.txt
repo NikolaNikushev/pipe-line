@@ -15,3 +15,6 @@ G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debu
 G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.Form1.resources
 G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.Properties.Resources.resources
 G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.csproj.GenerateResource.Cache
+E:\Uni\Programming C#\OOD2\gitProject\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.exe.config
+E:\Uni\Programming C#\OOD2\gitProject\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.exe
+E:\Uni\Programming C#\OOD2\gitProject\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.pdb
