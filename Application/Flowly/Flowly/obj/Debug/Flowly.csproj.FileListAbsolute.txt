@@ -18,3 +18,12 @@ G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debu
 E:\Uni\Programming C#\OOD2\gitProject\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.exe.config
 E:\Uni\Programming C#\OOD2\gitProject\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.exe
 E:\Uni\Programming C#\OOD2\gitProject\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.pdb
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.exe.config
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.exe
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.pdb
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.exe
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.pdb
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.csprojResolveAssemblyReference.cache
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.Form1.resources
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.Properties.Resources.resources
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.csproj.GenerateResource.Cache
