@@ -1,0 +1,22 @@
+URS
+	 Rending, explanations
+	 How are the things with games
+	 Appendix - with definition of what we mean and What kind of rules we have
+	 Pipeline is not a component is a separate thing
+	 Our use cases don't suite the pipeline as a component - we should change it to be separate
+	 Why did we wrote twice the removing a componentremoving a pipeline
+	 Removing a shape or removing a trianglecircle
+	 Update all the flow that comes AFTER the pipeline UC #3
+	 #7 User chooses on option on the menu 
+	 #8 Again the same problem with the #7
+	 NONfunc - Reliability - #3 
+	 Auto-save is a good idea of implementation
+
+Class diagram and components
+
+	 When we do it as a rectangle we will have a nice predefined methods for overlapping and stuff
+	 id of the component is the X and Y because it will be unique and it doesnt need ID
+	 Aliasing
+	 ToolboxComponent The selectedone - we dont need the INMODE boolean
+	 Make on visual studio Class Diagram for better performance
+
