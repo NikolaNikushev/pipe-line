@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class Sink : FlowComponent
+public class Sink : ComponentDrawn
 {
 }
 

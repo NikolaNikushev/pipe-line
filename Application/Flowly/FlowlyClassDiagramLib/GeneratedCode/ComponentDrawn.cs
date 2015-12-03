@@ -9,19 +9,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class ConnectionPoint
+public class ComponentDrawn
 {
+	private List<ConnectionPoint> listOfConnectionPoints;
+
 	private Point coordinates;
 
-	private float currentFlow;
+	private List<Properties> listOfProperties;
 
-	private bool isOutput;
+	private Direction direction;
 
-	private ComponentDrawn componentDrawnBelong;
-
-	private bool iisAvailable;
+	private Image imageSource;
 
 	private Point coordinates1;
+
+	private List<ComponentDrawn> listOfComponentDrawn;
+
+	private bool diffCurrFlowPossible;
+
+	private float capacity;
+
+	public virtual IEnumerable<ConnectionPoint> ConnectionPoint
+	{
+		get;
+		set;
+	}
 
 }
 

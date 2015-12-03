@@ -11,16 +11,94 @@ using System.Text;
 
 public class SystemFlowly
 {
-	public virtual List<Component> listOfToolboxItems
+	private List<ToolboxComponent> listOfToolboxItems;
+
+	private Grid grid;
+
+	private List<Change> changes;
+
+	public virtual Grid Grid
 	{
 		get;
 		set;
 	}
 
-	public virtual Grid grid
+	public virtual DialogWindow DialogWindow
 	{
 		get;
 		set;
+	}
+
+	public virtual IEnumerable<ToolboxComponent> ToolboxComponent
+	{
+		get;
+		set;
+	}
+
+	public virtual IEnumerable<Change> Change
+	{
+		get;
+		set;
+	}
+
+	public virtual bool CheckFreeSpot(object int x, object int y)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual bool MakeSpotFree(object int x, object int y)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual bool MakeSpotBusy(object int x, object int y)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual void CreateComponentDrawn(object string name, object Point top, object Point bottom, object int capacity)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual bool RemoveComponent(object ComponentDrawn theComponent)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual bool EditComponentDrawn(object ComponentDrawn theComponent)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual bool ClearGrid(object Grid theGrid)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual bool SaveGrid(object Grid theGrid)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual bool NewFile()
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual bool OpenFile()
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual bool UndoLastChange()
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual bool CreateChange(object Change theChange)
+	{
+		throw new System.NotImplementedException();
 	}
 
 }

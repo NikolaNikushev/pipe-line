@@ -9,19 +9,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class ConnectionPoint
+public class ToolboxComponent
 {
-	private Point coordinates;
+	private int id;
 
-	private float currentFlow;
+	private string name;
 
-	private bool isOutput;
-
-	private ComponentDrawn componentDrawnBelong;
-
-	private bool iisAvailable;
-
-	private Point coordinates1;
+	private Image image;
 
 }
 

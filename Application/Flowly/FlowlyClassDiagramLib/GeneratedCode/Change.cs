@@ -9,19 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class ConnectionPoint
+public class Change
 {
-	private Point coordinates;
-
-	private float currentFlow;
-
-	private bool isOutput;
-
-	private ComponentDrawn componentDrawnBelong;
-
-	private bool iisAvailable;
-
-	private Point coordinates1;
+	private string description;
 
 }
 

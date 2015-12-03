@@ -9,25 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class Pipe : ConnectionComponent
+public class Pipe : ComponentDrawn
 {
-	public virtual ConnectionPoint connection1
-	{
-		get;
-		set;
-	}
-
-	public virtual ConnectionPoint connection2
-	{
-		get;
-		set;
-	}
-
-	public virtual IEnumerable<ConnectionPoint> ConnectionPoint
-	{
-		get;
-		set;
-	}
-
 }
 

@@ -11,13 +11,15 @@ using System.Text;
 
 public class Grid
 {
-	public virtual List<Component> listOfComponents
-	{
-		get;
-		set;
-	}
+	private List<ComponentDrawn> listOfComponents;
 
-	public virtual Graphics Graphic
+	private Graphics graphic;
+
+	private int id;
+
+	private string name;
+
+	public virtual IEnumerable<ComponentDrawn> ComponentDrawn
 	{
 		get;
 		set;

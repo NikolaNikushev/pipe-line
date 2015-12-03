@@ -9,19 +9,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class ConnectionPoint
+public class DialogWindow
 {
-	private Point coordinates;
+	private Image image;
 
-	private float currentFlow;
-
-	private bool isOutput;
-
-	private ComponentDrawn componentDrawnBelong;
-
-	private bool iisAvailable;
-
-	private Point coordinates1;
+	public virtual bool SetPlaceAndLocation(object String info)
+	{
+		throw new System.NotImplementedException();
+	}
 
 }
 
