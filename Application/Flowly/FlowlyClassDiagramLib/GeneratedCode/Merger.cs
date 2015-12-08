@@ -9,6 +9,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+/// <summary>
+/// Sub class of the "ComponentDrawn" class. A particular component called - Merger. Nothing specific in it. Set diffCurrFlowPossible 
+/// needs to be false.
+/// </summary>
 public class Merger : ComponentDrawn
 {
 }

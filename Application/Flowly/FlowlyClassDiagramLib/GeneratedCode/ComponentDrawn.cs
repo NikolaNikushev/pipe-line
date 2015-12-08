@@ -8,7 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+/// <summary>
+/// ComponentDrawn class is meant for the components that the program will have. Components as pipe, sink, merger and so on.
+/// </summary>
 public class ComponentDrawn
 {
 	private List<ConnectionPoint> listOfConnectionPoints;
@@ -27,7 +29,7 @@ public class ComponentDrawn
 
 	private bool diffCurrFlowPossible;
 
-	private Float capacity;
+	private float capacity;
 
 	public virtual IEnumerable<ConnectionPoint> ConnectionPoint
 	{
@@ -35,26 +37,49 @@ public class ComponentDrawn
 		set;
 	}
 
+    /// <summary>
+    /// Adds neighbour component to listOfComponentDrawn list. 
+    /// </summary>
+    /// <param name="givenComponent"></param>
+    /// <returns>True if successfull, false otherwise</returns>
 	public virtual bool AddComponentDrawnToList(ComponentDrawn givenComponent)
 	{
 		throw new System.NotImplementedException();
 	}
-
+    /// <summary>
+    /// Automatically creates connection points of a component depending on its type.
+    /// </summary>
+    /// <returns>True if successfull, false otherwise.</returns>
 	public virtual bool CreateConnectionPoints()
 	{
 		throw new System.NotImplementedException();
 	}
 
-	public virtual bool SetCurrentFlow(Float givenFlow)
+    /// <summary>
+    /// Sets the current flow (the amount of gas/liquid) going through the component.
+    /// </summary>
+    /// <param name="givenFlow"></param>
+    /// <returns>True if successfull, false otherwise.</returns>
+	public virtual bool SetCurrentFlow(float givenFlow)
 	{
 		throw new System.NotImplementedException();
 	}
 
-	public virtual void RemoveComponentDrawnFromList(ComponentDrawn givenComponent)
+    /// <summary>
+    /// The opposite action of method AddComponentDrawnToList.
+    /// </summary>
+    /// <param name="givenComponent"></param>
+    /// <returns>True if successfull, false otherwise.</returns>
+	public virtual bool RemoveComponentDrawnFromList(ComponentDrawn givenComponent)
 	{
 		throw new System.NotImplementedException();
 	}
 
+    /// <summary>
+    /// Sets the diffCurrFlowPossible attribute to true or false.
+    /// </summary>
+    /// <param name="givenPosibility"></param>
+    /// <returns>True if successfull, false otherwise</returns>
 	public virtual bool SetDiffCurrFlowPossible(bool givenPosibility)
 	{
 		throw new System.NotImplementedException();

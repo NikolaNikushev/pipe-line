@@ -8,7 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+/// <summary>
+/// Objects of this class will be the "drawing" place of the user. A grid will contain components in it.
+/// </summary>
 public class Grid
 {
 	private List<ComponentDrawn> listOfComponents;
@@ -24,13 +26,22 @@ public class Grid
 		get;
 		set;
 	}
-
-	public virtual void AddComponentDrawnToGridList(ComponentDrawn givenComponent)
+    
+    /// <summary>
+    /// Adds a component to the listOfComponents list.
+    /// </summary>
+    /// <param name="givenComponent"></param>
+    /// <returns>True if successfull, false otherwise</returns>
+	public virtual bool AddComponentDrawnToGridList(ComponentDrawn givenComponent)
 	{
 		throw new System.NotImplementedException();
 	}
-
-	public virtual void RemoveComponentDrawnFromGridList(ComponentDrawn givenComponent)
+    /// <summary>
+    /// Opposite of the other method.
+    /// </summary>
+    /// <param name="givenComponent"></param>
+    /// <returns>True if successfull, false otherwise.</returns>
+	public virtual bool RemoveComponentDrawnFromGridList(ComponentDrawn givenComponent)
 	{
 		throw new System.NotImplementedException();
 	}

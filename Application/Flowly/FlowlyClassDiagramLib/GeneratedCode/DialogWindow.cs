@@ -9,10 +9,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+/// <summary>
+/// Meant to be used for Dialog Windows that will be opened during runtime.
+/// </summary>
 public class DialogWindow
 {
-	private string info;
 
+	private string info;
+    /// <summary>
+    /// Sets information to the DialogWindow's info attribute. Info as location, name...
+    /// </summary>
+    /// <param name="givenInfo"></param>
+    /// <returns>True if successfull, false otherwise.</returns>
 	public virtual bool SetPlaceAndLocation(string givenInfo)
 	{
 		throw new System.NotImplementedException();
