@@ -23,7 +23,7 @@ public class SystemFlowly
 		set;
 	}
 
-	public virtual DialogWindow DialogWindow
+	public virtual IEnumerable<DialogWindow> DialogWindow
 	{
 		get;
 		set;
@@ -41,42 +41,42 @@ public class SystemFlowly
 		set;
 	}
 
-	public virtual bool CheckFreeSpot(object int x, object int y)
+	public virtual bool CheckFreeSpot(int x, int y)
 	{
 		throw new System.NotImplementedException();
 	}
 
-	public virtual bool MakeSpotFree(object int x, object int y)
+	public virtual bool MakeSpotFree(int x, int y)
 	{
 		throw new System.NotImplementedException();
 	}
 
-	public virtual bool MakeSpotBusy(object int x, object int y)
+	public virtual bool MakeSpotBusy(int x, int y)
 	{
 		throw new System.NotImplementedException();
 	}
 
-	public virtual void CreateComponentDrawn(object string name, object Point top, object Point bottom, object int capacity)
+	public virtual void CreateComponentDrawn(string cName, ConnectionPoint cTop, ConnectionPoint cBottom, int cCapacity)
 	{
 		throw new System.NotImplementedException();
 	}
 
-	public virtual bool RemoveComponent(object ComponentDrawn theComponent)
+	public virtual bool RemoveComponent(ComponentDrawn givenComponent)
 	{
 		throw new System.NotImplementedException();
 	}
 
-	public virtual bool EditComponentDrawn(object ComponentDrawn theComponent)
+	public virtual bool EditComponentDrawn(ComponentDrawn givenComponent)
 	{
 		throw new System.NotImplementedException();
 	}
 
-	public virtual bool ClearGrid(object Grid theGrid)
+	public virtual bool ClearGrid(Grid givenGrid)
 	{
 		throw new System.NotImplementedException();
 	}
 
-	public virtual bool SaveGrid(object Grid theGrid)
+	public virtual bool SaveGrid(Grid givenGrid)
 	{
 		throw new System.NotImplementedException();
 	}
@@ -96,7 +96,17 @@ public class SystemFlowly
 		throw new System.NotImplementedException();
 	}
 
-	public virtual bool CreateChange(object Change theChange)
+	public virtual bool CreateChange(Change givenChange)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	private bool AddCompDrawnToList(object ComponentDrawn component)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	private bool RemoveComponentDrawnFromList(object ComponentDrawn component)
 	{
 		throw new System.NotImplementedException();
 	}

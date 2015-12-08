@@ -25,5 +25,15 @@ public class Grid
 		set;
 	}
 
+	public virtual void AddComponentDrawnToGridList(ComponentDrawn givenComponent)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual void RemoveComponentDrawnFromGridList(ComponentDrawn givenComponent)
+	{
+		throw new System.NotImplementedException();
+	}
+
 }
 

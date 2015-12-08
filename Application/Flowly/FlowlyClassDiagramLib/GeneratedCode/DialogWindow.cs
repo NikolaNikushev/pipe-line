@@ -11,9 +11,9 @@ using System.Text;
 
 public class DialogWindow
 {
-	private Image image;
+	private string info;
 
-	public virtual bool SetPlaceAndLocation(object String info)
+	public virtual bool SetPlaceAndLocation(string givenInfo)
 	{
 		throw new System.NotImplementedException();
 	}

@@ -13,15 +13,25 @@ public class ConnectionPoint
 {
 	private Point coordinates;
 
-	private float currentFlow;
+	private Float currentFlow;
 
 	private bool isOutput;
 
 	private ComponentDrawn componentDrawnBelong;
 
-	private bool iisAvailable;
+	private bool isAvailable;
 
 	private Point coordinates1;
+
+	public virtual bool SetAvailable(bool givenAvailable)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual bool SetCurrentFlow(Float givenFlow)
+	{
+		throw new System.NotImplementedException();
+	}
 
 }
 

@@ -27,12 +27,37 @@ public class ComponentDrawn
 
 	private bool diffCurrFlowPossible;
 
-	private float capacity;
+	private Float capacity;
 
 	public virtual IEnumerable<ConnectionPoint> ConnectionPoint
 	{
 		get;
 		set;
+	}
+
+	public virtual bool AddComponentDrawnToList(ComponentDrawn givenComponent)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual bool CreateConnectionPoints()
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual bool SetCurrentFlow(Float givenFlow)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual void RemoveComponentDrawnFromList(ComponentDrawn givenComponent)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual bool SetDiffCurrFlowPossible(bool givenPosibility)
+	{
+		throw new System.NotImplementedException();
 	}
 
 }

@@ -43,11 +43,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GeneratedCode\Change.cs" />
+    <Compile Include="GeneratedCode\ComponentDrawn.cs" />
+    <Compile Include="GeneratedCode\ConnectionPoint.cs" />
+    <Compile Include="GeneratedCode\DialogWindow.cs" />
+    <Compile Include="GeneratedCode\Direction.cs" />
+    <Compile Include="GeneratedCode\Grid.cs" />
+    <Compile Include="GeneratedCode\IDeletable.cs" />
+    <Compile Include="GeneratedCode\IEditable.cs" />
+    <Compile Include="GeneratedCode\Merger.cs" />
+    <Compile Include="GeneratedCode\Pipe.cs" />
+    <Compile Include="GeneratedCode\Properties.cs" />
+    <Compile Include="GeneratedCode\Pump.cs" />
+    <Compile Include="GeneratedCode\Sink.cs" />
+    <Compile Include="GeneratedCode\Splitter.cs" />
+    <Compile Include="GeneratedCode\SystemFlowly.cs" />
+    <Compile Include="GeneratedCode\ToolboxComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GeneratedCode\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
