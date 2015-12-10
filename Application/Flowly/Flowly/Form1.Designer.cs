@@ -314,6 +314,7 @@
             this.toolPipe.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.toolPipe.TabIndex = 5;
             this.toolPipe.TabStop = false;
+            this.toolPipe.Click += new System.EventHandler(this.toolPipe_Click);
             // 
             // toolRemove
             // 
@@ -325,6 +326,7 @@
             this.toolRemove.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.toolRemove.TabIndex = 4;
             this.toolRemove.TabStop = false;
+            this.toolRemove.Click += new System.EventHandler(this.toolRemove_Click);
             // 
             // toolPump
             // 
@@ -336,6 +338,7 @@
             this.toolPump.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.toolPump.TabIndex = 3;
             this.toolPump.TabStop = false;
+            this.toolPump.Click += new System.EventHandler(this.toolPump_Click);
             this.toolPump.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolPump_MouseDown);
             // 
             // toolSplitterAdj
@@ -370,6 +373,7 @@
             this.toolEdit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.toolEdit.TabIndex = 0;
             this.toolEdit.TabStop = false;
+            this.toolEdit.Click += new System.EventHandler(this.toolEdit_Click);
             // 
             // process1
             // 
@@ -394,10 +398,8 @@
             this.grid.TabIndex = 2;
             this.grid.TabStop = false;
             this.grid.Click += new System.EventHandler(this.grid_Click);
-            this.grid.DragDrop += new System.Windows.Forms.DragEventHandler(this.grid_DragDrop);
             this.grid.DragEnter += new System.Windows.Forms.DragEventHandler(this.grid_DragEnter);
             this.grid.Paint += new System.Windows.Forms.PaintEventHandler(this.grid_Paint);
-            
             this.grid.MouseMove += new System.Windows.Forms.MouseEventHandler(this.grid_MouseMove);
             // 
             // Form1
