@@ -28,3 +28,4 @@ E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Fl
 E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.Properties.Resources.resources
 E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.csproj.GenerateResource.Cache
 G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.XML
+E:\Uni\Programming C#\OOD2\gitProject\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.XML
