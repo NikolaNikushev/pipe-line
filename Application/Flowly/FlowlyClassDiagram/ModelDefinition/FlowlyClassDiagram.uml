@@ -5040,6 +5040,7 @@
           <operation
             Id="de9784a2-a5a3-460c-aad7-c8234a437142"
             name="CreateConnectionPoints"
+            visibility="Private"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -5114,6 +5115,7 @@
           <operation
             Id="911ea868-4190-4165-8ed8-8ee87a9818fd"
             name="SetCurrentFlow"
+            visibility="Private"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -5172,25 +5174,27 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="2aa936e1-539b-482e-837e-53e39964f9d0"
-                  name="givenFlow"
-                  direction="In">
+                  Id="8ffd887d-82f8-4a99-861e-f375904f0224"
+                  direction="Return"
+                  isUnique="false">
                   <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="f774e37f-a163-4355-a9d8-deb8fd0a86d7"
-                      LastKnownName="Float"
+                    <primitiveTypeMoniker
+                      Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+                      LastKnownName="Boolean"
                       LastKnownLocation="FlowlyClassDiagram.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="8ffd887d-82f8-4a99-861e-f375904f0224"
-                  direction="Return">
+                  Id="30548f03-dc33-4492-997e-a33e1cef3a61"
+                  name="givenFlow"
+                  direction="In"
+                  isUnique="false">
                   <type_NamedElement>
-                    <primitiveTypeMoniker
-                      Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
-                      LastKnownName="Boolean"
+                    <undefinedTypeMoniker
+                      Id="f774e37f-a163-4355-a9d8-deb8fd0a86d7"
+                      LastKnownName="Float"
                       LastKnownLocation="FlowlyClassDiagram.uml" />
                   </type_NamedElement>
                 </parameter>

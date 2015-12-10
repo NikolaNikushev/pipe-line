@@ -2971,7 +2971,7 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
-          <operation Id="becac291-546a-4d34-aa58-fba51f4161c6" name="CreateConnectionPoints" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+          <operation Id="becac291-546a-4d34-aa58-fba51f4161c6" name="CreateConnectionPoints" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <appliedStereotypesInternal>
               <stereotypeInstance Id="8fceb507-af35-4619-a374-8838797a4d1d" name="method" profile="CSharpProfile">
                 <elementDefinition Id="25f7cb0f-9b03-416a-be13-0c47aaaa35ed" />
@@ -3027,7 +3027,7 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
-          <operation Id="c5f2de81-b1a0-4a47-81b0-2cbc24b94b81" name="SetCurrentFlow" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+          <operation Id="c5f2de81-b1a0-4a47-81b0-2cbc24b94b81" name="SetCurrentFlow" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <appliedStereotypesInternal>
               <stereotypeInstance Id="85371cf1-1456-4a29-a138-fb180c696d6a" name="method" profile="CSharpProfile">
                 <elementDefinition Id="402dcb2d-88db-470b-89db-311ee29bd3a6" />
@@ -3074,18 +3074,18 @@
             <elementDefinition Id="911ea868-4190-4165-8ed8-8ee87a9818fd" />
             <ownedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="7c19a3f2-b2af-4bf0-9c39-ba82de97af29" name="givenFlow" direction="In">
-                  <elementDefinition Id="2aa936e1-539b-482e-837e-53e39964f9d0" />
+                <parameter Id="61db331d-9481-4292-b764-0cc26610ded9" direction="Return" isUnique="false">
+                  <elementDefinition Id="8ffd887d-82f8-4a99-861e-f375904f0224" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="b056b56a-5eff-4d25-9488-54498bb61558" LastKnownName="Float" />
+                    <referencedTypeMoniker Id="3812dbad-723e-443d-a564-6cd4c21ecaaf" LastKnownName="Boolean" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="61db331d-9481-4292-b764-0cc26610ded9" direction="Return">
-                  <elementDefinition Id="8ffd887d-82f8-4a99-861e-f375904f0224" />
+                <parameter Id="a2e7ce13-6d9f-45a1-be26-d8c2f9447825" name="givenFlow" direction="In" isUnique="false">
+                  <elementDefinition Id="30548f03-dc33-4492-997e-a33e1cef3a61" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="3812dbad-723e-443d-a564-6cd4c21ecaaf" LastKnownName="Boolean" />
+                    <referencedTypeMoniker Id="b056b56a-5eff-4d25-9488-54498bb61558" LastKnownName="Float" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
