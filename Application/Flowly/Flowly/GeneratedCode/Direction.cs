@@ -8,9 +8,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-public enum Direction : int
+namespace Flowly
 {
-	Left,
-	Right,
+    /// <summary>
+    /// This is an emurations containg the direction a component can face
+    /// Left or right. It is used to better display the value of the direction
+    /// </summary>
+    public enum Direction : int
+    {
+        Left,
+        Right,
+    }
 }

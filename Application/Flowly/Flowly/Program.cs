@@ -6,6 +6,14 @@ using System.Windows.Forms;
 
 namespace Flowly
 {
+    /// <summary>
+    /// This namespace contains all the classes that the Flowly Windows forms uses. 
+    /// Inside there are brief descriptions of each class and their methods.
+    /// </summary>
+    public static class NamespaceDoc
+    {
+        //this is used for sandcastle
+    }
     static class Program
     {
         /// <summary>

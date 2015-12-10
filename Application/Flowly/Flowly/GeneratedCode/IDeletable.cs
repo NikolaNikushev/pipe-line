@@ -8,10 +8,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-public interface IDeletable 
+namespace Flowly
 {
-	void Delete();
+    /// <summary>
+    /// This is an interface which allows objects to be deleted when necesery, it makes all objecets that use the interface have 
+    /// a method that will delete them.
+    /// </summary>
+    public interface IDeletable
+    {
+        /// <summary>
+        /// Method that is called when an object will be deleted.
+        /// </summary>
+        void Delete();
 
+    }
 }
-

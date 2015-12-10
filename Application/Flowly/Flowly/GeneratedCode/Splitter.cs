@@ -8,13 +8,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-/// <summary>
-/// Sub class of the "ComponentDrawn" class. A particular component called - Splitter. 
-/// SPECIFICATION: IF NORMAL SPLITTER THEN setCurrFlowPossible attribute needs to be false. IF ADJUSTABLE SPLITTER THEN setCurrFlowPossible
-/// needs to be true. Because through the two outputs of the adjustable splitter different amounts of liquid/gas can go through.
-/// </summary>
-public class Splitter : ComponentDrawn
+namespace Flowly
 {
-}
+    /// <summary>
+    /// Sub class of the "ComponentDrawn" class. A particular component called - Splitter. 
+    /// SPECIFICATION: IF NORMAL SPLITTER THEN setCurrFlowPossible attribute needs to be false. IF ADJUSTABLE SPLITTER THEN setCurrFlowPossible
+    /// needs to be true. Because through the two outputs of the adjustable splitter different amounts of liquid/gas can go through.
+    /// </summary>
+    public class Splitter : ComponentDrawn
+    {
+    }
 
+}

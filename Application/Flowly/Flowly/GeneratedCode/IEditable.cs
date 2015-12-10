@@ -8,10 +8,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-public interface IEditable 
+namespace Flowly
 {
-	void Edit();
+    /// <summary>
+    /// This is an interface that enables an object to be edited
+    /// </summary>
+    public interface IEditable
+    {
+        /// <summary>
+        /// This method is used to edit an object
+        /// </summary>
+        void Edit();
 
+    }
 }
-

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Change" Collapsed="true">
-    <Position X="7.5" Y="2.25" Width="1.5" />
+    <Position X="7.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GeneratedCode\Change.cs</FileName>
@@ -22,14 +22,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DialogWindow" Collapsed="true">
-    <Position X="2.5" Y="2" Width="1.5" />
+    <Position X="3.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
       <FileName>GeneratedCode\DialogWindow.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Grid" Collapsed="true">
-    <Position X="5.25" Y="2.25" Width="1.5" />
+    <Position X="4" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEAAAAAAAAAAAAIAAAAAEAAgQAAAAIAAAAgA=</HashCode>
       <FileName>GeneratedCode\Grid.cs</FileName>
@@ -71,14 +71,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SystemFlowly" Collapsed="true">
-    <Position X="5.25" Y="1" Width="1.5" />
+    <Position X="5.75" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAIgADhAJAAAIAAAAIBAAIEgAABEAAgAQAAAAAAAA=</HashCode>
       <FileName>GeneratedCode\SystemFlowly.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ToolboxComponent" Collapsed="true">
-    <Position X="7.5" Y="0.5" Width="1.5" />
+    <Position X="8" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAAgA=</HashCode>
       <FileName>GeneratedCode\ToolboxComponent.cs</FileName>

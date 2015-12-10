@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Flowly.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -52,6 +53,22 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GeneratedCode\Change.cs" />
+    <Compile Include="GeneratedCode\ComponentDrawn.cs" />
+    <Compile Include="GeneratedCode\ConnectionPoint.cs" />
+    <Compile Include="GeneratedCode\DialogWindow.cs" />
+    <Compile Include="GeneratedCode\Direction.cs" />
+    <Compile Include="GeneratedCode\Grid.cs" />
+    <Compile Include="GeneratedCode\IDeletable.cs" />
+    <Compile Include="GeneratedCode\IEditable.cs" />
+    <Compile Include="GeneratedCode\Merger.cs" />
+    <Compile Include="GeneratedCode\Pipe.cs" />
+    <Compile Include="GeneratedCode\PropertiesEnum.cs" />
+    <Compile Include="GeneratedCode\Pump.cs" />
+    <Compile Include="GeneratedCode\Sink.cs" />
+    <Compile Include="GeneratedCode\Splitter.cs" />
+    <Compile Include="GeneratedCode\SystemFlowly.cs" />
+    <Compile Include="GeneratedCode\ToolboxComponent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -67,6 +84,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

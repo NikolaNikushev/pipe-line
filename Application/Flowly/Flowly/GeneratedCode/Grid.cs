@@ -8,43 +8,47 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-/// <summary>
-/// Objects of this class will be the "drawing" place of the user. A grid will contain components in it.
-/// </summary>
-public class Grid
+using System.Drawing;
+namespace Flowly
 {
-	private List<ComponentDrawn> listOfComponents;
-
-	private Graphics graphic;
-
-	private int id;
-
-	private string name;
-
-	public virtual IEnumerable<ComponentDrawn> ComponentDrawn
-	{
-		get;
-		set;
-	}
-    
     /// <summary>
-    /// Adds a component to the listOfComponents list.
+    /// Objects of this class will be the "drawing" place of the user. A grid will contain components in it.
     /// </summary>
-    /// <param name="givenComponent"></param>
-    /// <returns>True if successfull, false otherwise</returns>
-	public virtual bool AddComponentDrawnToGridList(ComponentDrawn givenComponent)
-	{
-		throw new System.NotImplementedException();
-	}
-    /// <summary>
-    /// Opposite of the other method.
-    /// </summary>
-    /// <param name="givenComponent"></param>
-    /// <returns>True if successfull, false otherwise.</returns>
-	public virtual bool RemoveComponentDrawnFromGridList(ComponentDrawn givenComponent)
-	{
-		throw new System.NotImplementedException();
-	}
+    public class Grid
+    {
+        private List<ComponentDrawn> listOfComponents;
 
+        private Graphics graphic;
+
+        private int id;
+
+        private string name;
+
+        public virtual IEnumerable<ComponentDrawn> ComponentDrawn
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Adds a component to the listOfComponents list.
+        /// </summary>
+        /// <param name="givenComponent"></param>
+        /// <returns>True if successfull, false otherwise</returns>
+        public virtual bool AddComponentDrawnToGridList(ComponentDrawn givenComponent)
+        {
+            throw new System.NotImplementedException();
+        }
+        /// <summary>
+        /// Opposite of the other method.
+        /// </summary>
+        /// <param name="givenComponent"></param>
+        /// <returns>True if successfull, false otherwise.</returns>
+        public virtual bool RemoveComponentDrawnFromGridList(ComponentDrawn givenComponent)
+        {
+            throw new System.NotImplementedException();
+        }
+
+    }
 }
 

@@ -8,16 +8,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-/// <summary>
-/// Not a "ComponentDrawn"! This is a Component from the Toolbox! Can be just used to CREATE an instance of "ComponentDrawn"!
-/// </summary>
-public class ToolboxComponent
+using System.Drawing;
+namespace Flowly
 {
-	private int id;
+    /// <summary>
+    /// Not a "ComponentDrawn"! This is a Component from the Toolbox! Can be just used to CREATE an instance of "ComponentDrawn"!
+    /// </summary>
+    public class ToolboxComponent
+    {
+        private int id;
 
-	private string name;
+        private string name;
 
-	private Image image;
+        private Image image;
+
+    }
 
 }
-
