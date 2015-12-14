@@ -6666,7 +6666,7 @@
   <data name="toolEdit.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAAAd0SU1FB98LGw00EQY2pYMAABHRSURBVHhe7Z17jFxXfYB3Xjsz+5p9sVXs+EHs
+        DAAACwwBP0AiyAAAAAd0SU1FB98LGw00EQY2pYMAABHRSURBVHhe7Z17jFxXfYB3Xjsz+5p9sVXs+EHs
         YJuH08T2OiYlThMTShwSvzAJpBVVkSoQoQipf4RCaNpSVZSKIvUlQlpFCIhUFQEtAinkQV7kRdOEBBpD
         7LzA5OW8nGCbONvfWc9117O/Pbszc8+95577fdKnmZ2dufecmfnOvbO21z0AAAAAAAAAAAAAAAAAAAAA
         AAAAAACg8JkZTineJM68DwBkmM3iXLEv1GhRAICMYMI34WpBdyMLAYDHuAq/VRYCAM9IIvxWzYIDACmS
@@ -6750,5 +6750,8 @@
   </metadata>
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>232, 17</value>
+  </metadata>
+  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>387, 17</value>
   </metadata>
 </root>

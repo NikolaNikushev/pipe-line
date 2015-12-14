@@ -61,6 +61,7 @@
             this.process1 = new System.Diagnostics.Process();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.grid = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -400,7 +401,14 @@
             this.grid.Click += new System.EventHandler(this.grid_Click);
             this.grid.DragEnter += new System.Windows.Forms.DragEventHandler(this.grid_DragEnter);
             this.grid.Paint += new System.Windows.Forms.PaintEventHandler(this.grid_Paint);
+            this.grid.MouseLeave += new System.EventHandler(this.grid_MouseLeave);
             this.grid.MouseMove += new System.Windows.Forms.MouseEventHandler(this.grid_MouseMove);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 50;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
             // 
             // Form1
             // 
@@ -472,6 +480,7 @@
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox grid;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
