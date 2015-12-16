@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 namespace Flowly
 {
     /// <summary>
@@ -16,6 +17,17 @@ namespace Flowly
     /// </summary>
     public class Merger : ComponentDrawn
     {
+        public Merger(Point theUpperLeftCorner, Point theBottomRightCorner, Direction theDirection, Image theImageSource,
+            bool theDiffCurrFlowPossible, float theCapacity, float theCurrentFlow) : base( theUpperLeftCorner,  theBottomRightCorner,  theDirection,  theImageSource,
+             theDiffCurrFlowPossible,  theCapacity,  theCurrentFlow)
+        {
+
+        }
+
+        public override bool CreateConnectionPoints()
+        {
+            ConnectionPoint connPoint1 = new ConnectionPoint(currentFlow/2,coordinatesUpperLeftCorner,)
+        }
     }
 }
 

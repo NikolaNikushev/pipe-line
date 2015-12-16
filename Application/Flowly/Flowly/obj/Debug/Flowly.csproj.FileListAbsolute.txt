@@ -1,35 +1,10 @@
-G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowy\Flowy\bin\Debug\Flowly.exe.config
-G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowy\Flowy\bin\Debug\Flowly.exe
-G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowy\Flowy\bin\Debug\Flowly.pdb
-G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowy\Flowy\obj\Debug\Flowly.Properties.Resources.resources
-G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowy\Flowy\obj\Debug\Flowly.csproj.GenerateResource.Cache
-G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowy\Flowy\obj\Debug\Flowly.exe
-G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowy\Flowy\obj\Debug\Flowly.pdb
-G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowy\Flowy\obj\Debug\Flowly.Form1.resources
-G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.exe.config
-G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.exe
-G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.pdb
-G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.exe
-G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.pdb
-G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.csprojResolveAssemblyReference.cache
-G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.Form1.resources
-G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.Properties.Resources.resources
-G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.csproj.GenerateResource.Cache
-E:\Uni\Programming C#\OOD2\gitProject\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.exe.config
-E:\Uni\Programming C#\OOD2\gitProject\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.exe
-E:\Uni\Programming C#\OOD2\gitProject\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.pdb
 E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.exe.config
-E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.exe
-E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.pdb
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.XML
 E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.exe
 E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.pdb
 E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.csprojResolveAssemblyReference.cache
 E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.Form1.resources
 E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.Properties.Resources.resources
 E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.csproj.GenerateResource.Cache
-G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.XML
-<<<<<<< Updated upstream
-E:\Uni\Programming C#\OOD2\gitProject\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.XML
-=======
-E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.XML
->>>>>>> Stashed changes
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.exe
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.pdb

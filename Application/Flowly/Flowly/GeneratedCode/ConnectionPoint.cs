@@ -16,17 +16,32 @@ namespace Flowly
     /// </summary>
     public class ConnectionPoint
     {
-        private Point coordinates;
+        private Point coordinatesUpperLeftCorner; // will be set by the constructor
 
-        private float currentFlow;
+        private Point coordinatesBottomRightCorner; // will be set by the constructor
 
-        private bool isOutput;
+        private float currentFlow; // will be set by the constructor - with method used
 
-        private ComponentDrawn componentDrawnBelong;
+        private bool isOutput; // will be set by the constructor
 
-        private bool isAvailable;
+        private ComponentDrawn componentDrawnBelong; //will be set by the constructor
 
-        private Point coordinates1;
+        private bool isAvailable; //automatically set by the constructor when created - of course false
+
+        
+
+
+        public ConnectionPoint(float theGivenCurrentFlow, Point theCoordinatesUpperLeftCorner, Point theCoordinatesBottomRightCorner,
+            bool theIsOutput, ComponentDrawn theComponentDrawnBelong)
+        {
+            SetAvailable(false);
+            SetCurrentFlow(theGivenCurrentFlow);
+            coordinatesBottomRightCorner = theCoordinatesBottomRightCorner;
+            coordinatesUpperLeftCorner = theCoordinatesUpperLeftCorner;
+            isOutput = theIsOutput;
+            componentDrawnBelong = theComponentDrawnBelong;
+
+        }
 
         /// <summary>
         /// Sets availability of a "ConnectionPoint".
@@ -35,7 +50,15 @@ namespace Flowly
         /// <returns>True if successfull, false otherwise</returns>
         public virtual bool SetAvailable(bool givenAvailable)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                isAvailable = givenAvailable;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -46,7 +69,15 @@ namespace Flowly
         /// <returns>True if successfull, false otherwise</returns>
         public virtual bool SetCurrentFlow(float givenFlow)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                currentFlow = givenFlow;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
     }

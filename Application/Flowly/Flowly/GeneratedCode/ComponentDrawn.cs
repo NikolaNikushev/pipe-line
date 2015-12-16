@@ -16,30 +16,53 @@ namespace Flowly
     /// <summary>
     /// ComponentDrawn class is meant for the components that the program will have. Components as pipe, sink, merger and so on.
     /// </summary>
-    public class ComponentDrawn
+    public abstract class ComponentDrawn   // the class will be abstract, we will create separate instances of each sub class, polymorphism will be used
     {
-        private List<ConnectionPoint> listOfConnectionPoints;
+        protected List<ConnectionPoint> listOfConnectionPoints;
 
-        private Point coordinates;
+        protected Point coordinatesUpperLeftCorner; // will be set by the constructor
 
-        private List<PropertiesEnum> listOfProperties;
+        protected Point coordinatesBottomRightCorner; // will be set by the constructor
 
-        private Direction direction;
+        protected List<PropertiesEnum> listOfProperties; // will be used separately in each sub-class
 
-        private Image imageSource;
+        protected Direction direction; // // will be used separately in each sub-class
 
-        private Point coordinates1;
+        protected Image imageSource; // will be used separately in each sub-class
 
-        private List<ComponentDrawn> listOfComponentDrawn;
+        protected List<ComponentDrawn> listOfComponentDrawn;
 
-        private bool diffCurrFlowPossible;
+        protected bool diffCurrFlowPossible; // will be used separately in each sub-class
 
-        private float capacity;
+        protected float capacity; // will be used separately in each sub-class
+
+        protected float currentFlow;
+
+        protected Rectangle rectangle;
 
         public virtual IEnumerable<ConnectionPoint> ConnectionPoint
         {
             get;
             set;
+        }
+        public ComponentDrawn(Point theUpperLeftCorner, Point theBottomRightCorner, Direction theDirection, Image theImageSource,
+            bool theDiffCurrFlowPossible, float theCapacity, float theCurrentFlow)
+        {
+            listOfConnectionPoints = new List<ConnectionPoint>();
+            listOfComponentDrawn = new List<ComponentDrawn>();
+            coordinatesUpperLeftCorner = theUpperLeftCorner;
+            coordinatesBottomRightCorner = theBottomRightCorner;
+            listOfProperties = new List<PropertiesEnum>();
+            direction = theDirection;
+            imageSource = theImageSource;
+            diffCurrFlowPossible = theDiffCurrFlowPossible;
+            capacity = theCapacity;
+            currentFlow = theCurrentFlow;
+            rectangle.X = theUpperLeftCorner.X;
+            rectangle.Y = theUpperLeftCorner.Y;
+            rectangle.Width = rectangle.X
+
+
         }
 
         /// <summary>
@@ -49,16 +72,24 @@ namespace Flowly
         /// <returns>True if successfull, false otherwise</returns>
         public virtual bool AddComponentDrawnToList(ComponentDrawn givenComponent)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                listOfComponentDrawn.Add(givenComponent);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
         /// <summary>
         /// Automatically creates connection points of a component depending on its type.
         /// </summary>
         /// <returns>True if successfull, false otherwise.</returns>
-        public virtual bool CreateConnectionPoints()
-        {
-            throw new System.NotImplementedException();
-        }
+        public abstract bool CreateConnectionPoints();
+        
+            
+        
 
         /// <summary>
         /// Sets the current flow (the amount of gas/liquid) going through the component.
@@ -67,7 +98,15 @@ namespace Flowly
         /// <returns>True if successfull, false otherwise.</returns>
         public virtual bool SetCurrentFlow(float givenFlow)
         {
-            throw new System.NotImplementedException();
+           try
+            {
+                currentFlow = givenFlow;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -77,7 +116,15 @@ namespace Flowly
         /// <returns>True if successfull, false otherwise.</returns>
         public virtual bool RemoveComponentDrawnFromList(ComponentDrawn givenComponent)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                listOfComponentDrawn.Remove(givenComponent);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -85,10 +132,10 @@ namespace Flowly
         /// </summary>
         /// <param name="givenPosibility"></param>
         /// <returns>True if successfull, false otherwise</returns>
-        public virtual bool SetDiffCurrFlowPossible(bool givenPosibility)
-        {
-            throw new System.NotImplementedException();
-        }
+        public abstract bool SetDiffCurrFlowPossible(bool givenPosibility);
+       
+            
+       
 
     }
 }

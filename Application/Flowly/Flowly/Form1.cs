@@ -223,7 +223,7 @@ namespace Flowly
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            ConnectionPoint mytest = new ConnectionPoint(50,);
         }
     }
 }
