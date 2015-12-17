@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 namespace Flowly
 {
     /// <summary>
@@ -17,6 +18,55 @@ namespace Flowly
     /// </summary>
     public class Splitter : ComponentDrawn
     {
+
+
+        public Splitter(Rectangle theRectangle) : base(theRectangle)
+        {
+            diffCurrFlowPossible = false;
+
+
+            rectangleSmallRightUp = new Rectangle();
+            rectangleSmallRightUp.X = rectangleBig.X + rectangleBig.Width / 2;
+            rectangleSmallRightUp.Y = rectangleBig.Y;
+            rectangleSmallRightUp.Height = rectangleBig.Height / 2;
+            rectangleSmallRightUp.Width = rectangleBig.Width / 2;
+
+
+            rectangleSmallRightDown = new Rectangle();
+            rectangleSmallRightDown.X = rectangleBig.X + rectangleBig.Width / 2;
+            rectangleSmallRightDown.Y = rectangleBig.Y + rectangleBig.Height / 2;
+            rectangleSmallRightDown.Height = rectangleBig.Height / 2;
+            rectangleSmallRightDown.Width = rectangleBig.Width / 2;
+
+
+            rectangleCombLeft = new Rectangle();
+            rectangleCombLeft.X = rectangleBig.X;
+            rectangleCombLeft.Y = rectangleBig.Y;
+            rectangleCombLeft.Height = rectangleBig.Height;
+            rectangleCombLeft.Width = rectangleBig.Width / 2;
+
+            CreateConnectionPoints();
+
+        }
+
+        public override bool CreateConnectionPoints()
+        {
+            try
+            {
+                ConnectionPoint connRighttUp = new ConnectionPoint(rectangleSmallRightUp, this, false);
+                ConnectionPoint connRightDown = new ConnectionPoint(rectangleSmallRightDown, this, false);
+                ConnectionPoint connLeftComb = new ConnectionPoint(rectangleCombLeft, this, true);
+
+                listOfConnectionPoints.Add(connRighttUp);
+                listOfConnectionPoints.Add(connRightDown);
+                listOfConnectionPoints.Add(connLeftComb);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 
 }

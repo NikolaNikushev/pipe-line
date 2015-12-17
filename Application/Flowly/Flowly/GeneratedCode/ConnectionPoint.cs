@@ -16,30 +16,26 @@ namespace Flowly
     /// </summary>
     public class ConnectionPoint
     {
-        private Point coordinatesUpperLeftCorner; // will be set by the constructor
+        public Rectangle rectangle;
 
-        private Point coordinatesBottomRightCorner; // will be set by the constructor
+        private float currentFlow; 
 
-        private float currentFlow; // will be set by the constructor - with method used
+        private bool isOutput; 
 
-        private bool isOutput; // will be set by the constructor
+        private ComponentDrawn componentDrawnBelong;
 
-        private ComponentDrawn componentDrawnBelong; //will be set by the constructor
-
-        private bool isAvailable; //automatically set by the constructor when created - of course false
+        private bool isAvailable; 
 
         
 
 
-        public ConnectionPoint(float theGivenCurrentFlow, Point theCoordinatesUpperLeftCorner, Point theCoordinatesBottomRightCorner,
-            bool theIsOutput, ComponentDrawn theComponentDrawnBelong)
+        public ConnectionPoint(Rectangle theRectangle, ComponentDrawn theComponentDrawnBelong,bool theIsOutput)
         {
-            SetAvailable(false);
-            SetCurrentFlow(theGivenCurrentFlow);
-            coordinatesBottomRightCorner = theCoordinatesBottomRightCorner;
-            coordinatesUpperLeftCorner = theCoordinatesUpperLeftCorner;
+            rectangle = theRectangle;
+            SetCurrentFlow(0);
             isOutput = theIsOutput;
             componentDrawnBelong = theComponentDrawnBelong;
+            SetAvailable(true);
 
         }
 

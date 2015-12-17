@@ -69,7 +69,7 @@
             <param name="givenComponent"></param>
             <returns>True if successfull, false otherwise.</returns>
         </member>
-        <member name="M:Flowly.ComponentDrawn.SetDiffCurrFlowPossible(System.Boolean)">
+        <member name="M:Flowly.ComponentDrawn.SetCapacity(System.Single)">
             <summary>
             Sets the diffCurrFlowPossible attribute to true or false.
             </summary>

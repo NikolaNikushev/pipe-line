@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 namespace Flowly
 {
     /// <summary>
@@ -16,6 +17,49 @@ namespace Flowly
     /// </summary>
     public class Pipe : ComponentDrawn
     {
+
+
+        public Pipe(Rectangle theRectangle) : base(theRectangle)
+        {
+            diffCurrFlowPossible = false;
+
+            rectanglePipeLeft = new Rectangle();
+            rectanglePipeLeft.X = rectangleBig.X;
+            rectanglePipeLeft.Y = rectangleBig.Y;
+            rectanglePipeLeft.Height = rectangleBig.Height;
+            rectanglePipeLeft.Width = rectangleBig.Width / 2;
+
+
+            rectanglePipeRight = new Rectangle();
+            rectanglePipeRight.X = rectangleBig.X + rectangleBig.Width / 2;
+            rectanglePipeRight.Y = rectangleBig.Y;
+            rectanglePipeRight.Height = rectangleBig.Height;
+            rectanglePipeRight.Width = rectangleBig.Width / 2;
+
+            CreateConnectionPoints();
+            
+
+        }
+
+
+        public override bool CreateConnectionPoints()
+        {
+            try
+            {
+                ConnectionPoint connLeft = new ConnectionPoint(rectanglePipeLeft, this, false);
+                ConnectionPoint connRight = new ConnectionPoint(rectanglePipeRight, this, true);
+                
+
+                listOfConnectionPoints.Add(connLeft);
+                listOfConnectionPoints.Add(connRight);
+               
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 
 }

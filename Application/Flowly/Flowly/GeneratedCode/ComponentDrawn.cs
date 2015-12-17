@@ -16,52 +16,58 @@ namespace Flowly
     /// <summary>
     /// ComponentDrawn class is meant for the components that the program will have. Components as pipe, sink, merger and so on.
     /// </summary>
-    public abstract class ComponentDrawn   // the class will be abstract, we will create separate instances of each sub class, polymorphism will be used
+    public abstract class ComponentDrawn  
     {
         protected List<ConnectionPoint> listOfConnectionPoints;
 
-        protected Point coordinatesUpperLeftCorner; // will be set by the constructor
+        protected List<PropertiesEnum> listOfProperties; 
+        
+        protected List<ComponentDrawn> listOfComponentDrawn; 
 
-        protected Point coordinatesBottomRightCorner; // will be set by the constructor
+        protected bool diffCurrFlowPossible;
 
-        protected List<PropertiesEnum> listOfProperties; // will be used separately in each sub-class
-
-        protected Direction direction; // // will be used separately in each sub-class
-
-        protected Image imageSource; // will be used separately in each sub-class
-
-        protected List<ComponentDrawn> listOfComponentDrawn;
-
-        protected bool diffCurrFlowPossible; // will be used separately in each sub-class
-
-        protected float capacity; // will be used separately in each sub-class
+        protected float capacity; 
 
         protected float currentFlow;
 
-        protected Rectangle rectangle;
+        protected Rectangle rectangleBig;
+
+        protected Rectangle rectangleSmallLeftUp;
+
+        protected Rectangle rectangleSmallLeftDown;
+
+        protected Rectangle rectangleCombLeft;
+
+        protected Rectangle rectangleSmallRightUp;
+
+        protected Rectangle rectangleSmallRightDown;
+
+        protected Rectangle rectangleCombRight;
+
+        protected Rectangle rectanglePipeLeft;
+
+        protected Rectangle rectanglePipeRight;
+
+      
+
+
+
 
         public virtual IEnumerable<ConnectionPoint> ConnectionPoint
         {
             get;
             set;
         }
-        public ComponentDrawn(Point theUpperLeftCorner, Point theBottomRightCorner, Direction theDirection, Image theImageSource,
-            bool theDiffCurrFlowPossible, float theCapacity, float theCurrentFlow)
+        public ComponentDrawn(Rectangle theRectangle)
         {
             listOfConnectionPoints = new List<ConnectionPoint>();
-            listOfComponentDrawn = new List<ComponentDrawn>();
-            coordinatesUpperLeftCorner = theUpperLeftCorner;
-            coordinatesBottomRightCorner = theBottomRightCorner;
             listOfProperties = new List<PropertiesEnum>();
-            direction = theDirection;
-            imageSource = theImageSource;
-            diffCurrFlowPossible = theDiffCurrFlowPossible;
-            capacity = theCapacity;
-            currentFlow = theCurrentFlow;
-            rectangle.X = theUpperLeftCorner.X;
-            rectangle.Y = theUpperLeftCorner.Y;
-            rectangle.Width = rectangle.X
+            listOfComponentDrawn = new List<ComponentDrawn>();
+            SetCapacity(0);
+            SetCurrentFlow(0);
+            rectangleBig = theRectangle;
 
+        
 
         }
 
@@ -132,11 +138,25 @@ namespace Flowly
         /// </summary>
         /// <param name="givenPosibility"></param>
         /// <returns>True if successfull, false otherwise</returns>
-        public abstract bool SetDiffCurrFlowPossible(bool givenPosibility);
-       
-            
-       
 
+
+        public virtual bool SetCapacity(float givenCapacity)
+        {
+            try
+            {
+                capacity = givenCapacity;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public List<ConnectionPoint> GiveMeYourConnectionPoints()
+        {
+            return listOfConnectionPoints;
+        }
     }
 }
 

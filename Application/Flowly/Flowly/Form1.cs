@@ -99,6 +99,20 @@ namespace Flowly
                 dictionary.Add(r, currentPB.Image);
 
                 Paint(item);
+
+                Splitter testMerger = new Splitter(r);
+                
+                List<ConnectionPoint> testConnPoints = testMerger.GiveMeYourConnectionPoints();
+
+                ConnectionPoint bla   = testConnPoints[0];
+                ConnectionPoint bla2  = testConnPoints[1];
+               ConnectionPoint bla3  = testConnPoints[2];
+
+                g.DrawRectangle(Pens.Orange, bla.rectangle);
+              g.DrawRectangle(Pens.Blue, bla2.rectangle);
+                g.DrawRectangle(Pens.Yellow, bla3.rectangle);
+
+
             }
 
         }
@@ -223,7 +237,7 @@ namespace Flowly
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            ConnectionPoint mytest = new ConnectionPoint(50,);
+           
         }
     }
 }

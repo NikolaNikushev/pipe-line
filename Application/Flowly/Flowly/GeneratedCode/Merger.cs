@@ -17,16 +17,54 @@ namespace Flowly
     /// </summary>
     public class Merger : ComponentDrawn
     {
-        public Merger(Point theUpperLeftCorner, Point theBottomRightCorner, Direction theDirection, Image theImageSource,
-            bool theDiffCurrFlowPossible, float theCapacity, float theCurrentFlow) : base( theUpperLeftCorner,  theBottomRightCorner,  theDirection,  theImageSource,
-             theDiffCurrFlowPossible,  theCapacity,  theCurrentFlow)
+       public Merger(Rectangle theRectangle) : base(theRectangle)
         {
+            diffCurrFlowPossible = false;
 
+
+
+            rectangleSmallLeftUp = new Rectangle();
+            rectangleSmallLeftUp.X = rectangleBig.X;
+            rectangleSmallLeftUp.Y = rectangleBig.Y;
+            rectangleSmallLeftUp.Height = rectangleBig.Height / 2;
+            rectangleSmallLeftUp.Width = rectangleBig.Width / 2;
+
+            rectangleSmallLeftDown = new Rectangle();
+            rectangleSmallLeftDown.X = rectangleBig.X;
+            rectangleSmallLeftDown.Y = rectangleBig.Y + rectangleBig.Height / 2;
+            rectangleSmallLeftDown.Height = rectangleBig.Height / 2;
+            rectangleSmallLeftDown.Width = rectangleBig.Width / 2;
+
+
+            rectangleCombRight = new Rectangle();
+            rectangleCombRight.X = rectangleBig.X + rectangleBig.Width / 2;
+            rectangleCombRight.Y = rectangleBig.Y;
+            rectangleCombRight.Height = rectangleBig.Height;
+            rectangleCombRight.Width = rectangleBig.Width / 2;
+
+            CreateConnectionPoints();
         }
 
         public override bool CreateConnectionPoints()
         {
-            ConnectionPoint connPoint1 = new ConnectionPoint(currentFlow/2,coordinatesUpperLeftCorner,)
+           
+
+
+            try
+            {
+                ConnectionPoint connLeftUp = new ConnectionPoint(rectangleSmallLeftUp, this, false);
+                ConnectionPoint connLeftDown = new ConnectionPoint(rectangleSmallLeftDown, this, false);
+                ConnectionPoint connRightComb = new ConnectionPoint(rectangleCombRight, this, true);
+
+                listOfConnectionPoints.Add(connLeftUp);
+                listOfConnectionPoints.Add(connLeftDown);
+                listOfConnectionPoints.Add(connRightComb);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

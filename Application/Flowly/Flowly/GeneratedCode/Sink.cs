@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
+using System.Drawing;
 namespace Flowly
 {
     /// <summary>
@@ -16,6 +18,27 @@ namespace Flowly
     /// </summary>
     public class Sink : ComponentDrawn
     {
+        public Sink(Rectangle theRectangle) : base(theRectangle)
+        {
+             diffCurrFlowPossible = false;
+            CreateConnectionPoints();
+        }
+
+        public override bool CreateConnectionPoints()
+        {
+            try
+            {
+                ConnectionPoint conn1 = new ConnectionPoint(rectangleBig, this, false);
+                listOfConnectionPoints.Add(conn1);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+       
     }
 
 }
