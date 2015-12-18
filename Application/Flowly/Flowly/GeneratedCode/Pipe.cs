@@ -17,11 +17,13 @@ namespace Flowly
     /// </summary>
     public class Pipe : ComponentDrawn
     {
+        protected Rectangle rectanglePipeLeft;
 
+        protected Rectangle rectanglePipeRight;
 
         public Pipe(Rectangle theRectangle) : base(theRectangle)
         {
-            diffCurrFlowPossible = false;
+           
 
             rectanglePipeLeft = new Rectangle();
             rectanglePipeLeft.X = rectangleBig.X;

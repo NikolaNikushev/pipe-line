@@ -18,11 +18,15 @@ namespace Flowly
     /// </summary>
     public class Splitter : ComponentDrawn
     {
+        protected Rectangle rectangleCombLeft;
 
+        protected Rectangle rectangleSmallRightUp;
 
-        public Splitter(Rectangle theRectangle) : base(theRectangle)
+        protected Rectangle rectangleSmallRightDown;
+
+        public Splitter(Rectangle theRectangle,bool theDiffCurrFlowPossible) : base(theRectangle)
         {
-            diffCurrFlowPossible = false;
+           
 
 
             rectangleSmallRightUp = new Rectangle();
@@ -44,6 +48,8 @@ namespace Flowly
             rectangleCombLeft.Y = rectangleBig.Y;
             rectangleCombLeft.Height = rectangleBig.Height;
             rectangleCombLeft.Width = rectangleBig.Width / 2;
+
+            diffCurrFlowPossible = theDiffCurrFlowPossible;
 
             CreateConnectionPoints();
 

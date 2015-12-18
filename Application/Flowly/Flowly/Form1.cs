@@ -49,6 +49,8 @@ namespace Flowly
             }
             g = grid.CreateGraphics();
 
+        
+
 
 
         }
@@ -100,17 +102,67 @@ namespace Flowly
 
                 Paint(item);
 
-                Splitter testMerger = new Splitter(r);
-                
-                List<ConnectionPoint> testConnPoints = testMerger.GiveMeYourConnectionPoints();
+                if (currentPB.Image.Equals(toolPump.Image))
+                {
+                    Pump newPump = new Pump(r);
+                    List<ConnectionPoint> testListOfConnectionPoints = newPump.GiveMeYourConnectionPoints();
+                    foreach(ConnectionPoint testCP in testListOfConnectionPoints)
+                    {
+                        g.DrawRectangle(Pens.Blue,testCP.rectangle);
+                    }
 
-                ConnectionPoint bla   = testConnPoints[0];
-                ConnectionPoint bla2  = testConnPoints[1];
-               ConnectionPoint bla3  = testConnPoints[2];
+                }
+                else if (currentPB.Image.Equals(toolPipe.Image))
+                {
+                    Pipe newPipe = new Pipe(r);
+                    List<ConnectionPoint> testListOfConnectionPoints = newPipe.GiveMeYourConnectionPoints();
+                    foreach (ConnectionPoint testCP in testListOfConnectionPoints)
+                    {
+                        g.DrawRectangle(Pens.Blue, testCP.rectangle);
+                    }
+                }
+                else if(currentPB.Image.Equals(toolSplitter.Image))
+                {
+                    Splitter newSplitter = new Splitter(r,false);
+                    List<ConnectionPoint> testListOfConnectionPoints = newSplitter.GiveMeYourConnectionPoints();
+                    foreach (ConnectionPoint testCP in testListOfConnectionPoints)
+                    {
+                        g.DrawRectangle(Pens.Blue, testCP.rectangle);
+                    }
+                    MessageBox.Show("Not adjustable!");
+                }
+                else if (currentPB.Image.Equals(toolSplitterAdj.Image))
+                {
+                    Splitter newSplitter = new Splitter(r, true);
+                    List<ConnectionPoint> testListOfConnectionPoints = newSplitter.GiveMeYourConnectionPoints();
+                    foreach (ConnectionPoint testCP in testListOfConnectionPoints)
+                    {
+                        g.DrawRectangle(Pens.Blue, testCP.rectangle);
+                    }
+                    MessageBox.Show("Adjustable!");
+                }
+                else if(currentPB.Image.Equals(toolMerger.Image))
+                {
+                    Merger newMerger = new Merger(r);
+                    List<ConnectionPoint> testListOfConnectionPoints = newMerger.GiveMeYourConnectionPoints();
+                    foreach (ConnectionPoint testCP in testListOfConnectionPoints)
+                    {
+                        g.DrawRectangle(Pens.Blue, testCP.rectangle);
+                    }
+                }
+                else //then it's a sink
+                {
+                    Sink newSink = new Sink(r);
+                    List<ConnectionPoint> testListOfConnectionPoints = newSink.GiveMeYourConnectionPoints();
+                    foreach (ConnectionPoint testCP in testListOfConnectionPoints)
+                    {
+                        g.DrawRectangle(Pens.Blue, testCP.rectangle);
+                    }
+                }
 
-                g.DrawRectangle(Pens.Orange, bla.rectangle);
-              g.DrawRectangle(Pens.Blue, bla2.rectangle);
-                g.DrawRectangle(Pens.Yellow, bla3.rectangle);
+              
+
+            
 
 
             }

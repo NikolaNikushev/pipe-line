@@ -31,33 +31,9 @@ namespace Flowly
         protected float currentFlow;
 
         protected Rectangle rectangleBig;
+        
 
-        protected Rectangle rectangleSmallLeftUp;
-
-        protected Rectangle rectangleSmallLeftDown;
-
-        protected Rectangle rectangleCombLeft;
-
-        protected Rectangle rectangleSmallRightUp;
-
-        protected Rectangle rectangleSmallRightDown;
-
-        protected Rectangle rectangleCombRight;
-
-        protected Rectangle rectanglePipeLeft;
-
-        protected Rectangle rectanglePipeRight;
-
-      
-
-
-
-
-        public virtual IEnumerable<ConnectionPoint> ConnectionPoint
-        {
-            get;
-            set;
-        }
+    
         public ComponentDrawn(Rectangle theRectangle)
         {
             listOfConnectionPoints = new List<ConnectionPoint>();
@@ -66,8 +42,7 @@ namespace Flowly
             SetCapacity(0);
             SetCurrentFlow(0);
             rectangleBig = theRectangle;
-
-        
+            diffCurrFlowPossible = false;
 
         }
 

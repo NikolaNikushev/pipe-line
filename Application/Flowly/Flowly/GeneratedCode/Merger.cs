@@ -17,9 +17,16 @@ namespace Flowly
     /// </summary>
     public class Merger : ComponentDrawn
     {
-       public Merger(Rectangle theRectangle) : base(theRectangle)
+
+        protected Rectangle rectangleSmallLeftUp;
+
+        protected Rectangle rectangleSmallLeftDown;
+
+        protected Rectangle rectangleCombRight;
+
+        public Merger(Rectangle theRectangle) : base(theRectangle)
         {
-            diffCurrFlowPossible = false;
+           
 
 
 

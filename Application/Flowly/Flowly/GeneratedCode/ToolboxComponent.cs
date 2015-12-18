@@ -22,6 +22,13 @@ namespace Flowly
 
         private Image image;
 
+        public ToolboxComponent(int theId, string theName, Image theImage)
+        {
+            id = theId;
+            name = theName;
+            image = theImage;
+        }
+
     }
 
 }

@@ -19,7 +19,7 @@ namespace Flowly
     {
         public Pump(Rectangle theRectangle) :base(theRectangle)
         {
-            diffCurrFlowPossible = false;
+           
             CreateConnectionPoints();
         }
 
