@@ -204,7 +204,7 @@
             toolbox of the program. Simpe list of "ToolboxComponent"-s. Make the difference between "ComponentDrawn" and "ToolboxComponent".
             </summary>
         </member>
-        <member name="M:Flowly.SystemFlowly.CheckFreeSpot(System.Int32,System.Int32)">
+        <member name="M:Flowly.SystemFlowly.CheckFreeSpot(System.Drawing.Rectangle)">
             <summary>
             Checks if a particular area is free.
             </summary>
@@ -228,13 +228,12 @@
             <param name="y"></param>
             <returns>True for successfull, false otherwise.</returns>
         </member>
-        <member name="M:Flowly.SystemFlowly.CreateComponentDrawn(System.String,Flowly.ConnectionPoint,Flowly.ConnectionPoint,System.Int32)">
+        <member name="M:Flowly.SystemFlowly.CreateComponentDrawn(Flowly.GeneratedCode.ComponentName,System.Drawing.Rectangle,System.Int32)">
             <summary>
             Creates a new instance of class "ComponentDrawn". 
             </summary>
             <param name="cName">component name</param>
-            <param name="cTop">component top coordinate</param>
-            <param name="cBottom">component bottom coordinate</param>
+            <param name="rectangle">The rectangle that the component will have</param>
             <param name="cCapacity">component capacity</param>
             <returns>True if successfully created, false otherwise.</returns>
         </member>

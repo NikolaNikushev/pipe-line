@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Flowly.GeneratedCode;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,15 +18,13 @@ namespace Flowly
     {
         private int yPos;
         private int xPos;
-
+        SystemFlowly flowly;
 
 
         private bool modeCreate = false;
 
         //for testingperposes
         PictureBox currentPB;
-        List<Rectangle> rectangles = new List<Rectangle>();
-        Dictionary<Rectangle, Image> dictionary = new Dictionary<Rectangle, Image>();
 
         Graphics g;
         public Form1()
@@ -47,7 +46,8 @@ namespace Flowly
                         item.Click += (x, y) => ActivateCreating(pb);
                     }
             }
-            g = grid.CreateGraphics();
+            Grid theGrid = new Grid(grid);
+            flowly = new SystemFlowly(theGrid);
 
         
 
@@ -87,83 +87,49 @@ namespace Flowly
                 int width = currentPB.Width;
                 int height = currentPB.Height;
                 Rectangle r = new Rectangle(x, y, width, height);
-                foreach (Rectangle rect in rectangles)
-                {
-                    if (r.IntersectsWith(rect))
-                    {
-                        MessageBox.Show("The element is coliding with another element.");
-                        return;
-                    }
-                }
-                rectangles.Add(r);
-                KeyValuePair<Rectangle, Image> item = new KeyValuePair<Rectangle, Image>(r, currentPB.Image);
-               
-                dictionary.Add(r, currentPB.Image);
-
-                Paint(item);
-
+                ComponentName  currentComponentName;
                 if (currentPB.Image.Equals(toolPump.Image))
                 {
-                    Pump newPump = new Pump(r);
-                    List<ConnectionPoint> testListOfConnectionPoints = newPump.GiveMeYourConnectionPoints();
-                    foreach(ConnectionPoint testCP in testListOfConnectionPoints)
-                    {
-                        g.DrawRectangle(Pens.Blue,testCP.rectangle);
-                    }
+                    currentComponentName = ComponentName.Pump;
 
                 }
                 else if (currentPB.Image.Equals(toolPipe.Image))
                 {
-                    Pipe newPipe = new Pipe(r);
-                    List<ConnectionPoint> testListOfConnectionPoints = newPipe.GiveMeYourConnectionPoints();
-                    foreach (ConnectionPoint testCP in testListOfConnectionPoints)
-                    {
-                        g.DrawRectangle(Pens.Blue, testCP.rectangle);
-                    }
+                    currentComponentName = ComponentName.Pipe;
                 }
-                else if(currentPB.Image.Equals(toolSplitter.Image))
+                else if (currentPB.Image.Equals(toolSplitter.Image))
                 {
-                    Splitter newSplitter = new Splitter(r,false);
-                    List<ConnectionPoint> testListOfConnectionPoints = newSplitter.GiveMeYourConnectionPoints();
-                    foreach (ConnectionPoint testCP in testListOfConnectionPoints)
-                    {
-                        g.DrawRectangle(Pens.Blue, testCP.rectangle);
-                    }
-                    MessageBox.Show("Not adjustable!");
+                    currentComponentName = ComponentName.Splitter;
                 }
                 else if (currentPB.Image.Equals(toolSplitterAdj.Image))
                 {
-                    Splitter newSplitter = new Splitter(r, true);
-                    List<ConnectionPoint> testListOfConnectionPoints = newSplitter.GiveMeYourConnectionPoints();
-                    foreach (ConnectionPoint testCP in testListOfConnectionPoints)
-                    {
-                        g.DrawRectangle(Pens.Blue, testCP.rectangle);
-                    }
-                    MessageBox.Show("Adjustable!");
+                    currentComponentName = ComponentName.SplitterAdj;
                 }
-                else if(currentPB.Image.Equals(toolMerger.Image))
+                else if (currentPB.Image.Equals(toolMerger.Image))
                 {
-                    Merger newMerger = new Merger(r);
-                    List<ConnectionPoint> testListOfConnectionPoints = newMerger.GiveMeYourConnectionPoints();
-                    foreach (ConnectionPoint testCP in testListOfConnectionPoints)
-                    {
-                        g.DrawRectangle(Pens.Blue, testCP.rectangle);
-                    }
+                    currentComponentName = ComponentName.Merger;
                 }
                 else //then it's a sink
                 {
-                    Sink newSink = new Sink(r);
-                    List<ConnectionPoint> testListOfConnectionPoints = newSink.GiveMeYourConnectionPoints();
-                    foreach (ConnectionPoint testCP in testListOfConnectionPoints)
-                    {
-                        g.DrawRectangle(Pens.Blue, testCP.rectangle);
-                    }
+                    currentComponentName = ComponentName.Sink;
                 }
+                if (flowly.CheckFreeSpot(r))
+                {
+                    //TODO Fix capacity
+                    flowly.CreateComponentDrawn(currentComponentName, r, 5);
+                    
+                }
+                else
+                {
+                    MessageBox.Show("The element is coliding with another element.");
+                   
+                   
+                }
+               // KeyValuePair<Rectangle, Image> item = new KeyValuePair<Rectangle, Image>(r, currentPB.Image);
+               
+               // dictionary.Add(r, currentPB.Image);
 
-              
-
-            
-
+               // Paint(item);
 
             }
 
@@ -191,12 +157,7 @@ namespace Flowly
 
         }
 
-        private void Paint(KeyValuePair<Rectangle, Image> item)
-        {
-            Rectangle r = item.Key;
-            g.DrawRectangle(Pens.Red, r);
-            g.DrawImage(item.Value, r);
-        }
+       
 
         HashSet<Rectangle> colisions = new HashSet<Rectangle>();
         

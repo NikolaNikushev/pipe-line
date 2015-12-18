@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Windows.Forms;
+
 namespace Flowly
 {
     /// <summary>
@@ -24,11 +26,14 @@ namespace Flowly
 
         private string name;
 
-        public virtual IEnumerable<ComponentDrawn> ComponentDrawn
+
+        public Grid(PictureBox grid)
         {
-            get;
-            set;
+            this.listOfComponents = new List<Flowly.ComponentDrawn>();
+            this.graphic = grid.CreateGraphics();
         }
+
+
 
         /// <summary>
         /// Adds a component to the listOfComponents list.
@@ -37,7 +42,15 @@ namespace Flowly
         /// <returns>True if successfull, false otherwise</returns>
         public virtual bool AddComponentDrawnToGridList(ComponentDrawn givenComponent)
         {
-            throw new System.NotImplementedException();
+            try {
+                this.listOfComponents.Add(givenComponent);
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("There are a problem adding the component to the grid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
         /// <summary>
         /// Opposite of the other method.
@@ -46,7 +59,48 @@ namespace Flowly
         /// <returns>True if successfull, false otherwise.</returns>
         public virtual bool RemoveComponentDrawnFromGridList(ComponentDrawn givenComponent)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                this.listOfComponents.Remove(givenComponent);
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("There are a problem removing the component to the grid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        public List<Rectangle> GetComponentsRectangles()
+        {
+            List<Rectangle> rect= new List<Rectangle>();
+            foreach (ComponentDrawn component in this.listOfComponents)
+            {
+
+                rect.Add(component.RectangleBig);
+            }
+            return rect;
+        }
+
+        public void PaintAllComponents()
+        {
+            foreach (ComponentDrawn item in this.listOfComponents)
+            {
+                Paint(item);
+            }
+        }
+
+        public void Paint(ComponentDrawn drawn)
+        {
+            Rectangle r = drawn.RectangleBig;
+            graphic.DrawRectangle(Pens.Red, r);
+            graphic.DrawImage(drawn.Image, r);
+            List<ConnectionPoint> conPoints = drawn.GiveMeYourConnectionPoints();
+            foreach (ConnectionPoint cp in conPoints)
+            {
+                graphic.DrawRectangle(Pens.Blue, cp.rectangle);
+                
+            }
         }
 
     }

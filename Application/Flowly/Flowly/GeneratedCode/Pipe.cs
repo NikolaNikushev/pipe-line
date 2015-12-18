@@ -23,8 +23,8 @@ namespace Flowly
 
         public Pipe(Rectangle theRectangle) : base(theRectangle)
         {
-           
 
+            imageResource = Image.FromFile("images\\pump.png");
             rectanglePipeLeft = new Rectangle();
             rectanglePipeLeft.X = rectangleBig.X;
             rectanglePipeLeft.Y = rectangleBig.Y;

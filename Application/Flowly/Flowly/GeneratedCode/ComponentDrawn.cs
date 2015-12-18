@@ -22,7 +22,9 @@ namespace Flowly
 
         protected List<PropertiesEnum> listOfProperties; 
         
-        protected List<ComponentDrawn> listOfComponentDrawn; 
+        protected List<ComponentDrawn> listOfComponentDrawn;
+
+        protected Image imageResource;
 
         protected bool diffCurrFlowPossible;
 
@@ -31,9 +33,11 @@ namespace Flowly
         protected float currentFlow;
 
         protected Rectangle rectangleBig;
-        
 
-    
+
+        public Rectangle RectangleBig { get { return rectangleBig; } }
+
+        public Image Image { get { return this.imageResource; } }
         public ComponentDrawn(Rectangle theRectangle)
         {
             listOfConnectionPoints = new List<ConnectionPoint>();

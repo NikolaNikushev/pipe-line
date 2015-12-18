@@ -26,10 +26,10 @@ namespace Flowly
 
         public Merger(Rectangle theRectangle) : base(theRectangle)
         {
-           
 
 
 
+            imageResource = Image.FromFile("images\\merger2.png");
             rectangleSmallLeftUp = new Rectangle();
             rectangleSmallLeftUp.X = rectangleBig.X;
             rectangleSmallLeftUp.Y = rectangleBig.Y;

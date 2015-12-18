@@ -19,7 +19,7 @@ namespace Flowly
     {
         public Pump(Rectangle theRectangle) :base(theRectangle)
         {
-           
+            imageResource = Image.FromFile("images\\start_point.png");
             CreateConnectionPoints();
         }
 

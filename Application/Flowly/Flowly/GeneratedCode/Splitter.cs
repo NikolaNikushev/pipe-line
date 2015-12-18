@@ -26,9 +26,9 @@ namespace Flowly
 
         public Splitter(Rectangle theRectangle,bool theDiffCurrFlowPossible) : base(theRectangle)
         {
-           
 
 
+            
             rectangleSmallRightUp = new Rectangle();
             rectangleSmallRightUp.X = rectangleBig.X + rectangleBig.Width / 2;
             rectangleSmallRightUp.Y = rectangleBig.Y;
@@ -49,8 +49,16 @@ namespace Flowly
             rectangleCombLeft.Height = rectangleBig.Height;
             rectangleCombLeft.Width = rectangleBig.Width / 2;
 
+            
             diffCurrFlowPossible = theDiffCurrFlowPossible;
-
+            if (diffCurrFlowPossible)
+            {
+                imageResource = Image.FromFile("images\\ad_splitter2.png");
+            }
+            else
+            {
+                imageResource = Image.FromFile("images\\splitter2.png");
+            }
             CreateConnectionPoints();
 
         }

@@ -4,8 +4,10 @@
 //     Changes to this file will be lost if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using Flowly.GeneratedCode;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 namespace Flowly
@@ -50,15 +52,25 @@ namespace Flowly
             set;
         }
 
+        public SystemFlowly(Grid grid)
+        {
+            this.grid = grid;
+        }
+
         /// <summary>
         /// Checks if a particular area is free.
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns>True if it is, false otherwise.</returns>
-        public virtual bool CheckFreeSpot(int x, int y)
+        public virtual bool CheckFreeSpot(Rectangle r)
         {
-            throw new System.NotImplementedException();
+            List<Rectangle> rectangles = grid.GetComponentsRectangles();
+            foreach (Rectangle rect in rectangles)
+            {
+                if (r.IntersectsWith(rect)) return false;
+            }
+            return true;
         }
 
         /// <summary>
@@ -87,13 +99,54 @@ namespace Flowly
         /// Creates a new instance of class "ComponentDrawn". 
         /// </summary>
         /// <param name="cName">component name</param>
-        /// <param name="cTop">component top coordinate</param>
-        /// <param name="cBottom">component bottom coordinate</param>
+        /// <param name="rectangle">The rectangle that the component will have</param>
         /// <param name="cCapacity">component capacity</param>
         /// <returns>True if successfully created, false otherwise.</returns>
-        public virtual bool CreateComponentDrawn(string cName, ConnectionPoint cTop, ConnectionPoint cBottom, int cCapacity)
+        public virtual bool CreateComponentDrawn(ComponentName cName, Rectangle rectangle, int cCapacity)
         {
-            throw new System.NotImplementedException();
+            /* Pump newPump = new Pump(r);
+             List<ConnectionPoint> testListOfConnectionPoints = newPump.GiveMeYourConnectionPoints();
+             foreach (ConnectionPoint testCP in testListOfConnectionPoints)
+             {
+                 g.DrawRectangle(Pens.Blue, testCP.rectangle);
+             }*/
+            ComponentDrawn cd = null;
+            switch (cName)
+            {
+                case ComponentName.Merger:
+                    cd = new Merger(rectangle);
+                    break;
+                case ComponentName.Pipe:
+                    cd = new Pipe(rectangle);
+                    break;
+                case ComponentName.Pump:
+                    cd = new Pump(rectangle);
+                    break;
+                case ComponentName.Sink:
+                    cd = new Sink(rectangle);
+                    break;
+                case ComponentName.Splitter:
+                    cd = new Splitter(rectangle, false);
+                    break;
+                case ComponentName.SplitterAdj:
+                    cd = new Splitter(rectangle, true);
+                    break;
+                    
+                default:
+
+                    return false;
+            }
+            if (cd == null)
+            {
+                return false;
+            }
+            else
+            {
+                grid.AddComponentDrawnToGridList(cd);
+                grid.Paint(cd);             
+                return true;
+            }
+
         }
 
         /// <summary>

@@ -20,7 +20,8 @@ namespace Flowly
     {
         public Sink(Rectangle theRectangle) : base(theRectangle)
         {
-             diffCurrFlowPossible = false;
+            imageResource = Image.FromFile("images\\sink2.png");
+            diffCurrFlowPossible = false;
             CreateConnectionPoints();
         }
 
