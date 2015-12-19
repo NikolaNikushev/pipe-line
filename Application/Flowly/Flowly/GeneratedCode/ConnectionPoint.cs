@@ -19,17 +19,19 @@ namespace Flowly
     {
         public Rectangle rectangle;
 
-        private float currentFlow; 
+        private float currentFlow;
 
-        private bool isOutput; 
+        private bool isOutput;
 
         private ComponentDrawn componentDrawnBelong;
 
         private bool isAvailable;
 
-        public bool Available { get { return isAvailable; }}
+        public bool Available { get { return isAvailable; } }
 
-        public ConnectionPoint(Rectangle theRectangle, ComponentDrawn theComponentDrawnBelong,bool theIsOutput)
+        public bool IsOutput { get { return isOutput; } }
+
+        public ConnectionPoint(Rectangle theRectangle, ComponentDrawn theComponentDrawnBelong, bool theIsOutput)
         {
             rectangle = theRectangle;
             SetCurrentFlow(0);

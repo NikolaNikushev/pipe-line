@@ -36,7 +36,7 @@ namespace Flowly
                 System.Windows.Forms.ControlStyles.AllPaintingInWmPaint |
                 System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer,
                 true);
-        
+
             InitializeComponent();
             foreach (Control item in this.groupBox1.Controls)
             {
@@ -47,7 +47,7 @@ namespace Flowly
                         item.Click += (x, y) => ActivateCreating(pb);
                     }
             }
-             theGrid = new Grid(grid);
+            theGrid = new Grid(grid);
             flowly = new SystemFlowly(theGrid);
         }
 
@@ -72,14 +72,14 @@ namespace Flowly
 
         }
 
-        Point lastPoint = new Point(-1,-1);
+        Point lastPoint = new Point(-1, -1);
         Pipe pipe = null;
 
         private void grid_Click(object sender, EventArgs e)
         {
             //if(theImageLocationIsValid)
             int x = xPos;
-            int y = yPos ;
+            int y = yPos;
             if (modePipeCreate)
             {
                 if (currentPB.Image.Equals(toolPipe.Image))
@@ -92,10 +92,14 @@ namespace Flowly
                         ConnectionPoint cp = flowly.CheckInputOrOutput(newPoint);
                         if (cp != null)
                         {
-                            pipe = new Pipe();
-                            pipe.SetConnection(cp);
-                            lastPoint = newPoint;
-                            pipe.AddPointToList(lastPoint);
+                            if (cp.IsOutput)
+                            {
+                                cp.SetAvailable(false);
+                                pipe = new Pipe();
+                                pipe.SetConnection(cp);
+                                lastPoint = newPoint;
+                                pipe.AddPointToList(lastPoint);
+                            }
                         }
                         else
                         {
@@ -104,15 +108,36 @@ namespace Flowly
                     }
                     else
                     {
+                       
                         bool isAdded = flowly.DrawPipeline(lastPoint, newPoint, pipe);
                         if (isAdded)
                         {
+
+                          
                             lastPoint = newPoint;
-                           
                         }
                         else
                         {
+                            ConnectionPoint cp = flowly.CheckInputOrOutput(newPoint);
+                            if (cp != null)
+                            {
+                                if (!cp.IsOutput)
+                                {
+                                    cp.SetAvailable(false);
 
+                                    pipe.SetConnection(cp);
+                                   
+                                   
+                                    isAdded = flowly.DrawPipeline(lastPoint, newPoint, pipe);
+                                    if (isAdded)
+                                    {
+                                        MessageBox.Show("Connected");
+                                      
+                                        pipe = null;
+                                        lastPoint = new Point(-1, -1);
+                                    }
+                                }
+                            }
 
                         }
 
@@ -142,14 +167,14 @@ namespace Flowly
                 int width = currentPB.Width;
                 int height = currentPB.Height;
                 Rectangle r = new Rectangle(x, y, width, height);
-                ComponentName  currentComponentName;
+                ComponentName currentComponentName;
                 if (currentPB.Image.Equals(toolPump.Image))
                 {
                     currentComponentName = ComponentName.Pump;
-                   
+
 
                 }
-              
+
                 else if (currentPB.Image.Equals(toolSplitter.Image))
                 {
                     currentComponentName = ComponentName.Splitter;
@@ -170,19 +195,19 @@ namespace Flowly
                 {
                     //TODO Fix capacity
                     flowly.CreateComponentDrawn(currentComponentName, r, 5);
-                    
+
                 }
                 else
                 {
                     MessageBox.Show("The element is coliding with another element.");
-                   
-                   
-                }
-               // KeyValuePair<Rectangle, Image> item = new KeyValuePair<Rectangle, Image>(r, currentPB.Image);
-               
-               // dictionary.Add(r, currentPB.Image);
 
-               // Paint(item);
+
+                }
+                // KeyValuePair<Rectangle, Image> item = new KeyValuePair<Rectangle, Image>(r, currentPB.Image);
+
+                // dictionary.Add(r, currentPB.Image);
+
+                // Paint(item);
 
             }
 
@@ -205,15 +230,15 @@ namespace Flowly
 
 
             // Paint(item)
-           
+
 
 
         }
 
-       
+
 
         HashSet<Rectangle> colisions = new HashSet<Rectangle>();
-        
+
         private void grid_MouseMove(object sender, MouseEventArgs e)
         {
 
@@ -221,7 +246,7 @@ namespace Flowly
             xPos = (e.X);
             //followCursorPB.Location = new System.Drawing.Point(xPos + groupBox1.Width, yPos);
             //followCursorPB.Visible = true;
-           
+
 
         }
 
@@ -286,12 +311,12 @@ namespace Flowly
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-           
+
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            
+
         }
 
         private void timer1_Tick_1(object sender, EventArgs e)
@@ -305,12 +330,12 @@ namespace Flowly
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void clearGridToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           DialogResult dg = MessageBox.Show("Do you really want to clear the grid?", "Confirmation", MessageBoxButtons.YesNo);
+            DialogResult dg = MessageBox.Show("Do you really want to clear the grid?", "Confirmation", MessageBoxButtons.YesNo);
             if (dg == DialogResult.Yes)
             {
                 flowly.ClearGrid(theGrid);
@@ -338,7 +363,7 @@ namespace Flowly
                 flowly.OpenFile(grid);
             }
 
-           
+
         }
     }
 }

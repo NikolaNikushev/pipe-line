@@ -195,78 +195,82 @@ namespace Flowly
 
         internal bool DrawPipeLine(Point start, Point end, Pipe currentPipe)
         {
-            int listOfComponentsCount = listOfComponents.Count;
-            int currentPipeLines = currentPipe.PipePoints.Count;
-            for (int i = 0; i < currentPipeLines - 1; i++)
+            if (currentPipe.GiveMeYourConnectionPoints().Count != 2)
             {
-                Point other1 = currentPipe.PipePoints[i];
-                Point other2 = currentPipe.PipePoints[i + 1];
-                if (start != other1 && start != other2)
+                int listOfComponentsCount = listOfComponents.Count;
+                int currentPipeLines = currentPipe.PipePoints.Count;
+                for (int i = 0; i < currentPipeLines - 1; i++)
                 {
-                    if (CheckPipeIntersects(start, end, currentPipe.PipePoints[i], currentPipe.PipePoints[i + 1]))
+                    Point other1 = currentPipe.PipePoints[i];
+                    Point other2 = currentPipe.PipePoints[i + 1];
+                    if (start != other1 && start != other2)
                     {
-                        MessageBox.Show("Intersects with itself");
-
-                        return false;
-                    }
-                }
-            }   
-            for (int i = 0; i < listOfComponentsCount ; i++)
-            {
-                ComponentDrawn d = listOfComponents[i];
-                if (currentPipe.PipePoints.Count < 2)
-                {
-                    if (d.GiveMeYourConnectionPoints().Where(x => x == currentPipe.GiveMeYourConnectionPoints().Last()).Any())
-                        continue;
-                }
-             
-
-               
-                if (d is Pipe)
-                {
-                    Pipe pipe = (Pipe) d;
-                    int pipeLinesCount = pipe.PipePoints.Count;
-                    List<Point> pLines = pipe.PipePoints;
-
-                    for (int j = 0; j <= pipeLinesCount - 1; j++)
-                    {
-                        if (CheckPipeIntersects(start, end, pLines[j], pLines[j + 1]))
+                        if (CheckPipeIntersects(start, end, currentPipe.PipePoints[i], currentPipe.PipePoints[i + 1]))
                         {
-                            MessageBox.Show("Intersects another line");
+                            MessageBox.Show("Intersects with itself");
+
                             return false;
                         }
                     }
                 }
-                Rectangle dRect = d.RectangleBig;
-                
-                Point p = new Point(dRect.X, dRect.Y);
-                Point p2 = new Point(dRect.X + dRect.Width, dRect.Y);
-                if (CheckPipeIntersects(start, end, p, p2))
+                for (int i = 0; i < listOfComponentsCount; i++)
                 {
-                    return false;
-                }
+                    ComponentDrawn d = listOfComponents[i];
+                    if (currentPipe.PipePoints.Count < 2)
+                    {
+                        if (d.GiveMeYourConnectionPoints().Where(x => x == currentPipe.GiveMeYourConnectionPoints().Last()).Any())
+                            continue;
+                    }
 
-                p = new Point(dRect.X + dRect.Width, dRect.Y);
-                p2 = new Point(dRect.X + dRect.Width, dRect.Y + dRect.Height);
-                if (CheckPipeIntersects(start, end, p, p2))
-                {
-                    return false;
-                }
-                p = new Point(dRect.X, dRect.Y + dRect.Height);
-                p2 = new Point(dRect.X + dRect.Width, dRect.Y + dRect.Height);
-                if (CheckPipeIntersects(start, end, p, p2))
-                {
-                    return false;
-                }
-                p = new Point(dRect.X, dRect.Y);
-                p2 = new Point(dRect.X, dRect.Y + dRect.Height);
-                if (CheckPipeIntersects(start, end, p, p2))
-                {
-                    return false;
+
+
+                    if (d is Pipe)
+                    {
+                        Pipe pipe = (Pipe)d;
+                        int pipeLinesCount = pipe.PipePoints.Count;
+                        List<Point> pLines = pipe.PipePoints;
+
+                        for (int j = 0; j <= pipeLinesCount - 1; j++)
+                        {
+                            if (CheckPipeIntersects(start, end, pLines[j], pLines[j + 1]))
+                            {
+                                MessageBox.Show("Intersects another line");
+                                return false;
+                            }
+                        }
+                    }
+                    Rectangle dRect = d.RectangleBig;
+
+                    Point p = new Point(dRect.X, dRect.Y);
+                    Point p2 = new Point(dRect.X + dRect.Width, dRect.Y);
+                    if (CheckPipeIntersects(start, end, p, p2))
+                    {
+                        return false;
+                    }
+
+                    p = new Point(dRect.X + dRect.Width, dRect.Y);
+                    p2 = new Point(dRect.X + dRect.Width, dRect.Y + dRect.Height);
+                    if (CheckPipeIntersects(start, end, p, p2))
+                    {
+                        return false;
+                    }
+                    p = new Point(dRect.X, dRect.Y + dRect.Height);
+                    p2 = new Point(dRect.X + dRect.Width, dRect.Y + dRect.Height);
+                    if (CheckPipeIntersects(start, end, p, p2))
+                    {
+                        return false;
+                    }
+                    p = new Point(dRect.X, dRect.Y);
+                    p2 = new Point(dRect.X, dRect.Y + dRect.Height);
+                    if (CheckPipeIntersects(start, end, p, p2))
+                    {
+                        return false;
+                    }
                 }
             }
 
             graphic.DrawLine(Pens.Black, start, end);
+            
             currentPipe.AddPointToList(end);
             return true;
         }
