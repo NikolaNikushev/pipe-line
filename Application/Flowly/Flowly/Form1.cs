@@ -23,11 +23,11 @@ namespace Flowly
 
 
         private bool modeCreate = false;
+        private bool modePipeCreate = false;
 
         //for testingperposes
         PictureBox currentPB;
 
-        Graphics g;
         public Form1()
         {
 
@@ -49,11 +49,6 @@ namespace Flowly
             }
              theGrid = new Grid(grid);
             flowly = new SystemFlowly(theGrid);
-
-        
-
-
-
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -77,14 +72,73 @@ namespace Flowly
 
         }
 
+        Point lastPoint = new Point(-1,-1);
+        Pipe pipe = null;
+
         private void grid_Click(object sender, EventArgs e)
         {
             //if(theImageLocationIsValid)
+            int x = xPos;
+            int y = yPos ;
+            if (modePipeCreate)
+            {
+                if (currentPB.Image.Equals(toolPipe.Image))
+                {
+                    Point newPoint = new Point(x, y);
+
+                    //start drawing pipeline.
+                    if (lastPoint.X == -1 || lastPoint.Y == -1)
+                    {
+                        ConnectionPoint cp = flowly.CheckInputOrOutput(newPoint);
+                        if (cp != null)
+                        {
+                            pipe = new Pipe();
+                            pipe.SetConnection(cp);
+                            lastPoint = newPoint;
+                            pipe.AddPointToList(lastPoint);
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        bool isAdded = flowly.DrawPipeline(lastPoint, newPoint, pipe);
+                        if (isAdded)
+                        {
+                            lastPoint = newPoint;
+                           
+                        }
+                        else
+                        {
+
+
+                        }
+
+                    }
+                }
+            }
+            else
+            {
+                //pipe.AddPointToList(lastPoint);
+
+
+                //MessageBox.Show("Pipe is connected");
+                if (pipe != null)
+                {
+                    flowly.RemovePipe(pipe);
+                    pipe = null;
+                    lastPoint = new Point(-1, -1);
+                }
+            }
+
+
             if (modeCreate)
             {
 
-                int x = xPos - currentPB.Width / 2;
-                int y = yPos - currentPB.Height / 2;
+                x -= currentPB.Width / 2;
+                y -= currentPB.Height / 2;
                 int width = currentPB.Width;
                 int height = currentPB.Height;
                 Rectangle r = new Rectangle(x, y, width, height);
@@ -92,12 +146,10 @@ namespace Flowly
                 if (currentPB.Image.Equals(toolPump.Image))
                 {
                     currentComponentName = ComponentName.Pump;
+                   
 
                 }
-                else if (currentPB.Image.Equals(toolPipe.Image))
-                {
-                    currentComponentName = ComponentName.Pipe;
-                }
+              
                 else if (currentPB.Image.Equals(toolSplitter.Image))
                 {
                     currentComponentName = ComponentName.Splitter;
@@ -184,12 +236,14 @@ namespace Flowly
         private void toolPipe_Click(object sender, EventArgs e)
         {
             modeCreate = false;
+            modePipeCreate = true;
             HighlightCurrentPB(sender as PictureBox);
         }
 
         private void ActivateCreating(PictureBox pb)
         {
             modeCreate = true;
+            modePipeCreate = false;
             HighlightCurrentPB(pb);
 
 

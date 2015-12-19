@@ -13,13 +13,15 @@ using System.Windows.Forms;
 
 namespace Flowly
 {
-    
+
     /// <summary>
     /// Objects of this class will be the "drawing" place of the user. A grid will contain components in it.
     /// </summary>
     public class Grid
     {
         private List<ComponentDrawn> listOfComponents;
+
+      
 
         private Graphics graphic;
 
@@ -63,13 +65,13 @@ namespace Flowly
             }
         }
 
-        public Grid(PictureBox grid) 
+        public Grid(PictureBox grid)
         {
             ListOfComponents = new List<Flowly.ComponentDrawn>();
             Graphic = grid.CreateGraphics();
-
+           
         }
-       
+
 
 
         public Graphics Graphic
@@ -92,7 +94,8 @@ namespace Flowly
         /// <returns>True if successfull, false otherwise</returns>
         public virtual bool AddComponentDrawnToGridList(ComponentDrawn givenComponent)
         {
-            try {
+            try
+            {
                 this.listOfComponents.Add(givenComponent);
                 return true;
             }
@@ -102,6 +105,33 @@ namespace Flowly
                 return false;
             }
         }
+
+        internal ConnectionPoint IsInputOutput(Point newPoint)
+        {
+            foreach (ComponentDrawn item in ListOfComponents)
+            {
+                Rectangle componentRect = item.RectangleBig;
+                Rectangle pointRect = new Rectangle(newPoint, new Size(1, 1));
+                if (componentRect.IntersectsWith(pointRect))
+                {
+                    List<ConnectionPoint> conPoints = item.GiveMeYourConnectionPoints();
+                    foreach (ConnectionPoint cp in conPoints)
+                    {
+                        if (pointRect.IntersectsWith(cp.rectangle)){
+
+                            if (cp.Available)
+                            {
+                                return cp;
+                            }
+                            
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// Opposite of the other method.
         /// </summary>
@@ -121,9 +151,129 @@ namespace Flowly
             }
         }
 
+        internal void RemovePipe(Pipe pipe)
+        {
+            for (int i = 0; i < pipe.PipePoints.Count - 1; i++)
+            {
+                graphic.DrawLine(Pens.White, pipe.PipePoints[i], pipe.PipePoints[i + 1]);
+            }
+
+            
+
+        }
+
+        internal void AddPipe(Pipe pipe)
+        {
+            this.listOfComponents.Add(pipe);
+        }
+
+        public static bool CheckPipeIntersects(Point a1, Point a2, Point b1, Point b2)
+        {
+            Point b = new Point(a2.X - a1.X, a2.Y - a1.Y);
+            Point d = new Point(b2.X - b1.X, b2.Y - b1.Y);
+            float bDotDPerp = b.X * d.Y - b.Y * d.X;
+
+            // if b dot d == 0, it means the lines are parallel so have infinite intersection points
+            if (bDotDPerp == 0)
+                return false;
+
+            Point c = new Point(b1.X - a1.X, b1.Y - a1.Y);
+            float t = (c.X * d.Y - c.Y * d.X) / bDotDPerp;
+            if (t < 0 || t > 1)
+                return false;
+
+            float u = (c.X * b.Y - c.Y * b.X) / bDotDPerp;
+            if (u < 0 || u > 1)
+                return false;
+
+            //intersection = new Point((int)(a1.X + t  b.X), (int)(a1.Y + t  b.Y));
+
+            return true;
+        }
+
+
+
+        internal bool DrawPipeLine(Point start, Point end, Pipe currentPipe)
+        {
+            int listOfComponentsCount = listOfComponents.Count;
+            int currentPipeLines = currentPipe.PipePoints.Count;
+            for (int i = 0; i < currentPipeLines - 1; i++)
+            {
+                Point other1 = currentPipe.PipePoints[i];
+                Point other2 = currentPipe.PipePoints[i + 1];
+                if (start != other1 && start != other2)
+                {
+                    if (CheckPipeIntersects(start, end, currentPipe.PipePoints[i], currentPipe.PipePoints[i + 1]))
+                    {
+                        MessageBox.Show("Intersects with itself");
+
+                        return false;
+                    }
+                }
+            }   
+            for (int i = 0; i < listOfComponentsCount ; i++)
+            {
+                ComponentDrawn d = listOfComponents[i];
+                if (currentPipe.PipePoints.Count < 2)
+                {
+                    if (d.GiveMeYourConnectionPoints().Where(x => x == currentPipe.GiveMeYourConnectionPoints().Last()).Any())
+                        continue;
+                }
+             
+
+               
+                if (d is Pipe)
+                {
+                    Pipe pipe = (Pipe) d;
+                    int pipeLinesCount = pipe.PipePoints.Count;
+                    List<Point> pLines = pipe.PipePoints;
+
+                    for (int j = 0; j <= pipeLinesCount - 1; j++)
+                    {
+                        if (CheckPipeIntersects(start, end, pLines[j], pLines[j + 1]))
+                        {
+                            MessageBox.Show("Intersects another line");
+                            return false;
+                        }
+                    }
+                }
+                Rectangle dRect = d.RectangleBig;
+                
+                Point p = new Point(dRect.X, dRect.Y);
+                Point p2 = new Point(dRect.X + dRect.Width, dRect.Y);
+                if (CheckPipeIntersects(start, end, p, p2))
+                {
+                    return false;
+                }
+
+                p = new Point(dRect.X + dRect.Width, dRect.Y);
+                p2 = new Point(dRect.X + dRect.Width, dRect.Y + dRect.Height);
+                if (CheckPipeIntersects(start, end, p, p2))
+                {
+                    return false;
+                }
+                p = new Point(dRect.X, dRect.Y + dRect.Height);
+                p2 = new Point(dRect.X + dRect.Width, dRect.Y + dRect.Height);
+                if (CheckPipeIntersects(start, end, p, p2))
+                {
+                    return false;
+                }
+                p = new Point(dRect.X, dRect.Y);
+                p2 = new Point(dRect.X, dRect.Y + dRect.Height);
+                if (CheckPipeIntersects(start, end, p, p2))
+                {
+                    return false;
+                }
+            }
+
+            graphic.DrawLine(Pens.Black, start, end);
+            currentPipe.AddPointToList(end);
+            return true;
+        }
+
         public List<Rectangle> GetComponentsRectangles()
         {
-            List<Rectangle> rect= new List<Rectangle>();
+            List<Rectangle> rect = new List<Rectangle>();
             foreach (ComponentDrawn component in this.listOfComponents)
             {
 
@@ -149,7 +299,7 @@ namespace Flowly
             foreach (ConnectionPoint cp in conPoints)
             {
                 graphic.DrawRectangle(Pens.Blue, cp.rectangle);
-                
+
             }
         }
 

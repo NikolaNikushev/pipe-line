@@ -61,7 +61,6 @@
             this.process1 = new System.Diagnostics.Process();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.grid = new System.Windows.Forms.PictureBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -107,34 +106,34 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveWithoutAsToolStripMenuItem
             // 
             this.saveWithoutAsToolStripMenuItem.Name = "saveWithoutAsToolStripMenuItem";
-            this.saveWithoutAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveWithoutAsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.saveWithoutAsToolStripMenuItem.Text = "Save";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.saveAsToolStripMenuItem.Text = "Save as";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem1_Click);
             // 
             // openFileStripMenuItem
             // 
             this.openFileStripMenuItem.Name = "openFileStripMenuItem";
-            this.openFileStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openFileStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.openFileStripMenuItem.Text = "Open file";
             this.openFileStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // clearGridToolStripMenuItem
             // 
             this.clearGridToolStripMenuItem.Name = "clearGridToolStripMenuItem";
-            this.clearGridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearGridToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.clearGridToolStripMenuItem.Text = "Clear grid";
             this.clearGridToolStripMenuItem.Click += new System.EventHandler(this.clearGridToolStripMenuItem_Click);
             // 
@@ -408,12 +407,6 @@
             this.grid.MouseLeave += new System.EventHandler(this.grid_MouseLeave);
             this.grid.MouseMove += new System.Windows.Forms.MouseEventHandler(this.grid_MouseMove);
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 50;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(600, 182);
@@ -495,7 +488,6 @@
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox grid;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button button1;
     }
 }

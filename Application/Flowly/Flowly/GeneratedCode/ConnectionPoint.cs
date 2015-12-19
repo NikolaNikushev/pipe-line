@@ -25,10 +25,9 @@ namespace Flowly
 
         private ComponentDrawn componentDrawnBelong;
 
-        private bool isAvailable; 
+        private bool isAvailable;
 
-        
-
+        public bool Available { get { return isAvailable; }}
 
         public ConnectionPoint(Rectangle theRectangle, ComponentDrawn theComponentDrawnBelong,bool theIsOutput)
         {

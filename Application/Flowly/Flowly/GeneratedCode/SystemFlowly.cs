@@ -65,6 +65,11 @@ namespace Flowly
             throw new System.NotImplementedException();
         }
 
+        internal ConnectionPoint CheckInputOrOutput(Point newPoint)
+        {
+            return grid.IsInputOutput(newPoint);
+        }
+
         /// <summary>
         /// Opposite of the above method.
         /// </summary>
@@ -74,6 +79,21 @@ namespace Flowly
         public virtual bool MakeSpotBusy(int x, int y)
         {
             throw new System.NotImplementedException();
+        }
+
+        internal bool DrawPipeline(Point start, Point end, Pipe currentPipe)
+        {
+            return grid.DrawPipeLine(start,end, currentPipe);
+        }
+
+        internal void AddPipe(Pipe pipe)
+        {
+            grid.AddPipe(pipe);
+        }
+
+        internal void RemovePipe(Pipe pipe)
+        {
+            grid.RemovePipe(pipe);
         }
 
         /// <summary>

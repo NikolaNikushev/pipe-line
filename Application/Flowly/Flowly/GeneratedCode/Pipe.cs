@@ -22,10 +22,20 @@ namespace Flowly
 
         protected Rectangle rectanglePipeRight;
 
+        private List<Point> pipePoints;
+
+        public List<Point> PipePoints
+        {
+            get { return pipePoints; }
+            private set { pipePoints = value; }
+        }
+
+
+
         public Pipe(Rectangle theRectangle) : base(theRectangle)
         {
 
-            imageResource = Image.FromFile("images\\pump.png");
+           /* imageResource = Image.FromFile("images\\pump.png");
             rectanglePipeLeft = new Rectangle();
             rectanglePipeLeft.X = rectangleBig.X;
             rectanglePipeLeft.Y = rectangleBig.Y;
@@ -40,8 +50,14 @@ namespace Flowly
             rectanglePipeRight.Width = rectangleBig.Width / 2;
 
             CreateConnectionPoints();
-            
+            */
 
+        }
+
+        public Pipe() : base(new Rectangle())
+        {
+            this.listOfConnectionPoints = new List<ConnectionPoint>();
+            this.pipePoints = new List<Point>();
         }
 
 
@@ -62,6 +78,30 @@ namespace Flowly
             {
                 return false;
             }
+        }
+
+        public void SetConnection(ConnectionPoint connection)
+        {
+            if (rectanglePipeRight == null)
+            {
+                rectanglePipeRight = connection.rectangle;
+            }
+            else
+            {
+                rectanglePipeLeft = connection.rectangle;
+            }
+            AddConnection(connection);
+        }
+
+
+        private void AddConnection(ConnectionPoint cp)
+        {
+            this.listOfConnectionPoints.Add(cp);
+        }
+
+        public void AddPointToList(Point p)
+        {
+            this.pipePoints.Add(p);
         }
     }
 
