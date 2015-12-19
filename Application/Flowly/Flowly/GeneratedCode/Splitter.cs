@@ -11,6 +11,7 @@ using System.Text;
 using System.Drawing;
 namespace Flowly
 {
+    [Serializable]
     /// <summary>
     /// Sub class of the "ComponentDrawn" class. A particular component called - Splitter. 
     /// SPECIFICATION: IF NORMAL SPLITTER THEN setCurrFlowPossible attribute needs to be false. IF ADJUSTABLE SPLITTER THEN setCurrFlowPossible

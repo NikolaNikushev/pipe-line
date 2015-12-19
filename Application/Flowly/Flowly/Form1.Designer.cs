@@ -32,10 +32,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveWithoutAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -95,45 +95,48 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveToolStripMenuItem,
+            this.newToolStripMenuItem,
+            this.saveWithoutAsToolStripMenuItem,
             this.saveAsToolStripMenuItem,
-            this.saveAsToolStripMenuItem1,
-            this.clearToolStripMenuItem,
+            this.openFileStripMenuItem,
             this.clearGridToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // saveToolStripMenuItem
+            // newToolStripMenuItem
             // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.saveToolStripMenuItem.Text = "New";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // saveWithoutAsToolStripMenuItem
+            // 
+            this.saveWithoutAsToolStripMenuItem.Name = "saveWithoutAsToolStripMenuItem";
+            this.saveWithoutAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveWithoutAsToolStripMenuItem.Text = "Save";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.saveAsToolStripMenuItem.Text = "Save";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Text = "Save as";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem1_Click);
             // 
-            // saveAsToolStripMenuItem1
+            // openFileStripMenuItem
             // 
-            this.saveAsToolStripMenuItem1.Name = "saveAsToolStripMenuItem1";
-            this.saveAsToolStripMenuItem1.Size = new System.Drawing.Size(125, 22);
-            this.saveAsToolStripMenuItem1.Text = "Save as";
-            // 
-            // clearToolStripMenuItem
-            // 
-            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.clearToolStripMenuItem.Text = "Open file";
+            this.openFileStripMenuItem.Name = "openFileStripMenuItem";
+            this.openFileStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openFileStripMenuItem.Text = "Open file";
+            this.openFileStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // clearGridToolStripMenuItem
             // 
             this.clearGridToolStripMenuItem.Name = "clearGridToolStripMenuItem";
-            this.clearGridToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.clearGridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clearGridToolStripMenuItem.Text = "Clear grid";
+            this.clearGridToolStripMenuItem.Click += new System.EventHandler(this.clearGridToolStripMenuItem_Click);
             // 
             // groupBox1
             // 
@@ -410,6 +413,7 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 50;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(600, 182);
@@ -462,10 +466,10 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveWithoutAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openFileStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearGridToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox toolSink;

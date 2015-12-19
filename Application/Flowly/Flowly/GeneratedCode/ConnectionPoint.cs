@@ -11,6 +11,7 @@ using System.Text;
 using System.Drawing;
 namespace Flowly
 {
+    [Serializable]
     /// <summary>
     /// "ConnectionPoint" is the place where each "Component" is connected with another one.
     /// </summary>

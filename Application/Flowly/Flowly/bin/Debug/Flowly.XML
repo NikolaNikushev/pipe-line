@@ -37,11 +37,6 @@
             A string which contaions the description of a change.
             </summary>
         </member>
-        <member name="T:Flowly.ComponentDrawn">
-            <summary>
-            ComponentDrawn class is meant for the components that the program will have. Components as pipe, sink, merger and so on.
-            </summary>
-        </member>
         <member name="M:Flowly.ComponentDrawn.AddComponentDrawnToList(Flowly.ComponentDrawn)">
             <summary>
             Adds neighbour component to listOfComponentDrawn list. 
@@ -75,11 +70,6 @@
             </summary>
             <param name="givenPosibility"></param>
             <returns>True if successfull, false otherwise</returns>
-        </member>
-        <member name="T:Flowly.ConnectionPoint">
-            <summary>
-            "ConnectionPoint" is the place where each "Component" is connected with another one.
-            </summary>
         </member>
         <member name="M:Flowly.ConnectionPoint.SetAvailable(System.Boolean)">
             <summary>
@@ -154,42 +144,11 @@
             This method is used to edit an object
             </summary>
         </member>
-        <member name="T:Flowly.Merger">
-            <summary>
-            Sub class of the "ComponentDrawn" class. A particular component called - Merger. Nothing specific in it. Set diffCurrFlowPossible 
-            needs to be false.
-            </summary>
-        </member>
-        <member name="T:Flowly.Pipe">
-            <summary>
-            Sub class of the "ComponentDrawn" class. A particular component called - Pipe. Nothing specific in it. Set diffCurrFlowPossible 
-            needs to be false.
-            </summary>
-        </member>
         <member name="T:Flowly.PropertiesEnum">
             <summary>
             Enumeration that contains the type of propertie that can be set, if it is possible you can adjust the flow that can pass.
             If the component is an adjustable splitter it has the property of Adjustable.
             Properties: FLOW and Adjustable
-            </summary>
-        </member>
-        <member name="T:Flowly.Pump">
-            <summary>
-            Sub class of the "ComponentDrawn" class. A particular component called - Pump. Nothing specific in it. Set diffCurrFlowPossible 
-            needs to be false.
-            </summary>
-        </member>
-        <member name="T:Flowly.Sink">
-            <summary>
-            Sub class of the "ComponentDrawn" class. A particular component called - Sink. Nothing specific in it. Set diffCurrFlowPossible 
-            needs to be false.
-            </summary>
-        </member>
-        <member name="T:Flowly.Splitter">
-            <summary>
-            Sub class of the "ComponentDrawn" class. A particular component called - Splitter. 
-            SPECIFICATION: IF NORMAL SPLITTER THEN setCurrFlowPossible attribute needs to be false. IF ADJUSTABLE SPLITTER THEN setCurrFlowPossible
-            needs to be true. Because through the two outputs of the adjustable splitter different amounts of liquid/gas can go through.
             </summary>
         </member>
         <member name="T:Flowly.SystemFlowly">
@@ -271,7 +230,7 @@
             </summary>
             <returns>True if successfull, false otherwise.</returns>
         </member>
-        <member name="M:Flowly.SystemFlowly.OpenFile">
+        <member name="M:Flowly.SystemFlowly.OpenFile(System.Windows.Forms.PictureBox)">
             <summary>
             Opens already created and saved grid.
             </summary>

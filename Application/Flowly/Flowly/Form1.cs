@@ -19,6 +19,7 @@ namespace Flowly
         private int yPos;
         private int xPos;
         SystemFlowly flowly;
+        Grid theGrid;
 
 
         private bool modeCreate = false;
@@ -46,7 +47,7 @@ namespace Flowly
                         item.Click += (x, y) => ActivateCreating(pb);
                     }
             }
-            Grid theGrid = new Grid(grid);
+             theGrid = new Grid(grid);
             flowly = new SystemFlowly(theGrid);
 
         
@@ -250,6 +251,39 @@ namespace Flowly
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void clearGridToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           DialogResult dg = MessageBox.Show("Do you really want to clear the grid?", "Confirmation", MessageBoxButtons.YesNo);
+            if (dg == DialogResult.Yes)
+            {
+                flowly.ClearGrid(theGrid);
+            }
+        }
+
+        private void saveAsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            flowly.SaveGrid(theGrid);
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            DialogResult dg = MessageBox.Show("Do you want to save before closing?", "Confirmation", MessageBoxButtons.YesNo);
+            if (dg == DialogResult.Yes)
+            {
+                flowly.SaveGrid(theGrid);
+                flowly.ClearGrid(theGrid);
+                flowly.OpenFile(grid);
+            }
+            else
+            {
+                flowly.ClearGrid(theGrid);
+                flowly.OpenFile(grid);
+            }
+
            
         }
     }

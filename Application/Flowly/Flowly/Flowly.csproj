@@ -66,6 +66,7 @@
     <Compile Include="GeneratedCode\Pipe.cs" />
     <Compile Include="GeneratedCode\PropertiesEnum.cs" />
     <Compile Include="GeneratedCode\Pump.cs" />
+    <Compile Include="GeneratedCode\SerializationObject.cs" />
     <Compile Include="GeneratedCode\Sink.cs" />
     <Compile Include="GeneratedCode\Splitter.cs" />
     <Compile Include="GeneratedCode\SystemFlowly.cs" />

@@ -13,6 +13,7 @@ using System.Windows.Forms;
 
 namespace Flowly
 {
+    
     /// <summary>
     /// Objects of this class will be the "drawing" place of the user. A grid will contain components in it.
     /// </summary>
@@ -27,12 +28,61 @@ namespace Flowly
         private string name;
 
 
-        public Grid(PictureBox grid)
+        public int Id
         {
-            this.listOfComponents = new List<Flowly.ComponentDrawn>();
-            this.graphic = grid.CreateGraphics();
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
         }
 
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+            }
+        }
+        public List<ComponentDrawn> ListOfComponents
+        {
+            get
+            {
+                return listOfComponents;
+            }
+            set
+            {
+                listOfComponents = value;
+            }
+        }
+
+        public Grid(PictureBox grid) 
+        {
+            ListOfComponents = new List<Flowly.ComponentDrawn>();
+            Graphic = grid.CreateGraphics();
+
+        }
+       
+
+
+        public Graphics Graphic
+        {
+            get
+            {
+                return graphic;
+            }
+            set
+            {
+                graphic = value;
+            }
+        }
 
 
         /// <summary>

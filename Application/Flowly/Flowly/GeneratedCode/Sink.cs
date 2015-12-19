@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Drawing;
 namespace Flowly
 {
+    [Serializable]
     /// <summary>
     /// Sub class of the "ComponentDrawn" class. A particular component called - Sink. Nothing specific in it. Set diffCurrFlowPossible 
     /// needs to be false.

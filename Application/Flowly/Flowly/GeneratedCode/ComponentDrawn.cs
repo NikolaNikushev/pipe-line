@@ -13,6 +13,7 @@ using System.Drawing;
 
 namespace Flowly
 {
+    [Serializable]
     /// <summary>
     /// ComponentDrawn class is meant for the components that the program will have. Components as pipe, sink, merger and so on.
     /// </summary>

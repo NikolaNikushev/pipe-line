@@ -10,6 +10,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
+using System.IO; //because of FileStream
+using System.Runtime.Serialization.Formatters.Binary; //because of BinaryFormatter
+using System.Runtime.Serialization;//because of SerializationException
 namespace Flowly
 {
     /// <summary>
@@ -28,29 +32,6 @@ namespace Flowly
 
         private List<Change> changes;
 
-        public virtual Grid Grid
-        {
-            get;
-            set;
-        }
-
-        public virtual IEnumerable<DialogWindow> DialogWindow
-        {
-            get;
-            set;
-        }
-
-        public virtual IEnumerable<ToolboxComponent> ToolboxComponent
-        {
-            get;
-            set;
-        }
-
-        public virtual IEnumerable<Change> Change
-        {
-            get;
-            set;
-        }
 
         public SystemFlowly(Grid grid)
         {
@@ -131,7 +112,7 @@ namespace Flowly
                 case ComponentName.SplitterAdj:
                     cd = new Splitter(rectangle, true);
                     break;
-                    
+
                 default:
 
                     return false;
@@ -143,7 +124,7 @@ namespace Flowly
             else
             {
                 grid.AddComponentDrawnToGridList(cd);
-                grid.Paint(cd);             
+                grid.Paint(cd);
                 return true;
             }
 
@@ -174,7 +155,17 @@ namespace Flowly
         /// <returns>True for successfull, false otherwise.</returns>
         public virtual bool ClearGrid(Grid givenGrid)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                this.grid.Graphic.Clear(Color.White);
+                this.grid.ListOfComponents.Clear();
+                return true;
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong while clearing the grid!");
+                return false;
+            }
         }
 
         /// <summary>
@@ -184,45 +175,124 @@ namespace Flowly
         /// <returns>True if successfull, false otherwise.</returns>
         public virtual bool SaveGrid(Grid givenGrid)
         {
-            throw new System.NotImplementedException();
+            bool success = false;
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+            if(saveFileDialog.ShowDialog()==DialogResult.OK)
+            {
+
+                FileStream myFileStream = null;
+                BinaryFormatter myBinaryFormatter = null;
+
+                try
+                {
+                    myFileStream = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write);
+                    myBinaryFormatter = new BinaryFormatter();
+
+                    SerializationObject newObject = new SerializationObject(givenGrid.Id, givenGrid.Name, givenGrid.ListOfComponents);
+                    myBinaryFormatter.Serialize(myFileStream, newObject);
+                    MessageBox.Show("Successfully saved!");
+                    success = true;
+                }
+
+               catch(Exception e)
+                {
+                    MessageBox.Show("Somethign went wrong while saving!");
+                    MessageBox.Show(e.Message);
+                    success = false;
+                }
+                finally
+                {
+                    if (myFileStream != null)
+                    { 
+  
+                    myFileStream.Close();
+                        
+                    }
+                }
+           
+
+            }
+
+            return success;
+
         }
-        /// <summary>
-        /// Creates a new grid.
-        /// </summary>
-        /// <returns>True if successfull, false otherwise.</returns>
-        public virtual bool NewFile()
-        {
-            throw new System.NotImplementedException();
-        }
+    
+    /// <summary>
+    /// Creates a new grid.
+    /// </summary>
+    /// <returns>True if successfull, false otherwise.</returns>
+    public virtual bool NewFile()
+    {
+        throw new System.NotImplementedException();
+    }
 
         /// <summary>
         /// Opens already created and saved grid.
         /// </summary>
         /// <returns>True if successfull, false otherwise.</returns>
-        public virtual bool OpenFile()
-        {
-            throw new System.NotImplementedException();
-        }
-        /// <summary>
-        /// Goes back to a state before a change is made.
-        /// </summary>
-        /// <returns>True if successfull, false otherwise.</returns>
-        public virtual bool UndoLastChange()
-        {
-            throw new System.NotImplementedException();
-        }
-        /// <summary>
-        /// Always the user makes a change, a new instance of "Change" class is created.
-        /// </summary>
-        /// <param name="givenDescription"></param>
-        /// <returns>True if successfull, false otherwise.</returns>
-        public virtual bool CreateChange(string givenDescription)
-        {
-            throw new System.NotImplementedException();
-        }
+        public virtual bool OpenFile(PictureBox givenPictureBox)
+    {
+            bool success = false;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if(openFileDialog.ShowDialog()==DialogResult.OK)
+            {
+                FileStream myFileStream = null;
+                BinaryFormatter myBinaryFormatter = null;
+                try
+                {
+                    myFileStream = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read);
+                    myBinaryFormatter = new BinaryFormatter();
 
+                    SerializationObject myNewOpenObj = (SerializationObject)myBinaryFormatter.Deserialize(myFileStream);
+                    Grid myNewGrid = new Grid(givenPictureBox);
+                    myNewGrid.Id = myNewOpenObj.Id;
+                    myNewGrid.Name = myNewOpenObj.Name;
+                    myNewGrid.ListOfComponents = myNewOpenObj.listCompDrawn;
 
+                    this.grid = myNewGrid;
+                    this.grid.PaintAllComponents();
+                    success = true;
+                }
 
+                catch (Exception e)
+                {
+                    MessageBox.Show("Somethign went wrong while opening!");
+                    MessageBox.Show(e.Message);
+                    success = false;
+                }
+                finally
+                {
+                    if (myFileStream != null)
+                    {
+
+                        myFileStream.Close();
+
+                    }
+                }
+            }
+            return success;
     }
+    /// <summary>
+    /// Goes back to a state before a change is made.
+    /// </summary>
+    /// <returns>True if successfull, false otherwise.</returns>
+    public virtual bool UndoLastChange()
+    {
+        throw new System.NotImplementedException();
+    }
+    /// <summary>
+    /// Always the user makes a change, a new instance of "Change" class is created.
+    /// </summary>
+    /// <param name="givenDescription"></param>
+    /// <returns>True if successfull, false otherwise.</returns>
+    public virtual bool CreateChange(string givenDescription)
+    {
+        throw new System.NotImplementedException();
+    }
+
+
+
+}
 }
 
