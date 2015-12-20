@@ -159,9 +159,13 @@ namespace Flowly
             {
                 foreach (ConnectionPoint cp in givenComponent.GiveMeYourConnectionPoints())
                 {
-                    
+                    if(cp.PipeConnection!= null)
+                    {
+                        RemovePipe(cp.PipeConnection);
+                    }
                 }
-                this.listOfComponents.Remove(givenComponent);
+                listOfComponents.Remove(givenComponent);
+                PaintAllComponents();
                 return true;
             }
             catch (Exception e)
@@ -173,14 +177,16 @@ namespace Flowly
 
         internal void RemovePipe(Pipe pipe)
         {
-            for (int i = 0; i < pipe.PipePoints.Count - 1; i++)
-            {
-                graphic.DrawLine(Pens.White, pipe.PipePoints[i], pipe.PipePoints[i + 1]);
-            }
             foreach (ConnectionPoint CP in pipe.GiveMeYourConnectionPoints())
             {
                 CP.PipeConnection = null;
             }
+            listOfComponents.Remove(pipe);
+            //for (int i = 0; i < pipe.PipePoints.Count - 1; i++)
+            //{
+            //    graphic.DrawLine(Pens.White, pipe.PipePoints[i], pipe.PipePoints[i + 1]);
+            //}
+          
 
 
         }
@@ -429,6 +435,7 @@ namespace Flowly
 
         public void PaintAllComponents()
         {
+            graphic.Clear(Color.White);
             foreach (ComponentDrawn item in this.listOfComponents)
             {
                 Paint(item);
@@ -437,6 +444,18 @@ namespace Flowly
 
         public void Paint(ComponentDrawn drawn)
         {
+           
+            if(drawn is Pipe)
+            {
+                Pipe d = drawn as Pipe;
+                for (int i = 0; i < d.PipePoints.Count - 1; i++)
+                {
+                    Point start = d.PipePoints[i];
+                    Point end = d.PipePoints[i+1];
+                    graphic.DrawLine(Pens.Black, start, end);
+                }
+                return;
+            }
             Rectangle r = drawn.RectangleBig;
             graphic.DrawRectangle(Pens.Red, r);
             graphic.DrawImage(drawn.Image, r);
@@ -450,4 +469,5 @@ namespace Flowly
 
     }
 }
+
 
