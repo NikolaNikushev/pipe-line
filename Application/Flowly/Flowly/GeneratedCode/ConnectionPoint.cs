@@ -78,6 +78,13 @@ namespace Flowly
             }
         }
 
+        public ComponentDrawn ComponentDrawnBelong
+        {
+            get { return componentDrawnBelong; }
+           private set { componentDrawnBelong = value; }
+        }
+
+
     }
 
 }

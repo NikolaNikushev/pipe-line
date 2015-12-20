@@ -65,7 +65,7 @@ namespace Flowly
             throw new System.NotImplementedException();
         }
 
-        internal ConnectionPoint CheckInputOrOutput(Point newPoint)
+        internal ConnectionPoint GetConnectionPointAt(Point newPoint)
         {
             return grid.IsInputOutput(newPoint);
         }
@@ -81,9 +81,9 @@ namespace Flowly
             throw new System.NotImplementedException();
         }
 
-        internal bool DrawPipeline(Point start, Point end, Pipe currentPipe)
+        internal bool DrawPipeline(Point start, Point end, ref Pipe currentPipe)
         {
-            return grid.DrawPipeLine(start,end, currentPipe);
+            return grid.DrawPipeLine(start,end, ref currentPipe);
         }
 
         internal void AddPipe(Pipe pipe)
@@ -148,6 +148,11 @@ namespace Flowly
                 return true;
             }
 
+        }
+
+        internal void AddComponentDrawn(Pipe pipe)
+        {
+            grid.AddComponentDrawnToGridList(pipe);
         }
 
         /// <summary>

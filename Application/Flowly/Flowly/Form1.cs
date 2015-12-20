@@ -89,7 +89,7 @@ namespace Flowly
                     //start drawing pipeline.
                     if (lastPoint.X == -1 || lastPoint.Y == -1)
                     {
-                        ConnectionPoint cp = flowly.CheckInputOrOutput(newPoint);
+                        ConnectionPoint cp = flowly.GetConnectionPointAt(newPoint);
                         if (cp != null)
                         {
                             if (cp.IsOutput)
@@ -109,35 +109,48 @@ namespace Flowly
                     else
                     {
                        
-                        bool isAdded = flowly.DrawPipeline(lastPoint, newPoint, pipe);
+                        bool isAdded = flowly.DrawPipeline(lastPoint, newPoint, ref pipe);
                         if (isAdded)
                         {
 
                           
                             lastPoint = newPoint;
+                            if (pipe.GiveMeYourConnectionPoints().Count == 2)
+                            {
+                                MessageBox.Show("Connected");
+                                flowly.AddComponentDrawn(pipe);
+                                pipe = null;
+                                lastPoint = new Point(-1, -1);
+                            }
                         }
                         else
                         {
-                            ConnectionPoint cp = flowly.CheckInputOrOutput(newPoint);
+                            /*ConnectionPoint cp = flowly.GetConnectionPointAt(newPoint);
                             if (cp != null)
                             {
                                 if (!cp.IsOutput)
                                 {
                                     cp.SetAvailable(false);
-
                                     pipe.SetConnection(cp);
-                                   
-                                   
+
                                     isAdded = flowly.DrawPipeline(lastPoint, newPoint, pipe);
                                     if (isAdded)
                                     {
-                                        MessageBox.Show("Connected");
                                       
+                                       
+                                        MessageBox.Show("Connected");
+                                        flowly.AddComponentDrawn(pipe);
                                         pipe = null;
                                         lastPoint = new Point(-1, -1);
                                     }
-                                }
+                                    else
+                                    {
+                                        cp.SetAvailable(true);
+                                        pipe.RemoveConnection(cp);
+                                    }
+                                
                             }
+                            */
 
                         }
 

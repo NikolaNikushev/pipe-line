@@ -103,6 +103,11 @@ namespace Flowly
         {
             this.pipePoints.Add(p);
         }
+
+        internal void RemoveConnection(ConnectionPoint cp)
+        {
+            this.listOfConnectionPoints.Remove(cp);
+        }
     }
 
 }
