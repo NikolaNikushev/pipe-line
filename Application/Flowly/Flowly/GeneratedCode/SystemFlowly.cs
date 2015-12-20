@@ -70,6 +70,11 @@ namespace Flowly
             return grid.IsInputOutput(newPoint);
         }
 
+        internal ComponentDrawn GetComponentPointAt(Point newPoint)
+        {
+            return grid.GetComponentAt(newPoint);
+        }
+
         /// <summary>
         /// Opposite of the above method.
         /// </summary>
@@ -162,7 +167,8 @@ namespace Flowly
         /// <returns>True if successfull, false otherwise.</returns>
         public virtual bool DeleteComponent(ComponentDrawn givenComponent)
         {
-            throw new System.NotImplementedException();
+            grid.RemoveComponentDrawnFromGridList(givenComponent);
+            return true;
         }
         /// <summary>
         /// A "ComponentDrawn" is passed and the particular componentDrawn's properties should be changed.

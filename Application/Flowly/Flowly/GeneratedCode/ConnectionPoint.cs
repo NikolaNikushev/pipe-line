@@ -25,9 +25,8 @@ namespace Flowly
 
         private ComponentDrawn componentDrawnBelong;
 
-        private bool isAvailable;
 
-        public bool Available { get { return isAvailable; } }
+        public bool Available { get { return pipeConnection == null; } }
 
         public bool IsOutput { get { return isOutput; } }
 
@@ -37,7 +36,7 @@ namespace Flowly
             SetCurrentFlow(0);
             isOutput = theIsOutput;
             componentDrawnBelong = theComponentDrawnBelong;
-            SetAvailable(true);
+            //SetAvailable(true);
 
         }
 
@@ -46,18 +45,18 @@ namespace Flowly
         /// </summary>
         /// <param name="givenAvailable"></param>
         /// <returns>True if successfull, false otherwise</returns>
-        public virtual bool SetAvailable(bool givenAvailable)
-        {
-            try
-            {
-                isAvailable = givenAvailable;
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+        //public virtual bool SetAvailable(bool givenAvailable)
+        //{
+        //    try
+        //    {
+        //        isAvailable = givenAvailable;
+        //        return true;
+        //    }
+        //    catch
+        //    {
+        //        return false;
+        //    }
+        //}
 
         /// <summary>
         /// Sets the current flow going through the "ConnectionPoint". Current flow means the amount of gas
@@ -83,6 +82,15 @@ namespace Flowly
             get { return componentDrawnBelong; }
            private set { componentDrawnBelong = value; }
         }
+
+        private Pipe pipeConnection;
+
+        public Pipe PipeConnection
+        {
+            get { return pipeConnection; }
+            set { pipeConnection = value; }
+        }
+
 
 
     }

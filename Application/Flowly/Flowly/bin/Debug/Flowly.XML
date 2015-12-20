@@ -71,13 +71,6 @@
             <param name="givenPosibility"></param>
             <returns>True if successfull, false otherwise</returns>
         </member>
-        <member name="M:Flowly.ConnectionPoint.SetAvailable(System.Boolean)">
-            <summary>
-            Sets availability of a "ConnectionPoint".
-            </summary>
-            <param name="givenAvailable"></param>
-            <returns>True if successfull, false otherwise</returns>
-        </member>
         <member name="M:Flowly.ConnectionPoint.SetCurrentFlow(System.Single)">
             <summary>
             Sets the current flow going through the "ConnectionPoint". Current flow means the amount of gas

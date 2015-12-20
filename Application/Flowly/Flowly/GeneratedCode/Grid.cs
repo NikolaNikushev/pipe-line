@@ -133,6 +133,21 @@ namespace Flowly
             return null;
         }
 
+        internal ComponentDrawn GetComponentAt(Point pointLocation)
+        {
+            foreach (ComponentDrawn item in ListOfComponents)
+            {
+                Rectangle componentRect = item.RectangleBig;
+                Rectangle pointRect = new Rectangle(pointLocation, new Size(1, 1));
+                if (componentRect.IntersectsWith(pointRect))
+                {
+                    return item;
+                }
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// Opposite of the other method.
         /// </summary>
@@ -142,6 +157,10 @@ namespace Flowly
         {
             try
             {
+                foreach (ConnectionPoint cp in givenComponent.GiveMeYourConnectionPoints())
+                {
+                    
+                }
                 this.listOfComponents.Remove(givenComponent);
                 return true;
             }
@@ -160,7 +179,7 @@ namespace Flowly
             }
             foreach (ConnectionPoint CP in pipe.GiveMeYourConnectionPoints())
             {
-                CP.SetAvailable(true);
+                CP.PipeConnection = null;
             }
 
 
@@ -311,17 +330,11 @@ namespace Flowly
         {
             Pipe currentPipe = curPipe;
             int pointsCount = currentPipe.GiveMeYourConnectionPoints().Count;
-            if (pointsCount == 2)
+            if(currentPipe.GiveMeYourConnectionPoints().First().ComponentDrawnBelong == GetComponentAt(end))
             {
-                if (CheckIntersectAllOther(start, end, currentPipe))
-                {
-                    return false;
-                }
-                graphic.DrawLine(Pens.Black, start, end);
-
-                currentPipe.AddPointToList(end);
-                return true;
+                return false;
             }
+          
             if (pointsCount != 2)
             {
 
@@ -335,7 +348,7 @@ namespace Flowly
                 for (int i = 0; i < listOfComponentsCount; i++)
                 {
                     ComponentDrawn d = listOfComponents[i];
-                    if (currentPipe.PipePoints.Count == 1)
+                    if (currentPipe.PipePoints.Count <= 1)
                     {
                         if (d.GiveMeYourConnectionPoints().Where(x => x == currentPipe.GiveMeYourConnectionPoints().Last()).Any())
                             continue;
@@ -364,9 +377,16 @@ namespace Flowly
                                 {
                                     if (!cp.IsOutput)
                                     {
-                                        cp.SetAvailable(false);
+                                        cp.PipeConnection = currentPipe;
                                         currentPipe.SetConnection(cp);
-
+                                        
+                                        if (CheckIntersectAllOther(start, end, currentPipe))
+                                        {
+                                            
+                                            cp.PipeConnection = null;
+                                            currentPipe.RemoveConnection(cp);
+                                            return false;
+                                        }
                                         graphic.DrawLine(Pens.Black, start, end);
 
                                         currentPipe.AddPointToList(end);
