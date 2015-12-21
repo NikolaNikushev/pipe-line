@@ -25,7 +25,7 @@ namespace Flowly
 
         private Graphics graphic;
 
-      
+
 
         private string name;
 
@@ -46,7 +46,7 @@ namespace Flowly
             }
         }
 
-     
+
 
         public string Name
         {
@@ -184,7 +184,7 @@ namespace Flowly
 
         internal void RemovePipe(Pipe pipe)
         {
-           
+
             foreach (ConnectionPoint CP in pipe.GiveMeYourConnectionPoints())
             {
                 CP.PipeConnection = null;
@@ -339,11 +339,11 @@ namespace Flowly
         {
             Pipe currentPipe = curPipe;
             int pointsCount = currentPipe.GiveMeYourConnectionPoints().Count;
-            if(currentPipe.GiveMeYourConnectionPoints().First().ComponentDrawnBelong == GetComponentAt(end))
+            if (currentPipe.GiveMeYourConnectionPoints().First().ComponentDrawnBelong == GetComponentAt(end))
             {
                 return false;
             }
-          
+
             if (pointsCount != 2)
             {
 
@@ -388,10 +388,10 @@ namespace Flowly
                                     {
                                         cp.PipeConnection = currentPipe;
                                         currentPipe.SetConnection(cp);
-                                        
+
                                         if (CheckIntersectAllOther(start, end, currentPipe))
                                         {
-                                            
+
                                             cp.PipeConnection = null;
                                             currentPipe.RemoveConnection(cp);
                                             return false;
@@ -423,6 +423,58 @@ namespace Flowly
             curPipe = currentPipe;
             return true;
 
+        }
+
+        private void DrawConnectionPointLimits(Brush color, ConnectionPoint cp)
+        {
+            int width = cp.rectangle.Width;
+            int height = cp.rectangle.Height;
+            int x = cp.rectangle.X;
+            int y = cp.rectangle.Y;
+            Rectangle r = new Rectangle(new Point(x, y), new Size(width, 5));
+            graphic.FillRectangle(color, r);
+            r = new Rectangle(new Point(x + width, y), new Size(5, height + 5));
+            graphic.FillRectangle(color, r);
+            r = new Rectangle(new Point(x, y + height), new Size(width, 5));
+            graphic.FillRectangle(color, r);
+            r = new Rectangle(new Point(x, y), new Size(5, height));
+            graphic.FillRectangle(color, r);
+        }
+
+        internal void HighightAllAvailableInputs()
+        {
+            foreach (ComponentDrawn cd in ListOfComponents)
+            {
+                foreach (ConnectionPoint cp in cd.GiveMeYourConnectionPoints())
+                {
+                    if (cp.Available && !cp.IsOutput)
+                    {
+                        DrawConnectionPointLimits(Brushes.Blue, cp);
+                    }
+                    else
+                    {
+                        DrawConnectionPointLimits(Brushes.Red, cp);
+                    }
+                }
+            }
+        }
+
+        internal void HighightAllAvailableOutputs()
+        {
+            foreach (ComponentDrawn cd in ListOfComponents)
+            {
+                foreach (ConnectionPoint cp in cd.GiveMeYourConnectionPoints())
+                {
+                    if (cp.Available && cp.IsOutput)
+                    {
+                        DrawConnectionPointLimits(Brushes.Blue, cp);
+                    }
+                    else
+                    {
+                        DrawConnectionPointLimits(Brushes.Red, cp);
+                    }
+                }
+            }
         }
 
 

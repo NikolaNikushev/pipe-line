@@ -109,8 +109,10 @@ namespace Flowly
                                 ConnectionPoint cp = flowly.GetConnectionPointAt(newPoint);
                                 if (cp != null)
                                 {
+
                                     if (cp.IsOutput)
                                     {
+                                        flowly.HighlightAllAvailableInputs();
                                         // cp.SetAvailable(false);
                                         pipe = new Pipe();
                                         pipe.SetConnection(cp);
@@ -121,6 +123,7 @@ namespace Flowly
                                 }
                                 else
                                 {
+
                                     return;
                                 }
                             }
@@ -130,50 +133,51 @@ namespace Flowly
                                 bool isAdded = flowly.DrawPipeline(lastPoint, newPoint, ref pipe);
                                 if (isAdded)
                                 {
-
-
                                     lastPoint = newPoint;
                                     if (pipe.GiveMeYourConnectionPoints().Count == 2)
                                     {
+                                        flowly.HighlightAllAvailableOutputs();
                                         MessageBox.Show("Connected");
                                         flowly.AddComponentDrawn(pipe);
                                         pipe = null;
                                         lastPoint = new Point(-1, -1);
+
                                     }
-                                }
-                                else
-                                {
-                                    /*ConnectionPoint cp = flowly.GetConnectionPointAt(newPoint);
-                                    if (cp != null)
+                                    else
                                     {
-                                        if (!cp.IsOutput)
+                                        /*ConnectionPoint cp = flowly.GetConnectionPointAt(newPoint);
+                                        if (cp != null)
                                         {
-                                            cp.SetAvailable(false);
-                                            pipe.SetConnection(cp);
-
-                                            isAdded = flowly.DrawPipeline(lastPoint, newPoint, pipe);
-                                            if (isAdded)
+                                            if (!cp.IsOutput)
                                             {
+                                                cp.SetAvailable(false);
+                                                pipe.SetConnection(cp);
+
+                                                isAdded = flowly.DrawPipeline(lastPoint, newPoint, pipe);
+                                                if (isAdded)
+                                                {
 
 
-                                                MessageBox.Show("Connected");
-                                                flowly.AddComponentDrawn(pipe);
-                                                pipe = null;
-                                                lastPoint = new Point(-1, -1);
-                                            }
-                                            else
-                                            {
-                                                cp.SetAvailable(true);
-                                                pipe.RemoveConnection(cp);
-                                            }
+                                                    MessageBox.Show("Connected");
+                                                    flowly.AddComponentDrawn(pipe);
+                                                    pipe = null;
+                                                    lastPoint = new Point(-1, -1);
+                                                }
+                                                else
+                                                {
+                                                    cp.SetAvailable(true);
+                                                    pipe.RemoveConnection(cp);
+                                                }
+
+                                        }
+                                        */
 
                                     }
-                                    */
 
                                 }
-
                             }
                         }
+                        
                         break;
                     case WorkingMode.create:
                         x -= currentPB.Width / 2;
@@ -332,11 +336,25 @@ namespace Flowly
         private void toolPipe_Click(object sender, EventArgs e)
         {
             currentWorkingMode = WorkingMode.pipe;
+
             HighlightCurrentPB(sender as PictureBox);
+           
+        }
+
+        void RefreshGridFromMode()
+        {
+            if (currentWorkingMode != null)
+            {
+                if (currentWorkingMode == WorkingMode.pipe)
+                {
+                    flowly.UpdateGrid();
+                }
+            }
         }
 
         private void ActivateCreating(PictureBox pb)
         {
+            RefreshGridFromMode();
             currentWorkingMode = WorkingMode.create;
             HighlightCurrentPB(pb);
 
@@ -349,6 +367,11 @@ namespace Flowly
             {
                 currentPB.BackColor = Control.DefaultBackColor;
             }
+            if (currentWorkingMode == WorkingMode.pipe)
+            {
+                flowly.HighlightAllAvailableOutputs();
+            }
+          
             //if (modeCreate)
             //{
             //    //followCursorPB.Image = pb.Image;
@@ -360,13 +383,16 @@ namespace Flowly
         }
 
         private void toolEdit_Click(object sender, EventArgs e)
+
         {
+            RefreshGridFromMode();
             currentWorkingMode = WorkingMode.edit;
             HighlightCurrentPB(sender as PictureBox);
         }
 
         private void toolRemove_Click(object sender, EventArgs e)
         {
+            RefreshGridFromMode();
             currentWorkingMode = WorkingMode.remove;
             HighlightCurrentPB(sender as PictureBox);
         }

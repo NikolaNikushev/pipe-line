@@ -347,6 +347,20 @@ namespace Flowly
 
         }
 
+        internal void UpdateGrid()
+        {
+            grid.PaintAllComponents();
+        }
+
+        internal void HighlightAllAvailableInputs()
+        {
+            grid.HighightAllAvailableInputs();
+        }
+
+        internal void HighlightAllAvailableOutputs()
+        {
+            grid.HighightAllAvailableOutputs();
+        }
         /// <summary>
         /// Opens already created and saved grid.
         /// </summary>
