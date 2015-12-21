@@ -203,27 +203,27 @@
             <param name="givenComponent"></param>
             <returns>True if successfull, false otherwise.</returns>
         </member>
-        <member name="M:Flowly.SystemFlowly.ClearGrid(Flowly.Grid)">
+        <member name="M:Flowly.SystemFlowly.ClearGrid">
             <summary>
             Deletes all "ComponentDrawn"-s from the grid.
             </summary>
             <param name="givenGrid"></param>
             <returns>True for successfull, false otherwise.</returns>
         </member>
-        <member name="M:Flowly.SystemFlowly.SaveGrid(Flowly.Grid)">
+        <member name="M:Flowly.SystemFlowly.SaveAsGrid(Flowly.Grid,System.String@)">
             <summary>
             Saves the current grid as a file.
             </summary>
             <param name="givenGrid"></param>
             <returns>True if successfull, false otherwise.</returns>
         </member>
-        <member name="M:Flowly.SystemFlowly.NewFile">
+        <member name="M:Flowly.SystemFlowly.NewFile(System.Windows.Forms.PictureBox)">
             <summary>
             Creates a new grid.
             </summary>
             <returns>True if successfull, false otherwise.</returns>
         </member>
-        <member name="M:Flowly.SystemFlowly.OpenFile(System.Windows.Forms.PictureBox)">
+        <member name="M:Flowly.SystemFlowly.OpenFile(System.Windows.Forms.PictureBox,System.String@)">
             <summary>
             Opens already created and saved grid.
             </summary>

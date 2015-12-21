@@ -32,6 +32,14 @@ namespace Flowly
 
         private List<Change> changes;
 
+        public Grid Grid
+        {
+            get
+            {
+                return grid;
+            }
+        }
+
 
         public SystemFlowly(Grid grid)
         {
@@ -184,7 +192,7 @@ namespace Flowly
         /// </summary>
         /// <param name="givenGrid"></param>
         /// <returns>True for successfull, false otherwise.</returns>
-        public virtual bool ClearGrid(Grid givenGrid)
+        public virtual bool ClearGrid()
         {
             try
             {
@@ -204,8 +212,9 @@ namespace Flowly
         /// </summary>
         /// <param name="givenGrid"></param>
         /// <returns>True if successfull, false otherwise.</returns>
-        public virtual bool SaveGrid(Grid givenGrid)
+        public virtual bool SaveAsGrid(Grid givenGrid, out string returnedName)
         {
+            returnedName = "";
             bool success = false;
             SaveFileDialog saveFileDialog = new SaveFileDialog();
 
@@ -219,10 +228,12 @@ namespace Flowly
                 {
                     myFileStream = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write);
                     myBinaryFormatter = new BinaryFormatter();
-
-                    SerializationObject newObject = new SerializationObject(givenGrid.Id, givenGrid.Name, givenGrid.ListOfComponents);
+                    givenGrid.Name = Path.GetFileNameWithoutExtension(saveFileDialog.FileName);
+                    givenGrid.Destination = saveFileDialog.FileName;
+                    SerializationObject newObject = new SerializationObject(givenGrid.Name, givenGrid.ListOfComponents,givenGrid.Destination);
                     myBinaryFormatter.Serialize(myFileStream, newObject);
-                    MessageBox.Show("Successfully saved!");
+                    returnedName = givenGrid.Name;
+                    MessageBox.Show("Successfully saved - " + givenGrid.Name);
                     success = true;
                 }
 
@@ -244,30 +255,107 @@ namespace Flowly
            
 
             }
+          
 
             return success;
 
         }
-    
-    /// <summary>
-    /// Creates a new grid.
-    /// </summary>
-    /// <returns>True if successfull, false otherwise.</returns>
-    public virtual bool NewFile()
-    {
-        throw new System.NotImplementedException();
-    }
+
+
+        public virtual bool SaveGrid(Grid givenGrid, out string returnedName)
+        {
+            bool success = false;
+
+            returnedName = givenGrid.Name;
+           
+
+                FileStream myFileStream = null;
+                BinaryFormatter myBinaryFormatter = null;
+
+                try
+                {
+                    myFileStream = new FileStream(givenGrid.Destination, FileMode.Create, FileAccess.Write);
+                    myBinaryFormatter = new BinaryFormatter();
+                
+                   
+                    SerializationObject newObject = new SerializationObject(givenGrid.Name, givenGrid.ListOfComponents, givenGrid.Destination);
+                    myBinaryFormatter.Serialize(myFileStream, newObject);
+               
+                    MessageBox.Show("Successfully saved - " + givenGrid.Name);
+                    success = true;
+                }
+
+                catch (Exception e)
+                {
+                    MessageBox.Show("Somethign went wrong while saving!");
+                    MessageBox.Show(e.Message);
+                    success = false;
+                }
+                finally
+                {
+                    if (myFileStream != null)
+                    {
+
+                        myFileStream.Close();
+
+                    }
+                }
+
+
+            
+
+            return success;
+
+        }
+
+        /// <summary>
+        /// Creates a new grid.
+        /// </summary>
+        /// <returns>True if successfull, false otherwise.</returns>
+        public virtual bool NewFile(PictureBox givenPictureBox)
+        {
+            bool success = false;
+            try
+            {
+                if (this.grid != null)
+                {
+                    ClearGrid();
+                    CloseGrid();
+                }
+                Grid newlyCreatedGrid = new Grid(givenPictureBox);
+                this.grid = newlyCreatedGrid;
+                success = true;
+            }
+            catch
+            {
+                success = false;
+                MessageBox.Show("Something went wrong creating the new grid!");
+            }
+            return success;
+           
+
+        }
 
         /// <summary>
         /// Opens already created and saved grid.
         /// </summary>
         /// <returns>True if successfull, false otherwise.</returns>
-        public virtual bool OpenFile(PictureBox givenPictureBox)
+        public virtual bool OpenFile(PictureBox givenPictureBox, out string returnedName)
     {
+            
+            
+            returnedName = "";
+
             bool success = false;
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if(openFileDialog.ShowDialog()==DialogResult.OK)
             {
+                if(this.grid!=null)
+                {
+                    ClearGrid();
+                    CloseGrid();
+                }
+                
                 FileStream myFileStream = null;
                 BinaryFormatter myBinaryFormatter = null;
                 try
@@ -276,13 +364,17 @@ namespace Flowly
                     myBinaryFormatter = new BinaryFormatter();
 
                     SerializationObject myNewOpenObj = (SerializationObject)myBinaryFormatter.Deserialize(myFileStream);
-                    Grid myNewGrid = new Grid(givenPictureBox);
-                    myNewGrid.Id = myNewOpenObj.Id;
+                  Grid   myNewGrid = new Grid(givenPictureBox);
                     myNewGrid.Name = myNewOpenObj.Name;
+                    myNewGrid.Destination = myNewOpenObj.Destionation;
                     myNewGrid.ListOfComponents = myNewOpenObj.listCompDrawn;
 
+                    returnedName = myNewGrid.Name;
+
                     this.grid = myNewGrid;
+                    
                     this.grid.PaintAllComponents();
+
                     success = true;
                 }
 
@@ -302,6 +394,7 @@ namespace Flowly
                     }
                 }
             }
+           
             return success;
     }
     /// <summary>
@@ -322,7 +415,19 @@ namespace Flowly
         throw new System.NotImplementedException();
     }
 
-
+        public bool CloseGrid()
+        {
+            try
+            {
+                
+                this.grid = null;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
 }
 }

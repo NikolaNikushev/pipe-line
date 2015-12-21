@@ -37,6 +37,7 @@
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -98,7 +99,8 @@
             this.saveWithoutAsToolStripMenuItem,
             this.saveAsToolStripMenuItem,
             this.openFileStripMenuItem,
-            this.clearGridToolStripMenuItem});
+            this.clearGridToolStripMenuItem,
+            this.closeGridToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -106,28 +108,49 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+<<<<<<< Updated upstream
             this.newToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.newToolStripMenuItem.Text = "New";
+=======
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Text = "New grid";
+>>>>>>> Stashed changes
             this.newToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveWithoutAsToolStripMenuItem
             // 
             this.saveWithoutAsToolStripMenuItem.Name = "saveWithoutAsToolStripMenuItem";
+<<<<<<< Updated upstream
             this.saveWithoutAsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.saveWithoutAsToolStripMenuItem.Text = "Save";
+=======
+            this.saveWithoutAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveWithoutAsToolStripMenuItem.Text = "Save grid";
+            this.saveWithoutAsToolStripMenuItem.Click += new System.EventHandler(this.saveWithoutAsToolStripMenuItem_Click);
+>>>>>>> Stashed changes
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+<<<<<<< Updated upstream
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.saveAsToolStripMenuItem.Text = "Save as";
+=======
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Text = "Save as grid";
+>>>>>>> Stashed changes
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem1_Click);
             // 
             // openFileStripMenuItem
             // 
             this.openFileStripMenuItem.Name = "openFileStripMenuItem";
+<<<<<<< Updated upstream
             this.openFileStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.openFileStripMenuItem.Text = "Open file";
+=======
+            this.openFileStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openFileStripMenuItem.Text = "Open grid";
+>>>>>>> Stashed changes
             this.openFileStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // clearGridToolStripMenuItem
@@ -136,6 +159,13 @@
             this.clearGridToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.clearGridToolStripMenuItem.Text = "Clear grid";
             this.clearGridToolStripMenuItem.Click += new System.EventHandler(this.clearGridToolStripMenuItem_Click);
+            // 
+            // closeGridToolStripMenuItem
+            // 
+            this.closeGridToolStripMenuItem.Name = "closeGridToolStripMenuItem";
+            this.closeGridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.closeGridToolStripMenuItem.Text = "Close grid";
+            this.closeGridToolStripMenuItem.Click += new System.EventHandler(this.closeGridToolStripMenuItem_Click);
             // 
             // groupBox1
             // 
@@ -431,7 +461,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Flowly - flow system";
+            this.Text = "Flowly - flow system / (New grid)";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -489,6 +519,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox grid;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem closeGridToolStripMenuItem;
     }
 }
 

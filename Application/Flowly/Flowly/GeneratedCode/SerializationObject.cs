@@ -11,11 +11,7 @@ namespace Flowly.GeneratedCode
     [Serializable]
     class SerializationObject
     {
-        public int Id
-        {
-            get;
-          private  set;
-        }
+       
         public string Name
         {
             get;
@@ -27,14 +23,19 @@ namespace Flowly.GeneratedCode
            private set;
 
         }
-
+         public string Destionation
+        {
+            get;
+            private set;
+        }
       
 
-        public SerializationObject(int theId, string theName, List<ComponentDrawn> theListCompDrawn)
+        public SerializationObject(string theName, List<ComponentDrawn> theListCompDrawn, string theDestination)
         {
-            Id = theId;
+            
             Name = theName;
             listCompDrawn = theListCompDrawn;
+            Destionation = theDestination;
           
         }
     }

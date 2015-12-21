@@ -25,22 +25,26 @@ namespace Flowly
 
         private Graphics graphic;
 
-        private int id;
+      
 
         private string name;
 
+        private string destination;
 
-        public int Id
+
+        public String Destination
         {
             get
             {
-                return id;
+                return destination;
             }
             set
             {
-                id = value;
+                destination = value;
             }
         }
+
+     
 
         public string Name
         {
