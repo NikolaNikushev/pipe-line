@@ -396,7 +396,8 @@ namespace Flowly
                                             currentPipe.RemoveConnection(cp);
                                             return false;
                                         }
-                                        graphic.DrawLine(Pens.Black, start, end);
+                                        Pen myPen2 = new Pen(Color.Gray, 3);
+                                        graphic.DrawLine(myPen2, start, end);
 
                                         currentPipe.AddPointToList(end);
                                         curPipe = currentPipe;
@@ -415,7 +416,8 @@ namespace Flowly
                 }
 
             }
-            graphic.DrawLine(Pens.Black, start, end);
+            Pen myPen = new Pen(Color.Gray, 3);
+            graphic.DrawLine(myPen, start, end);
 
             currentPipe.AddPointToList(end);
             curPipe = currentPipe;
@@ -454,7 +456,8 @@ namespace Flowly
                 {
                     Point start = d.PipePoints[i];
                     Point end = d.PipePoints[i + 1];
-                    graphic.DrawLine(Pens.Black, start, end);
+                    Pen myPen = new Pen(Color.Gray, 3);
+                    graphic.DrawLine(myPen, start, end);
                 }
                 return;
             }

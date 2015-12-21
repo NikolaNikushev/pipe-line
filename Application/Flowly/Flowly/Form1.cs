@@ -81,202 +81,204 @@ namespace Flowly
 
         private void grid_Click(object sender, EventArgs e)
         {
-            //if(theImageLocationIsValid)
-            int x = xPos;
-            int y = yPos;
-            if (currentWorkingMode != WorkingMode.pipe)
+            if (currentPB != null)
             {
-                if (pipe != null)
+                //if(theImageLocationIsValid)
+                int x = xPos;
+                int y = yPos;
+                if (currentWorkingMode != WorkingMode.pipe)
                 {
-                    flowly.RemovePipe(pipe);
-                    pipe = null;
-                    lastPoint = new Point(-1, -1);
-                }
-            }
-            Point newPoint;
-            switch (currentWorkingMode)
-            {
-                case WorkingMode.pipe:
-                    if (currentPB.Image.Equals(toolPipe.Image))
+                    if (pipe != null)
                     {
-                        newPoint = new Point(x, y);
-
-                        //start drawing pipeline.
-                        if (lastPoint.X == -1 || lastPoint.Y == -1)
+                        flowly.RemovePipe(pipe);
+                        pipe = null;
+                        lastPoint = new Point(-1, -1);
+                    }
+                }
+                Point newPoint;
+                switch (currentWorkingMode)
+                {
+                    case WorkingMode.pipe:
+                        if (currentPB.Image.Equals(toolPipe.Image))
                         {
-                            ConnectionPoint cp = flowly.GetConnectionPointAt(newPoint);
-                            if (cp != null)
-                            {
-                                if (cp.IsOutput)
-                                {
-                                    // cp.SetAvailable(false);
-                                    pipe = new Pipe();
-                                    pipe.SetConnection(cp);
-                                    cp.PipeConnection = pipe;
-                                    lastPoint = newPoint;
-                                    pipe.AddPointToList(lastPoint);
-                                }
-                            }
-                            else
-                            {
-                                return;
-                            }
-                        }
-                        else
-                        {
+                            newPoint = new Point(x, y);
 
-                            bool isAdded = flowly.DrawPipeline(lastPoint, newPoint, ref pipe);
-                            if (isAdded)
+                            //start drawing pipeline.
+                            if (lastPoint.X == -1 || lastPoint.Y == -1)
                             {
-
-
-                                lastPoint = newPoint;
-                                if (pipe.GiveMeYourConnectionPoints().Count == 2)
-                                {
-                                    MessageBox.Show("Connected");
-                                    flowly.AddComponentDrawn(pipe);
-                                    pipe = null;
-                                    lastPoint = new Point(-1, -1);
-                                }
-                            }
-                            else
-                            {
-                                /*ConnectionPoint cp = flowly.GetConnectionPointAt(newPoint);
+                                ConnectionPoint cp = flowly.GetConnectionPointAt(newPoint);
                                 if (cp != null)
                                 {
-                                    if (!cp.IsOutput)
+                                    if (cp.IsOutput)
                                     {
-                                        cp.SetAvailable(false);
+                                        // cp.SetAvailable(false);
+                                        pipe = new Pipe();
                                         pipe.SetConnection(cp);
+                                        cp.PipeConnection = pipe;
+                                        lastPoint = newPoint;
+                                        pipe.AddPointToList(lastPoint);
+                                    }
+                                }
+                                else
+                                {
+                                    return;
+                                }
+                            }
+                            else
+                            {
 
-                                        isAdded = flowly.DrawPipeline(lastPoint, newPoint, pipe);
-                                        if (isAdded)
+                                bool isAdded = flowly.DrawPipeline(lastPoint, newPoint, ref pipe);
+                                if (isAdded)
+                                {
+
+
+                                    lastPoint = newPoint;
+                                    if (pipe.GiveMeYourConnectionPoints().Count == 2)
+                                    {
+                                        MessageBox.Show("Connected");
+                                        flowly.AddComponentDrawn(pipe);
+                                        pipe = null;
+                                        lastPoint = new Point(-1, -1);
+                                    }
+                                }
+                                else
+                                {
+                                    /*ConnectionPoint cp = flowly.GetConnectionPointAt(newPoint);
+                                    if (cp != null)
+                                    {
+                                        if (!cp.IsOutput)
                                         {
+                                            cp.SetAvailable(false);
+                                            pipe.SetConnection(cp);
+
+                                            isAdded = flowly.DrawPipeline(lastPoint, newPoint, pipe);
+                                            if (isAdded)
+                                            {
 
 
-                                            MessageBox.Show("Connected");
-                                            flowly.AddComponentDrawn(pipe);
-                                            pipe = null;
-                                            lastPoint = new Point(-1, -1);
-                                        }
-                                        else
-                                        {
-                                            cp.SetAvailable(true);
-                                            pipe.RemoveConnection(cp);
-                                        }
+                                                MessageBox.Show("Connected");
+                                                flowly.AddComponentDrawn(pipe);
+                                                pipe = null;
+                                                lastPoint = new Point(-1, -1);
+                                            }
+                                            else
+                                            {
+                                                cp.SetAvailable(true);
+                                                pipe.RemoveConnection(cp);
+                                            }
+
+                                    }
+                                    */
 
                                 }
-                                */
+
+                            }
+                        }
+                        break;
+                    case WorkingMode.create:
+                        x -= currentPB.Width / 2;
+                        y -= currentPB.Height / 2;
+                        if (flowly.Grid == null)
+                        {
+                            MessageBox.Show("No grid is open! Create a new grid or open an existing one!");
+
+                        }
+                        else
+                        {
+                            int width = currentPB.Width;
+                            int height = currentPB.Height;
+                            Rectangle r = new Rectangle(x, y, width, height);
+                            ComponentName currentComponentName;
+                            if (currentPB.Image.Equals(toolPump.Image))
+                            {
+                                currentComponentName = ComponentName.Pump;
+
+
+                            }
+
+
+                            else if (currentPB.Image.Equals(toolPipe.Image))
+                            {
+                                currentComponentName = ComponentName.Pipe;
+                            }
+                            else if (currentPB.Image.Equals(toolSplitter.Image))
+                            {
+                                currentComponentName = ComponentName.Splitter;
+                            }
+                            else if (currentPB.Image.Equals(toolSplitterAdj.Image))
+                            {
+                                currentComponentName = ComponentName.SplitterAdj;
+                            }
+                            else if (currentPB.Image.Equals(toolMerger.Image))
+                            {
+                                currentComponentName = ComponentName.Merger;
+                            }
+                            else //then it's a sink
+                            {
+                                currentComponentName = ComponentName.Sink;
+                            }
+                            if (flowly.CheckFreeSpot(r))
+                            {
+                                //TODO Fix capacity
+                                flowly.CreateComponentDrawn(currentComponentName, r, 5);
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("The element is coliding with another element.");
+
 
                             }
 
                         }
-                    }
-                    break;
-                case WorkingMode.create:
-                    x -= currentPB.Width / 2;
-                    y -= currentPB.Height / 2;
-                    if (flowly.Grid == null)
-                    {
-                        MessageBox.Show("No grid is open! Create a new grid or open an existing one!");
+                        // KeyValuePair<Rectangle, Image> item = new KeyValuePair<Rectangle, Image>(r, currentPB.Image);
 
-                    }
-                    else
-                    {
-                        int width = currentPB.Width;
-                        int height = currentPB.Height;
-                        Rectangle r = new Rectangle(x, y, width, height);
-                        ComponentName currentComponentName;
-                        if (currentPB.Image.Equals(toolPump.Image))
-                        {
-                            currentComponentName = ComponentName.Pump;
+                        // dictionary.Add(r, currentPB.Image);
 
+                        // Paint(item);
+                        break;
+                    case WorkingMode.remove:
+                        newPoint = new Point(x, y);
+                        ComponentDrawn componentAtPoint = flowly.GetComponentPointAt(newPoint);
+                        if (componentAtPoint == null)
+                        {
+                            if (flowly.Grid == null)
+                            {
+                                MessageBox.Show("No grid is open! Create a new grid or open an existing one!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("No component selected");
+                            }
 
-                        }
-
-
-                        else if (currentPB.Image.Equals(toolPipe.Image))
-                        {
-                            currentComponentName = ComponentName.Pipe;
-                        }
-                        else if (currentPB.Image.Equals(toolSplitter.Image))
-                        {
-                            currentComponentName = ComponentName.Splitter;
-                        }
-                        else if (currentPB.Image.Equals(toolSplitterAdj.Image))
-                        {
-                            currentComponentName = ComponentName.SplitterAdj;
-                        }
-                        else if (currentPB.Image.Equals(toolMerger.Image))
-                        {
-                            currentComponentName = ComponentName.Merger;
-                        }
-                        else //then it's a sink
-                        {
-                            currentComponentName = ComponentName.Sink;
-                        }
-                        if (flowly.CheckFreeSpot(r))
-                        {
-                            //TODO Fix capacity
-                            flowly.CreateComponentDrawn(currentComponentName, r, 5);
-
+                            return;
                         }
                         else
                         {
-                            MessageBox.Show("The element is coliding with another element.");
 
+                            DialogResult dg = MessageBox.Show(String.Format("Do you wish to delete {0}?", componentAtPoint.GetType().Name), "Deleting component", MessageBoxButtons.YesNo);
+                            if (dg == DialogResult.Yes)
+                            {
+                                flowly.DeleteComponent(componentAtPoint);
 
-                        }
-
-                    }
-                    // KeyValuePair<Rectangle, Image> item = new KeyValuePair<Rectangle, Image>(r, currentPB.Image);
-
-                    // dictionary.Add(r, currentPB.Image);
-
-                    // Paint(item);
-                    break;
-                case WorkingMode.remove:
-                    newPoint = new Point(x, y);
-                    ComponentDrawn componentAtPoint = flowly.GetComponentPointAt(newPoint);
-                    if (componentAtPoint == null)
-                    {
-                        if(flowly.Grid==null)
-                        {
-                            MessageBox.Show("No grid is open! Create a new grid or open an existing one!");
-                        }
-                        else
-                        {
-                            MessageBox.Show("No component selected");
-                        }
-                       
-                        return;
-                    }
-                    else
-                    {
-
-                        DialogResult dg = MessageBox.Show(String.Format("Do you wish to delete {0}?", componentAtPoint.GetType().Name), "Deleting component", MessageBoxButtons.YesNo);
-                        if (dg == DialogResult.Yes)
-                        {
-                            flowly.DeleteComponent(componentAtPoint);
+                            }
 
                         }
 
-                    }
-
-                    break;
-                case WorkingMode.edit:
-                    break;
-                default:
-                    break;
+                        break;
+                    case WorkingMode.edit:
+                        break;
+                    default:
+                        break;
 
 
+                }
+                // KeyValuePair<Rectangle, Image> item = new KeyValuePair<Rectangle, Image>(r, currentPB.Image);
+
+                // dictionary.Add(r, currentPB.Image);
+
+                // Paint(item);
             }
-            // KeyValuePair<Rectangle, Image> item = new KeyValuePair<Rectangle, Image>(r, currentPB.Image);
-
-            // dictionary.Add(r, currentPB.Image);
-
-            // Paint(item);
-
         }
 
 
