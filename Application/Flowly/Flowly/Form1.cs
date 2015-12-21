@@ -20,15 +20,14 @@ namespace Flowly
         private int xPos;
         SystemFlowly flowly;
         Grid theGrid;
-<<<<<<< Updated upstream
+
 
         private WorkingMode currentWorkingMode;
-=======
+
         string nameForForm;
 
         private bool modeCreate = false;
 
->>>>>>> Stashed changes
         //for testingperposes
         PictureBox currentPB;
 
@@ -54,17 +53,12 @@ namespace Flowly
             }
             theGrid = new Grid(grid);
             flowly = new SystemFlowly(theGrid);
-<<<<<<< Updated upstream
-=======
 
 
-           
 
-
->>>>>>> Stashed changes
         }
 
-       
+
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
@@ -88,7 +82,6 @@ namespace Flowly
         private void grid_Click(object sender, EventArgs e)
         {
             //if(theImageLocationIsValid)
-<<<<<<< Updated upstream
             int x = xPos;
             int y = yPos;
             if (currentWorkingMode != WorkingMode.pipe)
@@ -116,7 +109,7 @@ namespace Flowly
                             {
                                 if (cp.IsOutput)
                                 {
-                                   // cp.SetAvailable(false);
+                                    // cp.SetAvailable(false);
                                     pipe = new Pipe();
                                     pipe.SetConnection(cp);
                                     cp.PipeConnection = pipe;
@@ -183,66 +176,57 @@ namespace Flowly
                 case WorkingMode.create:
                     x -= currentPB.Width / 2;
                     y -= currentPB.Height / 2;
-=======
-            if (flowly.Grid == null)
-            {
-                MessageBox.Show("No grid is open! Create a new grid or open an existing one!");
-
-            }
-            else
-            {
-                if (modeCreate)
-                {
-
-                    int x = xPos - currentPB.Width / 2;
-                    int y = yPos - currentPB.Height / 2;
->>>>>>> Stashed changes
-                    int width = currentPB.Width;
-                    int height = currentPB.Height;
-                    Rectangle r = new Rectangle(x, y, width, height);
-                    ComponentName currentComponentName;
-                    if (currentPB.Image.Equals(toolPump.Image))
+                    if (flowly.Grid == null)
                     {
-                        currentComponentName = ComponentName.Pump;
-
-<<<<<<< Updated upstream
-
-                    }
-
-=======
-                    }
-                    else if (currentPB.Image.Equals(toolPipe.Image))
-                    {
-                        currentComponentName = ComponentName.Pipe;
-                    }
->>>>>>> Stashed changes
-                    else if (currentPB.Image.Equals(toolSplitter.Image))
-                    {
-                        currentComponentName = ComponentName.Splitter;
-                    }
-                    else if (currentPB.Image.Equals(toolSplitterAdj.Image))
-                    {
-                        currentComponentName = ComponentName.SplitterAdj;
-                    }
-                    else if (currentPB.Image.Equals(toolMerger.Image))
-                    {
-                        currentComponentName = ComponentName.Merger;
-                    }
-                    else //then it's a sink
-                    {
-                        currentComponentName = ComponentName.Sink;
-                    }
-                    if (flowly.CheckFreeSpot(r))
-                    {
-                        //TODO Fix capacity
-                        flowly.CreateComponentDrawn(currentComponentName, r, 5);
-<<<<<<< Updated upstream
+                        MessageBox.Show("No grid is open! Create a new grid or open an existing one!");
 
                     }
                     else
                     {
-                        MessageBox.Show("The element is coliding with another element.");
+                        int width = currentPB.Width;
+                        int height = currentPB.Height;
+                        Rectangle r = new Rectangle(x, y, width, height);
+                        ComponentName currentComponentName;
+                        if (currentPB.Image.Equals(toolPump.Image))
+                        {
+                            currentComponentName = ComponentName.Pump;
 
+
+                        }
+
+
+                        else if (currentPB.Image.Equals(toolPipe.Image))
+                        {
+                            currentComponentName = ComponentName.Pipe;
+                        }
+                        else if (currentPB.Image.Equals(toolSplitter.Image))
+                        {
+                            currentComponentName = ComponentName.Splitter;
+                        }
+                        else if (currentPB.Image.Equals(toolSplitterAdj.Image))
+                        {
+                            currentComponentName = ComponentName.SplitterAdj;
+                        }
+                        else if (currentPB.Image.Equals(toolMerger.Image))
+                        {
+                            currentComponentName = ComponentName.Merger;
+                        }
+                        else //then it's a sink
+                        {
+                            currentComponentName = ComponentName.Sink;
+                        }
+                        if (flowly.CheckFreeSpot(r))
+                        {
+                            //TODO Fix capacity
+                            flowly.CreateComponentDrawn(currentComponentName, r, 5);
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("The element is coliding with another element.");
+
+
+                        }
 
                     }
                     // KeyValuePair<Rectangle, Image> item = new KeyValuePair<Rectangle, Image>(r, currentPB.Image);
@@ -261,14 +245,14 @@ namespace Flowly
                     }
                     else
                     {
-                       
+
                         DialogResult dg = MessageBox.Show(String.Format("Do you wish to delete {0}?", componentAtPoint.GetType().Name), "Deleting component", MessageBoxButtons.YesNo);
                         if (dg == DialogResult.Yes)
                         {
                             flowly.DeleteComponent(componentAtPoint);
-                            
+
                         }
-                        
+
                     }
 
                     break;
@@ -276,27 +260,19 @@ namespace Flowly
                     break;
                 default:
                     break;
-=======
-
-                    }
-                    else
-                    {
-                        MessageBox.Show("The element is coliding with another element.");
 
 
-                    }
-                    // KeyValuePair<Rectangle, Image> item = new KeyValuePair<Rectangle, Image>(r, currentPB.Image);
-
-                    // dictionary.Add(r, currentPB.Image);
-
-                    // Paint(item);
-
-                }
->>>>>>> Stashed changes
             }
+            // KeyValuePair<Rectangle, Image> item = new KeyValuePair<Rectangle, Image>(r, currentPB.Image);
 
+            // dictionary.Add(r, currentPB.Image);
+
+            // Paint(item);
 
         }
+
+
+
 
         private void toolPump_MouseDown(object sender, MouseEventArgs e)
         {
@@ -312,7 +288,7 @@ namespace Flowly
 
         private void grid_Paint(object sender, PaintEventArgs e)
         {
-            
+
 
             // Paint(item)
 
@@ -413,32 +389,23 @@ namespace Flowly
         }
         private void button1_Click(object sender, EventArgs e)
         {
-<<<<<<< Updated upstream
 
-=======
-           
->>>>>>> Stashed changes
         }
 
         private void clearGridToolStripMenuItem_Click(object sender, EventArgs e)
         {
-<<<<<<< Updated upstream
             DialogResult dg = MessageBox.Show("Do you really want to clear the grid?", "Confirmation", MessageBoxButtons.YesNo);
             if (dg == DialogResult.Yes)
-=======
-            if (flowly.Grid != null)
->>>>>>> Stashed changes
-            {
-                DialogResult dg = MessageBox.Show("Do you really want to clear the grid?", "Confirmation", MessageBoxButtons.YesNo);
-                if (dg == DialogResult.Yes)
+                if (flowly.Grid != null)
+
                 {
                     flowly.ClearGrid();
+                  
                 }
-            }
-            else
-            {
-                MessageBox.Show("No grid is open! Create a new grid or open an existing one!");
-            }
+                else
+                {
+                    MessageBox.Show("No grid is open! Create a new grid or open an existing one!");
+                }
         }
 
         private void saveAsToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -449,10 +416,10 @@ namespace Flowly
             }
             else
             {
-               
-                    //save as
-                    flowly.SaveAsGrid(theGrid, out nameForForm);
-                if(nameForForm=="")
+
+                //save as
+                flowly.SaveAsGrid(theGrid, out nameForForm);
+                if (nameForForm == "")
                 {
 
                 }
@@ -460,8 +427,8 @@ namespace Flowly
                 {
                     this.Text = this.Text = "Flowly - flow system / " + nameForForm;
                 }
-                    
-               
+
+
             }
         }
 
@@ -495,7 +462,7 @@ namespace Flowly
                     }
 
                     flowly.NewFile(grid);
-                   
+
                     this.Text = "Flowly - flow system / (New grid)";
 
 
@@ -503,14 +470,14 @@ namespace Flowly
                 else
                 {
                     flowly.NewFile(grid);
-                   
+
                     this.Text = "Flowly - flow system / (New grid)";
                 }
             }
             else
             {
                 flowly.NewFile(grid);
-               
+
                 this.Text = "Flowly - flow system / (New grid)";
             }
 
@@ -522,11 +489,11 @@ namespace Flowly
             if (flowly.Grid != null)
             {
                 // ask this if there are any changes!
-               DialogResult saveChanges = MessageBox.Show("Do you want to save before closing?", "Save before closing", MessageBoxButtons.YesNo);
-                if(saveChanges==DialogResult.Yes)
+                DialogResult saveChanges = MessageBox.Show("Do you want to save before closing?", "Save before closing", MessageBoxButtons.YesNo);
+                if (saveChanges == DialogResult.Yes)
                 {
                     //save and open
-                    if(theGrid.Name!=null)
+                    if (theGrid.Name != null)
                     {
                         flowly.SaveGrid(theGrid, out nameForForm);
                     }
@@ -546,7 +513,7 @@ namespace Flowly
                     }
 
                     flowly.OpenFile(grid, out nameForForm);
-                    if(nameForForm=="")
+                    if (nameForForm == "")
                     {
 
                     }
@@ -555,13 +522,13 @@ namespace Flowly
                         this.Text = "Flowly - flow system / " + nameForForm;
                     }
 
-                    
+
                 }
                 else
                 {
                     // open
-                    
-                    
+
+
                     flowly.OpenFile(grid, out nameForForm);
                     if (nameForForm == "")
                     {
@@ -587,37 +554,34 @@ namespace Flowly
                 }
             }
 
-<<<<<<< Updated upstream
 
-=======
             theGrid = flowly.Grid;
-           
->>>>>>> Stashed changes
+
         }
 
         private void saveWithoutAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(flowly.Grid!=null)
+            if (flowly.Grid != null)
             {
-               if(flowly.Grid.Destination==null)
+                if (flowly.Grid.Destination == null)
                 {
                     //save as 
                     flowly.SaveAsGrid(theGrid, out nameForForm);
                     this.Text = this.Text = "Flowly - flow system / " + nameForForm;
                 }
-               else
+                else
                 {
                     //save
                     flowly.SaveGrid(theGrid, out nameForForm);
-                    this.Text = this.Text = "Flowly - flow system / " + nameForForm; 
+                    this.Text = this.Text = "Flowly - flow system / " + nameForForm;
                 }
             }
             else
             {
                 MessageBox.Show("No grid is open! Create a new grid or open an existing one!");
             }
-          
-            
+
+
         }
 
         private void closeGridToolStripMenuItem_Click(object sender, EventArgs e)
@@ -625,7 +589,7 @@ namespace Flowly
             if (flowly.Grid != null)
             {
                 flowly.ClearGrid();
-                  flowly.CloseGrid();
+                flowly.CloseGrid();
                 this.Text = "Flowly - flow system / (No name)";
             }
             else

@@ -108,49 +108,40 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-<<<<<<< Updated upstream
             this.newToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.newToolStripMenuItem.Text = "New";
-=======
             this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "New grid";
->>>>>>> Stashed changes
             this.newToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveWithoutAsToolStripMenuItem
             // 
             this.saveWithoutAsToolStripMenuItem.Name = "saveWithoutAsToolStripMenuItem";
-<<<<<<< Updated upstream
             this.saveWithoutAsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.saveWithoutAsToolStripMenuItem.Text = "Save";
-=======
             this.saveWithoutAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveWithoutAsToolStripMenuItem.Text = "Save grid";
             this.saveWithoutAsToolStripMenuItem.Click += new System.EventHandler(this.saveWithoutAsToolStripMenuItem_Click);
->>>>>>> Stashed changes
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-<<<<<<< Updated upstream
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.saveAsToolStripMenuItem.Text = "Save as";
-=======
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "Save as grid";
->>>>>>> Stashed changes
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem1_Click);
             // 
             // openFileStripMenuItem
             // 
             this.openFileStripMenuItem.Name = "openFileStripMenuItem";
-<<<<<<< Updated upstream
+
             this.openFileStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.openFileStripMenuItem.Text = "Open file";
-=======
+
             this.openFileStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openFileStripMenuItem.Text = "Open grid";
->>>>>>> Stashed changes
+
             this.openFileStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // clearGridToolStripMenuItem
