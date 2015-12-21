@@ -75,12 +75,23 @@ namespace Flowly
 
         internal ConnectionPoint GetConnectionPointAt(Point newPoint)
         {
-            return grid.IsInputOutput(newPoint);
+           
+            if (grid != null)
+            {
+                return grid.IsInputOutput(newPoint);
+            }
+            return null;
         }
 
         internal ComponentDrawn GetComponentPointAt(Point newPoint)
         {
-            return grid.GetComponentAt(newPoint);
+            if (grid != null)
+            {
+                return grid.GetComponentAt(newPoint);
+            }
+            return null;
+
+
         }
 
         /// <summary>

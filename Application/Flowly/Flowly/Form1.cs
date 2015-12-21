@@ -240,7 +240,15 @@ namespace Flowly
                     ComponentDrawn componentAtPoint = flowly.GetComponentPointAt(newPoint);
                     if (componentAtPoint == null)
                     {
-                        MessageBox.Show("No component selected");
+                        if(flowly.Grid==null)
+                        {
+                            MessageBox.Show("No grid is open! Create a new grid or open an existing one!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("No component selected");
+                        }
+                       
                         return;
                     }
                     else
@@ -394,18 +402,19 @@ namespace Flowly
 
         private void clearGridToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult dg = MessageBox.Show("Do you really want to clear the grid?", "Confirmation", MessageBoxButtons.YesNo);
-            if (dg == DialogResult.Yes)
-                if (flowly.Grid != null)
-
+            if (flowly.Grid != null)
+            {
+                DialogResult dg = MessageBox.Show("Do you really want to clear the grid?", "Confirmation", MessageBoxButtons.YesNo);
+                if (dg == DialogResult.Yes)
                 {
                     flowly.ClearGrid();
-                  
+
                 }
-                else
-                {
-                    MessageBox.Show("No grid is open! Create a new grid or open an existing one!");
-                }
+            }
+            else
+            {
+                MessageBox.Show("No grid is open! Create a new grid or open an existing one!");
+            }
         }
 
         private void saveAsToolStripMenuItem1_Click(object sender, EventArgs e)
