@@ -447,7 +447,7 @@ namespace Flowly
             {
                 foreach (ConnectionPoint cp in cd.GiveMeYourConnectionPoints())
                 {
-                    if (cp.Available && !cp.IsOutput)
+                    if (cp.Available && !cp.IsOutput && cp.ComponentDrawnBelong != cd)
                     {
                         DrawConnectionPointLimits(Brushes.Blue, cp);
                     }
