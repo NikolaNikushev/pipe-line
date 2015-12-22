@@ -91,12 +91,6 @@
             <param name="givenInfo"></param>
             <returns>True if successfull, false otherwise.</returns>
         </member>
-        <member name="T:Flowly.Direction">
-            <summary>
-            This is an emurations containg the direction a component can face
-            Left or right. It is used to better display the value of the direction
-            </summary>
-        </member>
         <member name="T:Flowly.Grid">
             <summary>
             Objects of this class will be the "drawing" place of the user. A grid will contain components in it.
@@ -115,27 +109,6 @@
             </summary>
             <param name="givenComponent"></param>
             <returns>True if successfull, false otherwise.</returns>
-        </member>
-        <member name="T:Flowly.IDeletable">
-            <summary>
-            This is an interface which allows objects to be deleted when necesery, it makes all objecets that use the interface have 
-            a method that will delete them.
-            </summary>
-        </member>
-        <member name="M:Flowly.IDeletable.Delete">
-            <summary>
-            Method that is called when an object will be deleted.
-            </summary>
-        </member>
-        <member name="T:Flowly.IEditable">
-            <summary>
-            This is an interface that enables an object to be edited
-            </summary>
-        </member>
-        <member name="M:Flowly.IEditable.Edit">
-            <summary>
-            This method is used to edit an object
-            </summary>
         </member>
         <member name="T:Flowly.PropertiesEnum">
             <summary>

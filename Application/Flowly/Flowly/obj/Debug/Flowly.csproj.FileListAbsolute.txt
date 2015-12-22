@@ -34,3 +34,21 @@ E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Fl
 E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\images\sink2.png
 E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\images\splitter2.png
 E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\images\start_point.png
+C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.exe.config
+C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.XML
+C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.exe
+C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.pdb
+C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\bin\Debug\images\Ad_splitter2.png
+C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\bin\Debug\images\Editing-Edit-icon-pen.png
+C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\bin\Debug\images\merger2.png
+C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\bin\Debug\images\pipeline.png
+C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\bin\Debug\images\remove_element.png
+C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\bin\Debug\images\sink2.png
+C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\bin\Debug\images\splitter2.png
+C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\bin\Debug\images\start_point.png
+C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.exe
+C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.pdb
+C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.csprojResolveAssemblyReference.cache
+C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.Form1.resources
+C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.Properties.Resources.resources
+C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.csproj.GenerateResource.Cache

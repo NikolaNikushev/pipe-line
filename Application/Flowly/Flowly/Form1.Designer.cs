@@ -40,16 +40,17 @@
             this.closeGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.labelRightTrack = new System.Windows.Forms.Label();
+            this.labelLeftTrack = new System.Windows.Forms.Label();
+            this.nudCapacity = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.nudFlow = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.trackBarLeft = new System.Windows.Forms.TrackBar();
+            this.trackBarRight = new System.Windows.Forms.TrackBar();
             this.label5 = new System.Windows.Forms.Label();
             this.toolSink = new System.Windows.Forms.PictureBox();
             this.toolSplitter = new System.Windows.Forms.PictureBox();
@@ -66,9 +67,10 @@
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCapacity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFlow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarLeft)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolSink)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolSplitter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolPipe)).BeginInit();
@@ -108,53 +110,42 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.newToolStripMenuItem.Text = "New";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.newToolStripMenuItem.Text = "New grid";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveWithoutAsToolStripMenuItem
             // 
             this.saveWithoutAsToolStripMenuItem.Name = "saveWithoutAsToolStripMenuItem";
-            this.saveWithoutAsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.saveWithoutAsToolStripMenuItem.Text = "Save";
-            this.saveWithoutAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveWithoutAsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.saveWithoutAsToolStripMenuItem.Text = "Save grid";
             this.saveWithoutAsToolStripMenuItem.Click += new System.EventHandler(this.saveWithoutAsToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.saveAsToolStripMenuItem.Text = "Save as";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.saveAsToolStripMenuItem.Text = "Save as grid";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem1_Click);
             // 
             // openFileStripMenuItem
             // 
             this.openFileStripMenuItem.Name = "openFileStripMenuItem";
-
-            this.openFileStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.openFileStripMenuItem.Text = "Open file";
-
-            this.openFileStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openFileStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.openFileStripMenuItem.Text = "Open grid";
-
             this.openFileStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // clearGridToolStripMenuItem
             // 
             this.clearGridToolStripMenuItem.Name = "clearGridToolStripMenuItem";
-            this.clearGridToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.clearGridToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.clearGridToolStripMenuItem.Text = "Clear grid";
             this.clearGridToolStripMenuItem.Click += new System.EventHandler(this.clearGridToolStripMenuItem_Click);
             // 
             // closeGridToolStripMenuItem
             // 
             this.closeGridToolStripMenuItem.Name = "closeGridToolStripMenuItem";
-            this.closeGridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.closeGridToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.closeGridToolStripMenuItem.Text = "Close grid";
             this.closeGridToolStripMenuItem.Click += new System.EventHandler(this.closeGridToolStripMenuItem_Click);
             // 
@@ -180,16 +171,17 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.numericUpDown1);
+            this.groupBox2.Controls.Add(this.labelRightTrack);
+            this.groupBox2.Controls.Add(this.labelLeftTrack);
+            this.groupBox2.Controls.Add(this.nudCapacity);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.radioButton2);
-            this.groupBox2.Controls.Add(this.radioButton1);
+            this.groupBox2.Controls.Add(this.btnUpdate);
+            this.groupBox2.Controls.Add(this.nudFlow);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.trackBar2);
-            this.groupBox2.Controls.Add(this.trackBar1);
+            this.groupBox2.Controls.Add(this.trackBarLeft);
+            this.groupBox2.Controls.Add(this.trackBarRight);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Location = new System.Drawing.Point(0, 333);
             this.groupBox2.Name = "groupBox2";
@@ -198,62 +190,74 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Properties";
             // 
-            // label6
+            // labelRightTrack
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(47, 142);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 13);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "50% : 50%";
+            this.labelRightTrack.AutoSize = true;
+            this.labelRightTrack.Location = new System.Drawing.Point(79, 161);
+            this.labelRightTrack.Name = "labelRightTrack";
+            this.labelRightTrack.Size = new System.Drawing.Size(27, 13);
+            this.labelRightTrack.TabIndex = 15;
+            this.labelRightTrack.Text = "50%";
             // 
-            // numericUpDown1
+            // labelLeftTrack
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(47, 60);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.labelLeftTrack.AutoSize = true;
+            this.labelLeftTrack.Location = new System.Drawing.Point(36, 161);
+            this.labelLeftTrack.Name = "labelLeftTrack";
+            this.labelLeftTrack.Size = new System.Drawing.Size(27, 13);
+            this.labelLeftTrack.TabIndex = 14;
+            this.labelLeftTrack.Text = "50%";
+            // 
+            // nudCapacity
+            // 
+            this.nudCapacity.Enabled = false;
+            this.nudCapacity.Location = new System.Drawing.Point(80, 86);
+            this.nudCapacity.Maximum = new decimal(new int[] {
             2147483646,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(54, 20);
-            this.numericUpDown1.TabIndex = 9;
+            this.nudCapacity.Name = "nudCapacity";
+            this.nudCapacity.Size = new System.Drawing.Size(54, 20);
+            this.nudCapacity.TabIndex = 13;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(44, 234);
+            this.label4.Location = new System.Drawing.Point(26, 88);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Direction";
+            this.label4.Size = new System.Drawing.Size(48, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Capacity";
             // 
-            // radioButton2
+            // btnUpdate
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(83, 250);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(45, 17);
-            this.radioButton2.TabIndex = 4;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "right";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.btnUpdate.Enabled = false;
+            this.btnUpdate.Location = new System.Drawing.Point(16, 256);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(110, 23);
+            this.btnUpdate.TabIndex = 11;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
-            // radioButton1
+            // nudFlow
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(13, 250);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(43, 17);
-            this.radioButton1.TabIndex = 3;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Left";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.nudFlow.Enabled = false;
+            this.nudFlow.Location = new System.Drawing.Point(80, 62);
+            this.nudFlow.Maximum = new decimal(new int[] {
+            2147483646,
+            0,
+            0,
+            0});
+            this.nudFlow.Name = "nudFlow";
+            this.nudFlow.Size = new System.Drawing.Size(54, 20);
+            this.nudFlow.TabIndex = 9;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(98, 213);
+            this.label3.Location = new System.Drawing.Point(98, 240);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(32, 13);
             this.label3.TabIndex = 2;
@@ -262,7 +266,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 213);
+            this.label2.Location = new System.Drawing.Point(13, 240);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(25, 13);
             this.label2.TabIndex = 1;
@@ -271,31 +275,35 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 62);
+            this.label1.Location = new System.Drawing.Point(44, 69);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Flow";
             // 
-            // trackBar2
+            // trackBarLeft
             // 
-            this.trackBar2.Location = new System.Drawing.Point(16, 83);
-            this.trackBar2.Maximum = 100;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar2.Size = new System.Drawing.Size(45, 127);
-            this.trackBar2.TabIndex = 6;
-            this.trackBar2.Value = 50;
+            this.trackBarLeft.Enabled = false;
+            this.trackBarLeft.Location = new System.Drawing.Point(6, 104);
+            this.trackBarLeft.Maximum = 100;
+            this.trackBarLeft.Name = "trackBarLeft";
+            this.trackBarLeft.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBarLeft.Size = new System.Drawing.Size(45, 127);
+            this.trackBarLeft.TabIndex = 6;
+            this.trackBarLeft.Value = 50;
+            this.trackBarLeft.ValueChanged += new System.EventHandler(this.trackBarLeft_ValueChanged);
             // 
-            // trackBar1
+            // trackBarRight
             // 
-            this.trackBar1.Location = new System.Drawing.Point(101, 83);
-            this.trackBar1.Maximum = 100;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar1.Size = new System.Drawing.Size(45, 127);
-            this.trackBar1.TabIndex = 5;
-            this.trackBar1.Value = 50;
+            this.trackBarRight.Enabled = false;
+            this.trackBarRight.Location = new System.Drawing.Point(107, 104);
+            this.trackBarRight.Maximum = 100;
+            this.trackBarRight.Name = "trackBarRight";
+            this.trackBarRight.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBarRight.Size = new System.Drawing.Size(45, 127);
+            this.trackBarRight.TabIndex = 5;
+            this.trackBarRight.Value = 50;
+            this.trackBarRight.ValueChanged += new System.EventHandler(this.trackBarRight_ValueChanged);
             // 
             // label5
             // 
@@ -459,9 +467,10 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCapacity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFlow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarLeft)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarRight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolSink)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolSplitter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolPipe)).EndInit();
@@ -497,20 +506,21 @@
         private System.Diagnostics.Process process1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.NumericUpDown nudFlow;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TrackBar trackBar2;
-        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.TrackBar trackBarLeft;
+        private System.Windows.Forms.TrackBar trackBarRight;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox grid;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem closeGridToolStripMenuItem;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.NumericUpDown nudCapacity;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelRightTrack;
+        private System.Windows.Forms.Label labelLeftTrack;
     }
 }
 

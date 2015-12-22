@@ -37,7 +37,9 @@ namespace Flowly
 
 
         public Rectangle RectangleBig { get { return rectangleBig; } }
-
+        public float Capacity { get { return capacity; } }
+        public float CurrentFlow { get { return currentFlow; } }
+        public bool DiffCurrFlowPossible { get  { return diffCurrFlowPossible; }}
         public Image Image { get { return this.imageResource; } }
         public ComponentDrawn(Rectangle theRectangle)
         {
@@ -137,6 +139,8 @@ namespace Flowly
         {
             return listOfConnectionPoints;
         }
+        
+        
     }
 }
 

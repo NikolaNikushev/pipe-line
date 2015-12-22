@@ -29,6 +29,7 @@ namespace Flowly
         public bool Available { get { return pipeConnection == null; } }
 
         public bool IsOutput { get { return isOutput; } }
+        public float CurrentFlow { get { return currentFlow; } }
 
         public ConnectionPoint(Rectangle theRectangle, ComponentDrawn theComponentDrawnBelong, bool theIsOutput)
         {

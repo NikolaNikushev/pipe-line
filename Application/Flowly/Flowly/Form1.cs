@@ -28,6 +28,8 @@ namespace Flowly
 
         private bool modeCreate = false;
 
+        private ComponentDrawn currentSelectedComponent;
+
         //for testingperposes
         PictureBox currentPB;
 
@@ -53,6 +55,7 @@ namespace Flowly
             }
             theGrid = new Grid(grid);
             flowly = new SystemFlowly(theGrid);
+            currentSelectedComponent = null;
 
 
 
@@ -99,6 +102,15 @@ namespace Flowly
                 switch (currentWorkingMode)
                 {
                     case WorkingMode.pipe:
+                        nudCapacity.Enabled = false;
+                        nudFlow.Enabled = false;
+                        trackBarLeft.Enabled = false;
+                        trackBarRight.Enabled = false;
+                        btnUpdate.Enabled = false;
+                        nudCapacity.Value = 0;
+                        nudFlow.Value = 0;
+                        trackBarLeft.Value = 50;
+                        trackBarRight.Value = 50;
                         if (currentPB.Image.Equals(toolPipe.Image))
                         {
                             newPoint = new Point(x, y);
@@ -181,6 +193,16 @@ namespace Flowly
                         
                         break;
                     case WorkingMode.create:
+                        nudCapacity.Enabled = false;
+                        nudFlow.Enabled = false;
+                        trackBarLeft.Enabled = false;
+                        trackBarRight.Enabled = false;
+                        btnUpdate.Enabled = false;
+                        nudCapacity.Value = 0;
+                        nudFlow.Value = 0;
+                        trackBarLeft.Value = 50;
+                        trackBarRight.Value = 50;
+
                         x -= currentPB.Width / 2;
                         y -= currentPB.Height / 2;
                         if (flowly.Grid == null)
@@ -194,6 +216,7 @@ namespace Flowly
                             int height = currentPB.Height;
                             Rectangle r = new Rectangle(x, y, width, height);
                             ComponentName currentComponentName;
+                            ComponentDrawn createdComponent;
                             if (currentPB.Image.Equals(toolPump.Image))
                             {
                                 currentComponentName = ComponentName.Pump;
@@ -224,8 +247,12 @@ namespace Flowly
                             }
                             if (flowly.CheckFreeSpot(r))
                             {
-                                //TODO Fix capacity
-                                flowly.CreateComponentDrawn(currentComponentName, r, 5);
+                                //TODO capacity
+                               if(flowly.CreateComponentDrawn(currentComponentName, r, 5))
+                                {
+                                   
+                                }
+                                
 
                             }
                             else
@@ -243,6 +270,16 @@ namespace Flowly
                         // Paint(item);
                         break;
                     case WorkingMode.remove:
+                        nudCapacity.Enabled = false;
+                        nudFlow.Enabled = false;
+                        trackBarLeft.Enabled = false;
+                        trackBarRight.Enabled = false;
+                        btnUpdate.Enabled = false;
+                        nudCapacity.Value = 0;
+                        nudFlow.Value = 0;
+                        trackBarLeft.Value = 50;
+                        trackBarRight.Value = 50;
+
                         newPoint = new Point(x, y);
                         ComponentDrawn componentAtPoint = flowly.GetComponentPointAt(newPoint);
                         if (componentAtPoint == null)
@@ -272,6 +309,51 @@ namespace Flowly
 
                         break;
                     case WorkingMode.edit:
+                        newPoint = new Point(x, y);
+                        currentSelectedComponent = flowly.GetComponentPointAt(newPoint);
+                        if (currentSelectedComponent == null)
+                        {
+                            if (flowly.Grid == null)
+                            {
+                                MessageBox.Show("No grid is open! Create a new grid or open an existing one!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("No component selected");
+                            }
+
+                            return;
+                        }
+                        if(currentSelectedComponent.DiffCurrFlowPossible == true)
+                        {
+                            List<ConnectionPoint> currentConnectionPoints = new List<ConnectionPoint>();
+                            foreach (ConnectionPoint item in currentSelectedComponent.GiveMeYourConnectionPoints())
+                            {
+                                if (item.IsOutput)
+                                {
+                                    currentConnectionPoints.Add(item);
+                                }
+                            }
+                            if (currentSelectedComponent.CurrentFlow == 0)
+                            {
+                                trackBarLeft.Value = 50;
+                                trackBarRight.Value = 50;
+                            }
+                            else
+                            {
+                                trackBarLeft.Value = (Convert.ToInt32(currentSelectedComponent.CurrentFlow) / Convert.ToInt32(currentSelectedComponent.CurrentFlow - currentConnectionPoints[0].CurrentFlow));
+                                trackBarRight.Value = (Convert.ToInt32(currentSelectedComponent.CurrentFlow) / Convert.ToInt32(currentSelectedComponent.CurrentFlow - currentConnectionPoints[1].CurrentFlow));
+                            }
+                            
+                            trackBarLeft.Enabled = true;
+                            trackBarRight.Enabled = true;
+                        }
+                        nudFlow.Value = (decimal)currentSelectedComponent.CurrentFlow;
+                        nudCapacity.Value = (decimal)currentSelectedComponent.Capacity;
+                        btnUpdate.Enabled = true;
+                        nudFlow.Enabled = true;
+                        nudCapacity.Enabled = true;
+                        
                         break;
                     default:
                         break;
@@ -634,6 +716,78 @@ namespace Flowly
             {
                 MessageBox.Show("No grid is open! Create a new grid or open an existing one!");
             }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            //When user goes into Edit Mode
+            //Update button is enabled and changes on selected component are possible
+            int x = xPos;
+            int y = yPos;
+            if(currentWorkingMode == WorkingMode.edit)
+            {
+                float givenFlow = (float)nudFlow.Value;
+                float givenCapacity = (float)nudCapacity.Value;
+                if (currentSelectedComponent == null)
+                {
+                    if (flowly.Grid == null)
+                    {
+                        MessageBox.Show("No grid is open! Create a new grid or open an existing one!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No component selected");
+                    }
+
+                    return;
+                }  
+                // If its adjustable splitter
+                else if(currentSelectedComponent.DiffCurrFlowPossible == true)
+                {
+                    currentSelectedComponent.SetCapacity(givenCapacity);
+                    currentSelectedComponent.SetCurrentFlow(givenFlow);
+
+                    List<ConnectionPoint> currentConnectionPoints = new List<ConnectionPoint>();
+                    foreach (ConnectionPoint item in currentSelectedComponent.GiveMeYourConnectionPoints())
+                    {
+                        if (item.IsOutput)
+                        {
+                            currentConnectionPoints.Add(item);
+                        }
+                    }
+
+                    currentConnectionPoints[0].SetCurrentFlow(currentSelectedComponent.CurrentFlow * trackBarLeft.Value);
+                    currentConnectionPoints[1].SetCurrentFlow(currentSelectedComponent.CurrentFlow * trackBarRight.Value);
+                }
+                //If its other type of component
+                else
+                {
+                    currentSelectedComponent.SetCapacity(givenCapacity);
+                    currentSelectedComponent.SetCurrentFlow(givenFlow);
+                }
+
+
+
+
+
+
+            }
+            else
+            {
+                btnUpdate.Enabled = false;
+            }
+        }
+
+        private void trackBarRight_ValueChanged(object sender, EventArgs e)
+        {
+            trackBarLeft.Value = 100 - trackBarRight.Value;
+            labelRightTrack.Text = trackBarRight.Value.ToString() + "%";
+        }
+
+        private void trackBarLeft_ValueChanged(object sender, EventArgs e)
+        {
+            trackBarRight.Value = 100 - trackBarLeft.Value;
+            labelLeftTrack.Text = trackBarLeft.Value.ToString() + "%";
         }
     }
     enum WorkingMode

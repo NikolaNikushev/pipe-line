@@ -58,10 +58,7 @@
     <Compile Include="GeneratedCode\ComponentName.cs" />
     <Compile Include="GeneratedCode\ConnectionPoint.cs" />
     <Compile Include="GeneratedCode\DialogWindow.cs" />
-    <Compile Include="GeneratedCode\Direction.cs" />
     <Compile Include="GeneratedCode\Grid.cs" />
-    <Compile Include="GeneratedCode\IDeletable.cs" />
-    <Compile Include="GeneratedCode\IEditable.cs" />
     <Compile Include="GeneratedCode\Merger.cs" />
     <Compile Include="GeneratedCode\Pipe.cs" />
     <Compile Include="GeneratedCode\PropertiesEnum.cs" />
