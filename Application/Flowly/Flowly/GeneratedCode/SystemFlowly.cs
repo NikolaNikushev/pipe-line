@@ -352,9 +352,9 @@ namespace Flowly
             grid.PaintAllComponents();
         }
 
-        internal void HighlightAllAvailableInputs()
+        internal void HighlightAllAvailableInputs(ComponentDrawn currentComponent)
         {
-            grid.HighightAllAvailableInputs();
+            grid.HighightAllAvailableInputs(currentComponent);
         }
 
         internal void HighlightAllAvailableOutputs()

@@ -441,21 +441,30 @@ namespace Flowly
             graphic.FillRectangle(color, r);
         }
 
-        internal void HighightAllAvailableInputs()
+        private void HighlightPointsOfComponent(ComponentDrawn cd)
+        {
+            
+        }
+
+        internal void HighightAllAvailableInputs(ComponentDrawn currentComponent)
         {
             foreach (ComponentDrawn cd in ListOfComponents)
             {
-                foreach (ConnectionPoint cp in cd.GiveMeYourConnectionPoints())
+                if (cd != null)
                 {
-                    if (cp.Available && !cp.IsOutput && cp.ComponentDrawnBelong != cd)
+                    foreach (ConnectionPoint cp in cd.GiveMeYourConnectionPoints())
                     {
-                        DrawConnectionPointLimits(Brushes.Blue, cp);
-                    }
-                    else
-                    {
-                        DrawConnectionPointLimits(Brushes.Red, cp);
+                        if ((cp.Available && !cp.IsOutput) && currentComponent != cd)
+                        {
+                            DrawConnectionPointLimits(Brushes.Blue, cp);
+                        }
+                        else
+                        {
+                            DrawConnectionPointLimits(Brushes.Red, cp);
+                        }
                     }
                 }
+
             }
         }
 
@@ -463,9 +472,10 @@ namespace Flowly
         {
             foreach (ComponentDrawn cd in ListOfComponents)
             {
+
                 foreach (ConnectionPoint cp in cd.GiveMeYourConnectionPoints())
-                {
-                    if (cp.Available && cp.IsOutput)
+
+                    if ((cp.Available && cp.IsOutput))
                     {
                         DrawConnectionPointLimits(Brushes.Blue, cp);
                     }
@@ -473,7 +483,7 @@ namespace Flowly
                     {
                         DrawConnectionPointLimits(Brushes.Red, cp);
                     }
-                }
+
             }
         }
 
@@ -516,12 +526,7 @@ namespace Flowly
             Rectangle r = drawn.RectangleBig;
             graphic.DrawRectangle(Pens.Red, r);
             graphic.DrawImage(drawn.Image, r);
-            List<ConnectionPoint> conPoints = drawn.GiveMeYourConnectionPoints();
-            foreach (ConnectionPoint cp in conPoints)
-            {
-                graphic.DrawRectangle(Pens.Blue, cp.rectangle);
 
-            }
         }
 
     }

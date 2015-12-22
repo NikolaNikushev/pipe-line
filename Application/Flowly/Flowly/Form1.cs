@@ -112,13 +112,14 @@ namespace Flowly
 
                                     if (cp.IsOutput)
                                     {
-                                        flowly.HighlightAllAvailableInputs();
+                                       
                                         // cp.SetAvailable(false);
                                         pipe = new Pipe();
                                         pipe.SetConnection(cp);
                                         cp.PipeConnection = pipe;
                                         lastPoint = newPoint;
                                         pipe.AddPointToList(lastPoint);
+                                        flowly.HighlightAllAvailableInputs(pipe.GiveMeYourConnectionPoints().First().ComponentDrawnBelong);
                                     }
                                 }
                                 else
