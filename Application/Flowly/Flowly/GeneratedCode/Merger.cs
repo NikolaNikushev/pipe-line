@@ -25,6 +25,7 @@ namespace Flowly
 
         protected Rectangle rectangleCombRight;
 
+        
         public Merger(Rectangle theRectangle) : base(theRectangle)
         {
 
@@ -63,7 +64,7 @@ namespace Flowly
                 ConnectionPoint connLeftUp = new ConnectionPoint(rectangleSmallLeftUp, this, false);
                 ConnectionPoint connLeftDown = new ConnectionPoint(rectangleSmallLeftDown, this, false);
                 ConnectionPoint connRightComb = new ConnectionPoint(rectangleCombRight, this, true);
-
+                
                 listOfConnectionPoints.Add(connLeftUp);
                 listOfConnectionPoints.Add(connLeftDown);
                 listOfConnectionPoints.Add(connRightComb);

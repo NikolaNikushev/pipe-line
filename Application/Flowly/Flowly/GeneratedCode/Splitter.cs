@@ -71,7 +71,11 @@ namespace Flowly
                 ConnectionPoint connRighttUp = new ConnectionPoint(rectangleSmallRightUp, this, true);
                 ConnectionPoint connRightDown = new ConnectionPoint(rectangleSmallRightDown, this, true);
                 ConnectionPoint connLeftComb = new ConnectionPoint(rectangleCombLeft, this, false);
-
+                if(connLeftComb.CurrentFlow == 0)
+                {
+                    connRightDown.SetCurrentFlow(0);
+                    connRighttUp.SetCurrentFlow(0);
+                }
                 listOfConnectionPoints.Add(connRighttUp);
                 listOfConnectionPoints.Add(connRightDown);
                 listOfConnectionPoints.Add(connLeftComb);

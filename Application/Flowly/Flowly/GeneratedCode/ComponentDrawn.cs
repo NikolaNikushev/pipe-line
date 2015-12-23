@@ -17,19 +17,19 @@ namespace Flowly
     /// <summary>
     /// ComponentDrawn class is meant for the components that the program will have. Components as pipe, sink, merger and so on.
     /// </summary>
-    public abstract class ComponentDrawn  
+    public abstract class ComponentDrawn
     {
         protected List<ConnectionPoint> listOfConnectionPoints;
 
-        protected List<PropertiesEnum> listOfProperties; 
-        
+        protected List<PropertiesEnum> listOfProperties;
+
         protected List<ComponentDrawn> listOfComponentDrawn;
 
         protected Image imageResource;
 
         protected bool diffCurrFlowPossible;
 
-        protected float capacity; 
+        protected float capacity;
 
         protected float currentFlow;
 
@@ -39,7 +39,7 @@ namespace Flowly
         public Rectangle RectangleBig { get { return rectangleBig; } }
         public float Capacity { get { return capacity; } }
         public float CurrentFlow { get { return currentFlow; } }
-        public bool DiffCurrFlowPossible { get  { return diffCurrFlowPossible; }}
+        public bool DiffCurrFlowPossible { get { return diffCurrFlowPossible; } }
         public Image Image { get { return this.imageResource; } }
         public ComponentDrawn(Rectangle theRectangle)
         {
@@ -75,9 +75,9 @@ namespace Flowly
         /// </summary>
         /// <returns>True if successfull, false otherwise.</returns>
         public abstract bool CreateConnectionPoints();
-        
-            
-        
+
+
+
 
         /// <summary>
         /// Sets the current flow (the amount of gas/liquid) going through the component.
@@ -86,7 +86,7 @@ namespace Flowly
         /// <returns>True if successfull, false otherwise.</returns>
         public virtual bool SetCurrentFlow(float givenFlow)
         {
-           try
+            try
             {
                 currentFlow = givenFlow;
                 return true;
@@ -139,8 +139,34 @@ namespace Flowly
         {
             return listOfConnectionPoints;
         }
-        
-        
+        public List<ConnectionPoint> GiveMeYourOutputConnectionPoints()
+        {
+            List<ConnectionPoint> currentOutputConnectionPoints = new List<ConnectionPoint>();
+            foreach (ConnectionPoint item in GiveMeYourConnectionPoints())
+            {
+                if (item.IsOutput)
+                {
+                    currentOutputConnectionPoints.Add(item);
+                }
+            }
+            return currentOutputConnectionPoints;
+        }
+        public List<ConnectionPoint> GiveMeYourInputConnectionPoints()
+        {
+            List<ConnectionPoint> inputConnPoints = new List<ConnectionPoint>();
+            foreach (ConnectionPoint item in GiveMeYourConnectionPoints())
+            {
+                if (item.IsOutput == false)
+                {
+                    inputConnPoints.Add(item);
+                }
+            }
+            return inputConnPoints;
+        }
+
     }
+
+
 }
+
 

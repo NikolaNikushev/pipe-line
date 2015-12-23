@@ -127,7 +127,7 @@ namespace Flowly
         /// <param name="rectangle">The rectangle that the component will have</param>
         /// <param name="cCapacity">component capacity</param>
         /// <returns>True if successfully created, false otherwise.</returns>
-        public virtual bool CreateComponentDrawn(ComponentName cName, Rectangle rectangle, int cCapacity)
+        public virtual bool CreateComponentDrawn(ComponentName cName, Rectangle rectangle)
         {
             /* Pump newPump = new Pump(r);
              List<ConnectionPoint> testListOfConnectionPoints = newPump.GiveMeYourConnectionPoints();
@@ -194,9 +194,87 @@ namespace Flowly
         /// </summary>
         /// <param name="givenComponent"></param>
         /// <returns>True if successfull, false otherwise.</returns>
-        public virtual bool EditComponentDrawn(ComponentDrawn givenComponent)
+        public virtual bool EditComponentDrawn(ComponentDrawn cGivenComponent,float cGivenFlow,float cGivenCapacity,int cTbLeft,int cTbRight)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                if(cGivenFlow > cGivenCapacity)
+                {
+                    cGivenFlow = cGivenCapacity;
+                }
+                if (cGivenComponent is Pump)
+                {
+                    cGivenComponent.SetCapacity(cGivenCapacity);
+                    cGivenComponent.SetCurrentFlow(cGivenFlow);
+                    List<ConnectionPoint> pumpOutput = cGivenComponent.GiveMeYourOutputConnectionPoints();
+                    pumpOutput[0].SetCapacity(cGivenCapacity);
+                    pumpOutput[0].SetCurrentFlow(cGivenFlow);
+                    
+                }
+                else if (cGivenComponent is Pipe)
+                {
+                    cGivenComponent.SetCurrentFlow(cGivenFlow);
+                }
+                else if(cGivenComponent is Splitter)
+                {
+                    List<ConnectionPoint> currentOutputConnectionPoints = cGivenComponent.GiveMeYourOutputConnectionPoints();
+                    ConnectionPoint currentInputConnectionPoint = cGivenComponent.GiveMeYourInputConnectionPoints()[0];
+
+                    
+                    cGivenComponent.SetCapacity(cGivenCapacity);
+                    cGivenComponent.SetCurrentFlow(cGivenFlow);
+                    currentInputConnectionPoint.SetCapacity(cGivenCapacity);
+                    currentInputConnectionPoint.SetCurrentFlow(cGivenFlow);
+
+                    //if adj splitter
+                    if (cGivenComponent.DiffCurrFlowPossible == true)
+                    {
+                        currentOutputConnectionPoints[0].SetCapacity((cGivenComponent.Capacity * cTbLeft) / 100);
+                        currentOutputConnectionPoints[0].SetCurrentFlow((cGivenComponent.CurrentFlow * cTbLeft)/100);
+                        currentOutputConnectionPoints[1].SetCapacity((cGivenComponent.Capacity * cTbRight)/100);
+                        currentOutputConnectionPoints[1].SetCurrentFlow((cGivenComponent.CurrentFlow * cTbRight)/100);
+                    }
+                    else
+                    {
+                        currentOutputConnectionPoints[0].SetCapacity(cGivenComponent.Capacity / 2);
+                        currentOutputConnectionPoints[0].SetCurrentFlow(cGivenComponent.CurrentFlow /2);
+                        currentOutputConnectionPoints[1].SetCapacity(cGivenComponent.Capacity / 2);
+                        currentOutputConnectionPoints[1].SetCurrentFlow(cGivenComponent.CurrentFlow /2);
+                    }
+                    
+                }
+                else if(cGivenComponent is Merger)
+                {
+                    cGivenComponent.SetCapacity(cGivenCapacity);
+                    foreach (ConnectionPoint item in cGivenComponent.GiveMeYourOutputConnectionPoints())
+                    {
+                        if(cGivenFlow == 0)
+                        {
+                            item.SetCurrentFlow(0);
+                        }                     
+                    }
+                    //Split the capacity
+                    List<ConnectionPoint> inputTempConnPoints = cGivenComponent.GiveMeYourInputConnectionPoints();
+                    inputTempConnPoints[0].SetCapacity(cGivenCapacity / 2);
+                    inputTempConnPoints[1].SetCapacity(cGivenCapacity / 2);
+                }
+                //Sink
+                else
+                {
+                    cGivenComponent.SetCapacity(cGivenCapacity);
+                    cGivenComponent.SetCurrentFlow(cGivenFlow);
+                    List<ConnectionPoint> sinkInput = cGivenComponent.GiveMeYourInputConnectionPoints();
+                    sinkInput[0].SetCapacity(cGivenCapacity);
+                    sinkInput[0].SetCurrentFlow(cGivenFlow);
+
+                }
+                return true;
+               
+            }
+            catch
+            {
+                return false;
+            }
         }
         /// <summary>
         /// Deletes all "ComponentDrawn"-s from the grid.

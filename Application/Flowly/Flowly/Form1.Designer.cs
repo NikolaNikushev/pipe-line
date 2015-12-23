@@ -220,6 +220,7 @@
             this.nudCapacity.Name = "nudCapacity";
             this.nudCapacity.Size = new System.Drawing.Size(54, 20);
             this.nudCapacity.TabIndex = 13;
+            this.nudCapacity.ValueChanged += new System.EventHandler(this.nudCapacity_ValueChanged);
             // 
             // label4
             // 
@@ -253,6 +254,7 @@
             this.nudFlow.Name = "nudFlow";
             this.nudFlow.Size = new System.Drawing.Size(54, 20);
             this.nudFlow.TabIndex = 9;
+            this.nudFlow.ValueChanged += new System.EventHandler(this.nudFlow_ValueChanged);
             // 
             // label3
             // 

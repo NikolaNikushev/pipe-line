@@ -21,6 +21,8 @@ namespace Flowly
 
         private float currentFlow;
 
+        private float currentCapacity;
+
         private bool isOutput;
 
         private ComponentDrawn componentDrawnBelong;
@@ -29,7 +31,10 @@ namespace Flowly
         public bool Available { get { return pipeConnection == null; } }
 
         public bool IsOutput { get { return isOutput; } }
-        public float CurrentFlow { get { return currentFlow; } }
+        public float CurrentFlow
+        {  get { return currentFlow; } }
+        public float CurrentCapacity
+        {   get { return currentCapacity; }}
 
         public ConnectionPoint(Rectangle theRectangle, ComponentDrawn theComponentDrawnBelong, bool theIsOutput)
         {
@@ -70,6 +75,18 @@ namespace Flowly
             try
             {
                 currentFlow = givenFlow;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public virtual bool SetCapacity(float givenCapacity)
+        {
+            try
+            {
+                currentCapacity = givenCapacity;
                 return true;
             }
             catch

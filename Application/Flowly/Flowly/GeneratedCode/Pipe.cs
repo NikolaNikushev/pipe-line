@@ -23,7 +23,7 @@ namespace Flowly
         protected Rectangle rectanglePipeRight;
 
         private List<Point> pipePoints;
-
+        
         public List<Point> PipePoints
         {
             get { return pipePoints; }
@@ -97,6 +97,7 @@ namespace Flowly
         private void AddConnection(ConnectionPoint cp)
         {
             this.listOfConnectionPoints.Add(cp);
+
         }
 
         public void AddPointToList(Point p)

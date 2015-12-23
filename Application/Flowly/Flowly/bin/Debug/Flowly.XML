@@ -153,7 +153,7 @@
             <param name="y"></param>
             <returns>True for successfull, false otherwise.</returns>
         </member>
-        <member name="M:Flowly.SystemFlowly.CreateComponentDrawn(Flowly.GeneratedCode.ComponentName,System.Drawing.Rectangle,System.Int32)">
+        <member name="M:Flowly.SystemFlowly.CreateComponentDrawn(Flowly.GeneratedCode.ComponentName,System.Drawing.Rectangle)">
             <summary>
             Creates a new instance of class "ComponentDrawn". 
             </summary>
@@ -169,7 +169,7 @@
             <param name="givenComponent"></param>
             <returns>True if successfull, false otherwise.</returns>
         </member>
-        <member name="M:Flowly.SystemFlowly.EditComponentDrawn(Flowly.ComponentDrawn)">
+        <member name="M:Flowly.SystemFlowly.EditComponentDrawn(Flowly.ComponentDrawn,System.Single,System.Single,System.Int32,System.Int32)">
             <summary>
             A "ComponentDrawn" is passed and the particular componentDrawn's properties should be changed.
             </summary>

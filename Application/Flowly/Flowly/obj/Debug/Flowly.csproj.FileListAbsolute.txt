@@ -52,3 +52,8 @@ C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flo
 C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.Form1.resources
 C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.Properties.Resources.resources
 C:\Users\Vernn\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.csproj.GenerateResource.Cache
+C:\Users\Lyubomir\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.exe.config
+C:\Users\Lyubomir\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.XML
+C:\Users\Lyubomir\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.exe
+C:\Users\Lyubomir\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.pdb
+C:\Users\Lyubomir\OneDrive\University\Programming C#\OOD2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.csprojResolveAssemblyReference.cache
