@@ -24,6 +24,7 @@ namespace Flowly
             imageResource = Image.FromFile("images\\sink2.png");
             diffCurrFlowPossible = false;
             CreateConnectionPoints();
+            this.EditableProperties.Add(GeneratedCode.EditablePropertiesEnum.capacity);
         }
 
         public override bool CreateConnectionPoints()

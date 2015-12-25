@@ -55,6 +55,7 @@ namespace Flowly
             if (diffCurrFlowPossible)
             {
                 imageResource = Image.FromFile("images\\ad_splitter2.png");
+                this.EditableProperties.Add(GeneratedCode.EditablePropertiesEnum.splitterFlow);
             }
             else
             {
@@ -63,6 +64,35 @@ namespace Flowly
             CreateConnectionPoints();
 
         }
+
+        public override bool SetCapacity(float givenCapacity)
+        {
+            try {
+                base.SetCapacity(givenCapacity);
+                UpdateOutputs();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        private int topOutputPercentage;
+        private int bottomOutputPercentage;
+
+        public int BottomOutputPercentage
+        {
+            get { return bottomOutputPercentage; }
+            set { bottomOutputPercentage = value; }
+        }
+
+        public int TopOutputPercentage
+        {
+            get { return topOutputPercentage; }
+            set { topOutputPercentage = value; }
+        }
+
 
         public override bool CreateConnectionPoints()
         {
@@ -85,6 +115,32 @@ namespace Flowly
             {
                 return false;
             }
+        }
+
+        internal void UpdateOutputs()
+        {
+            List<ConnectionPoint> currentOutputs = GiveMeYourOutputConnectionPoints();
+            ConnectionPoint input = GiveMeYourInputConnectionPoints()[0];
+            if (DiffCurrFlowPossible == true)
+            {
+                currentOutputs[0].SetCapacity((Capacity * TopOutputPercentage) / 100);
+                currentOutputs[0].SetCurrentFlow((CurrentFlow * TopOutputPercentage) / 100);
+                currentOutputs[1].SetCapacity((Capacity * BottomOutputPercentage) / 100);
+                currentOutputs[1].SetCurrentFlow((CurrentFlow * BottomOutputPercentage) / 100);
+            }
+            else
+            {
+                currentOutputs[0].SetCapacity(Capacity / 2);
+                currentOutputs[0].SetCurrentFlow(CurrentFlow / 2);
+                currentOutputs[1].SetCapacity(Capacity / 2);
+                currentOutputs[1].SetCurrentFlow(CurrentFlow / 2);
+            }
+        }
+
+        public override void UpdateComponentFlow()
+        {
+            base.UpdateComponentFlow();
+            UpdateOutputs();
         }
     }
 

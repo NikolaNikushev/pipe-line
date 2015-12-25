@@ -223,6 +223,36 @@ namespace Flowly
             return true;
         }
 
+        internal void DrawPipelineAndUpdateFLow(Pipe pipe)
+        {
+            //Todo Check if it is a connection between elements that are not end or start 
+            ConnectionPoint startPoint = pipe.GetStartConnectionPoint();
+            if (startPoint == null)
+            {
+                MessageBox.Show("What did you do? grid-drawpipeline");
+            }
+            ConnectionPoint endPoint = pipe.GetEndConnectionPoint();
+            if (endPoint == null)
+            {
+                MessageBox.Show("You are drawing the pipe too soon, you need to have an endpoint!");
+            }
+            Pen colorOfPen = new Pen(Color.Gray, 3);
+
+            endPoint.SetCurrentFlow(startPoint.CurrentFlow);
+            endPoint.ComponentDrawnBelong.UpdateComponentFlow();
+            
+            if (((startPoint.CurrentFlow > endPoint.ComponentDrawnBelong.Capacity) &&(startPoint.CurrentFlow-endPoint.ComponentDrawnBelong.Capacity > 0.1F)) && endPoint.ComponentDrawnBelong is Sink)
+            {
+                colorOfPen.Color = Color.Red;
+            }
+            for(int i = 0; i < pipe.PipePoints.Count - 1; i++)
+            {
+                Point start = pipe.PipePoints[i];
+                Point end= pipe.PipePoints[i+1];
+                graphic.DrawLine(colorOfPen, start, end);
+            }
+        }
+
         private bool CheckIntersectAllOther(Point start, Point end, Pipe currentPipe)
         {
 
@@ -335,7 +365,7 @@ namespace Flowly
         }
 
 
-        internal bool DrawPipeLine(Point start, Point end, ref Pipe curPipe)
+        internal bool DrawPipeToPoint(Point start, Point end, ref Pipe curPipe)
         {
             Pipe currentPipe = curPipe;
             int pointsCount = currentPipe.GiveMeYourConnectionPoints().Count;
@@ -401,6 +431,7 @@ namespace Flowly
 
                                         currentPipe.AddPointToList(end);
                                         curPipe = currentPipe;
+                                        
                                         return true;
                                     }
                                     MessageBox.Show("Intersects component");
@@ -514,13 +545,7 @@ namespace Flowly
             if (drawn is Pipe)
             {
                 Pipe d = drawn as Pipe;
-                for (int i = 0; i < d.PipePoints.Count - 1; i++)
-                {
-                    Point start = d.PipePoints[i];
-                    Point end = d.PipePoints[i + 1];
-                    Pen myPen = new Pen(Color.Gray, 3);
-                    graphic.DrawLine(myPen, start, end);
-                }
+                DrawPipelineAndUpdateFLow(d);
                 return;
             }
             Rectangle r = drawn.RectangleBig;

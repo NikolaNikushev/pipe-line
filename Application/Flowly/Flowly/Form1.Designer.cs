@@ -41,15 +41,12 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.labelRightTrack = new System.Windows.Forms.Label();
-            this.labelLeftTrack = new System.Windows.Forms.Label();
             this.nudCapacity = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.nudFlow = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelRight = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.trackBarLeft = new System.Windows.Forms.TrackBar();
             this.trackBarRight = new System.Windows.Forms.TrackBar();
             this.label5 = new System.Windows.Forms.Label();
             this.toolSink = new System.Windows.Forms.PictureBox();
@@ -64,12 +61,14 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.grid = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.labelLeftTrack = new System.Windows.Forms.Label();
+            this.trackBarLeft = new System.Windows.Forms.TrackBar();
+            this.labelLeft = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCapacity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFlow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolSink)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolSplitter)).BeginInit();
@@ -80,6 +79,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.toolMerger)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarLeft)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -177,8 +177,8 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.btnUpdate);
             this.groupBox2.Controls.Add(this.nudFlow);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.labelRight);
+            this.groupBox2.Controls.Add(this.labelLeft);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.trackBarLeft);
             this.groupBox2.Controls.Add(this.trackBarRight);
@@ -199,17 +199,9 @@
             this.labelRightTrack.TabIndex = 15;
             this.labelRightTrack.Text = "50%";
             // 
-            // labelLeftTrack
-            // 
-            this.labelLeftTrack.AutoSize = true;
-            this.labelLeftTrack.Location = new System.Drawing.Point(36, 161);
-            this.labelLeftTrack.Name = "labelLeftTrack";
-            this.labelLeftTrack.Size = new System.Drawing.Size(27, 13);
-            this.labelLeftTrack.TabIndex = 14;
-            this.labelLeftTrack.Text = "50%";
-            // 
             // nudCapacity
             // 
+            this.nudCapacity.DecimalPlaces = 1;
             this.nudCapacity.Enabled = false;
             this.nudCapacity.Location = new System.Drawing.Point(80, 86);
             this.nudCapacity.Maximum = new decimal(new int[] {
@@ -244,6 +236,7 @@
             // 
             // nudFlow
             // 
+            this.nudFlow.DecimalPlaces = 1;
             this.nudFlow.Enabled = false;
             this.nudFlow.Location = new System.Drawing.Point(80, 62);
             this.nudFlow.Maximum = new decimal(new int[] {
@@ -256,23 +249,14 @@
             this.nudFlow.TabIndex = 9;
             this.nudFlow.ValueChanged += new System.EventHandler(this.nudFlow_ValueChanged);
             // 
-            // label3
+            // labelRight
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(98, 240);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Right";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 240);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(25, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Left";
+            this.labelRight.AutoSize = true;
+            this.labelRight.Location = new System.Drawing.Point(98, 240);
+            this.labelRight.Name = "labelRight";
+            this.labelRight.Size = new System.Drawing.Size(32, 13);
+            this.labelRight.TabIndex = 2;
+            this.labelRight.Text = "Right";
             // 
             // label1
             // 
@@ -282,18 +266,6 @@
             this.label1.Size = new System.Drawing.Size(29, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Flow";
-            // 
-            // trackBarLeft
-            // 
-            this.trackBarLeft.Enabled = false;
-            this.trackBarLeft.Location = new System.Drawing.Point(6, 104);
-            this.trackBarLeft.Maximum = 100;
-            this.trackBarLeft.Name = "trackBarLeft";
-            this.trackBarLeft.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBarLeft.Size = new System.Drawing.Size(45, 127);
-            this.trackBarLeft.TabIndex = 6;
-            this.trackBarLeft.Value = 50;
-            this.trackBarLeft.ValueChanged += new System.EventHandler(this.trackBarLeft_ValueChanged);
             // 
             // trackBarRight
             // 
@@ -448,6 +420,36 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // labelLeftTrack
+            // 
+            this.labelLeftTrack.AutoSize = true;
+            this.labelLeftTrack.Location = new System.Drawing.Point(36, 161);
+            this.labelLeftTrack.Name = "labelLeftTrack";
+            this.labelLeftTrack.Size = new System.Drawing.Size(27, 13);
+            this.labelLeftTrack.TabIndex = 14;
+            this.labelLeftTrack.Text = "50%";
+            // 
+            // trackBarLeft
+            // 
+            this.trackBarLeft.Enabled = false;
+            this.trackBarLeft.Location = new System.Drawing.Point(6, 104);
+            this.trackBarLeft.Maximum = 100;
+            this.trackBarLeft.Name = "trackBarLeft";
+            this.trackBarLeft.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBarLeft.Size = new System.Drawing.Size(45, 127);
+            this.trackBarLeft.TabIndex = 6;
+            this.trackBarLeft.Value = 50;
+            this.trackBarLeft.ValueChanged += new System.EventHandler(this.trackBarLeft_ValueChanged);
+            // 
+            // labelLeft
+            // 
+            this.labelLeft.AutoSize = true;
+            this.labelLeft.Location = new System.Drawing.Point(13, 240);
+            this.labelLeft.Name = "labelLeft";
+            this.labelLeft.Size = new System.Drawing.Size(25, 13);
+            this.labelLeft.TabIndex = 1;
+            this.labelLeft.Text = "Left";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -471,7 +473,6 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCapacity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFlow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarLeft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarRight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolSink)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolSplitter)).EndInit();
@@ -482,6 +483,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.toolMerger)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarLeft)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -509,10 +511,8 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.NumericUpDown nudFlow;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelRight;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TrackBar trackBarLeft;
         private System.Windows.Forms.TrackBar trackBarRight;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox grid;
@@ -523,6 +523,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelRightTrack;
         private System.Windows.Forms.Label labelLeftTrack;
+        private System.Windows.Forms.Label labelLeft;
+        private System.Windows.Forms.TrackBar trackBarLeft;
     }
 }
 

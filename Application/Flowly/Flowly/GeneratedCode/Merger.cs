@@ -52,6 +52,7 @@ namespace Flowly
             rectangleCombRight.Width = rectangleBig.Width / 2;
 
             CreateConnectionPoints();
+            
         }
 
         public override bool CreateConnectionPoints()
@@ -74,6 +75,30 @@ namespace Flowly
             {
                 return false;
             }
+        }
+
+        public override bool SetCurrentFlow(float givenFlow)
+        {
+            return base.SetCurrentFlow(givenFlow);
+        }
+
+        public override bool SetCapacity(float givenCapacity)
+        {
+            return base.SetCapacity(givenCapacity);
+        }
+
+        internal void UpdateOutput()
+        {
+            //List<ConnectionPoint> inputs = GiveMeYourInputConnectionPoints();
+            ConnectionPoint output = GiveMeYourOutputConnectionPoints()[0];
+            output.SetCurrentFlow(currentFlow);
+
+        }
+
+        public override void UpdateComponentFlow()
+        {
+            base.UpdateComponentFlow();
+            UpdateOutput();
         }
     }
 }

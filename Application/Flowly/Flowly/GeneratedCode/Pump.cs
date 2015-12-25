@@ -22,6 +22,8 @@ namespace Flowly
         {
             imageResource = Image.FromFile("images\\start_point.png");
             CreateConnectionPoints();
+            this.EditableProperties.Add(GeneratedCode.EditablePropertiesEnum.capacity);
+            this.EditableProperties.Add(GeneratedCode.EditablePropertiesEnum.flow);
         }
 
         public override bool CreateConnectionPoints()

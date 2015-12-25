@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
-
+using Flowly.GeneratedCode;
 
 namespace Flowly
 {
@@ -21,7 +21,7 @@ namespace Flowly
     {
         protected List<ConnectionPoint> listOfConnectionPoints;
 
-        protected List<PropertiesEnum> listOfProperties;
+
 
         protected List<ComponentDrawn> listOfComponentDrawn;
 
@@ -35,6 +35,14 @@ namespace Flowly
 
         protected Rectangle rectangleBig;
 
+        private List<EditablePropertiesEnum> editableProperties;
+
+        public List<EditablePropertiesEnum> EditableProperties
+        {
+            get { return editableProperties; }
+            private set { editableProperties = value; }
+        }
+
 
         public Rectangle RectangleBig { get { return rectangleBig; } }
         public float Capacity { get { return capacity; } }
@@ -44,7 +52,7 @@ namespace Flowly
         public ComponentDrawn(Rectangle theRectangle)
         {
             listOfConnectionPoints = new List<ConnectionPoint>();
-            listOfProperties = new List<PropertiesEnum>();
+            EditableProperties = new List<EditablePropertiesEnum>();
             listOfComponentDrawn = new List<ComponentDrawn>();
             SetCapacity(0);
             SetCurrentFlow(0);
@@ -162,6 +170,17 @@ namespace Flowly
                 }
             }
             return inputConnPoints;
+        }
+
+        public virtual void UpdateComponentFlow()
+        {
+            float flow = 0;
+            foreach (ConnectionPoint cp in listOfConnectionPoints)
+            {
+                if (!cp.IsOutput)
+                    flow += cp.CurrentFlow;
+            }
+            currentFlow = flow;
         }
 
     }

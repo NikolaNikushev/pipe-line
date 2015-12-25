@@ -27,6 +27,7 @@ namespace Flowly
         string nameForForm;
 
         private bool modeCreate = false;
+        private bool changeIsMade = false;
 
         private ComponentDrawn currentSelectedComponent;
 
@@ -56,7 +57,7 @@ namespace Flowly
             theGrid = new Grid(grid);
             flowly = new SystemFlowly(theGrid);
             currentSelectedComponent = null;
-
+            SetTrackBarVisibility(false);
 
 
         }
@@ -116,7 +117,7 @@ namespace Flowly
 
                                     if (cp.IsOutput)
                                     {
-                                       
+
                                         // cp.SetAvailable(false);
                                         pipe = new Pipe();
                                         pipe.SetConnection(cp);
@@ -135,54 +136,28 @@ namespace Flowly
                             else
                             {
 
-                                bool isAdded = flowly.DrawPipeline(lastPoint, newPoint, ref pipe);
+                                bool isAdded = flowly.DrawPipeToCursor(lastPoint, newPoint, ref pipe);
                                 if (isAdded)
                                 {
+                                    //continues drawing line
                                     lastPoint = newPoint;
+
+                                    //when connected to a component stops
                                     if (pipe.GiveMeYourConnectionPoints().Count == 2)
                                     {
                                         flowly.HighlightAllAvailableOutputs();
-                                        MessageBox.Show("Connected");
+                                      
+                                        flowly.DrawPipeline(pipe);
                                         flowly.AddComponentDrawn(pipe);
+                                        MessageBox.Show("Connected");
                                         pipe = null;
                                         lastPoint = new Point(-1, -1);
 
-                                    }
-                                    else
-                                    {
-                                        /*ConnectionPoint cp = flowly.GetConnectionPointAt(newPoint);
-                                        if (cp != null)
-                                        {
-                                            if (!cp.IsOutput)
-                                            {
-                                                cp.SetAvailable(false);
-                                                pipe.SetConnection(cp);
-
-                                                isAdded = flowly.DrawPipeline(lastPoint, newPoint, pipe);
-                                                if (isAdded)
-                                                {
-
-
-                                                    MessageBox.Show("Connected");
-                                                    flowly.AddComponentDrawn(pipe);
-                                                    pipe = null;
-                                                    lastPoint = new Point(-1, -1);
-                                                }
-                                                else
-                                                {
-                                                    cp.SetAvailable(true);
-                                                    pipe.RemoveConnection(cp);
-                                                }
-
-                                        }
-                                        */
-
-                                    }
-
+                                    }                                   
                                 }
                             }
                         }
-                        
+
                         break;
                     case WorkingMode.create:
                         ResetProperties();
@@ -231,15 +206,15 @@ namespace Flowly
                             }
                             if (flowly.CheckFreeSpot(r))
                             {
-                               
-                               if(flowly.CreateComponentDrawn(currentComponentName, r))
+
+                                if (flowly.CreateComponentDrawn(currentComponentName, r))
                                 {
-                                   if(currentComponentName == ComponentName.Pump)
+                                    if (currentComponentName == ComponentName.Pump)
                                     {
-                                        
+
                                     }
                                 }
-                                
+
 
                             }
                             else
@@ -288,6 +263,7 @@ namespace Flowly
 
                         break;
                     case WorkingMode.edit:
+                        ResetProperties();
                         newPoint = new Point(x, y);
                         currentSelectedComponent = flowly.GetComponentPointAt(newPoint);
                         if (currentSelectedComponent == null)
@@ -304,8 +280,11 @@ namespace Flowly
                             return;
                         }
                         //If component is adjustable splitter ->
-                        if(currentSelectedComponent.DiffCurrFlowPossible == true)
+                        if (currentSelectedComponent.DiffCurrFlowPossible == true)
                         {
+
+
+                            SetTrackBarVisibility(true);
                             List<ConnectionPoint> currentOutputConnectionPoints = new List<ConnectionPoint>();
                             foreach (ConnectionPoint item in currentSelectedComponent.GiveMeYourConnectionPoints())
                             {
@@ -322,26 +301,47 @@ namespace Flowly
                             else
                             {
                                 int maxFlow = Convert.ToInt32(currentSelectedComponent.CurrentFlow);
-                                trackBarLeft.Value = Convert.ToInt32((maxFlow - currentOutputConnectionPoints[1].CurrentFlow) * 100)/maxFlow;
-                                trackBarRight.Value = Convert.ToInt32((maxFlow - currentOutputConnectionPoints[0].CurrentFlow) * 100)/maxFlow;
+                                trackBarLeft.Value = Convert.ToInt32((maxFlow - currentOutputConnectionPoints[1].CurrentFlow) * 100) / maxFlow;
+                                trackBarRight.Value = Convert.ToInt32((maxFlow - currentOutputConnectionPoints[0].CurrentFlow) * 100) / maxFlow;
                             }
-                            
+
                             trackBarLeft.Enabled = true;
                             trackBarRight.Enabled = true;
                         }
                         else
                         {
+
+
+                            SetTrackBarVisibility(false);
+
+
                             trackBarLeft.Enabled = false;
+                            trackBarLeft.Value = 50;
                             trackBarRight.Enabled = false;
                             trackBarRight.Value = 50;
-                            trackBarLeft.Value = 50;
+
                         }
                         nudCapacity.Value = (decimal)currentSelectedComponent.Capacity;
                         nudFlow.Value = (decimal)currentSelectedComponent.CurrentFlow;
+
                         btnUpdate.Enabled = true;
-                        nudFlow.Enabled = true;
-                        nudCapacity.Enabled = true;
-                        
+                        if (currentSelectedComponent.EditableProperties.Contains(EditablePropertiesEnum.flow))
+                        {
+                            nudFlow.Enabled = true;
+                        }
+                        else
+                        {
+                            nudFlow.Enabled = false;
+                        }
+                        if (currentSelectedComponent.EditableProperties.Contains(EditablePropertiesEnum.capacity))
+                        {
+                            nudCapacity.Enabled = true;
+                        }
+                        else
+                        {
+                            nudCapacity.Enabled = false;
+                        }
+
                         break;
                     default:
                         break;
@@ -354,6 +354,16 @@ namespace Flowly
 
                 // Paint(item);
             }
+        }
+
+        public void SetTrackBarVisibility(Boolean value)
+        {
+            trackBarLeft.Visible = value;
+            trackBarRight.Visible = value;
+            labelLeftTrack.Visible = value;
+            labelRightTrack.Visible = value;
+            labelLeft.Visible = value;
+            labelRight.Visible = value;
         }
         public void ResetProperties()
         {
@@ -420,7 +430,7 @@ namespace Flowly
             currentWorkingMode = WorkingMode.pipe;
 
             HighlightCurrentPB(sender as PictureBox);
-           
+
         }
 
         void RefreshGridFromMode()
@@ -455,7 +465,7 @@ namespace Flowly
             {
                 flowly.HighlightAllAvailableOutputs();
             }
-          
+
             //if (modeCreate)
             //{
             //    //followCursorPB.Image = pb.Image;
@@ -724,10 +734,11 @@ namespace Flowly
         {
             //When user goes into Edit Mode
             //Update button is enabled and changes on selected component are possible
-            int x = xPos;
-            int y = yPos;
-            if(currentWorkingMode == WorkingMode.edit)
+           
+            if (currentWorkingMode == WorkingMode.edit && changeIsMade)
             {
+                int x = xPos;
+                int y = yPos;
                 float givenFlow = (float)nudFlow.Value;
                 float givenCapacity = (float)nudCapacity.Value;
                 if (currentSelectedComponent == null)
@@ -748,8 +759,10 @@ namespace Flowly
                 {
                     int tbLeft = trackBarLeft.Value;
                     int tbRight = trackBarRight.Value;
-                    
-                    flowly.EditComponentDrawn(currentSelectedComponent,givenFlow,givenCapacity,tbLeft,tbRight);
+
+                    flowly.EditComponentDrawn(currentSelectedComponent, givenFlow, givenCapacity, tbLeft, tbRight);
+                    changeIsMade = false;
+                    flowly.UpdateGrid();
                 }
 
             }
@@ -763,24 +776,30 @@ namespace Flowly
         {
             trackBarLeft.Value = 100 - trackBarRight.Value;
             labelRightTrack.Text = trackBarRight.Value.ToString() + "%";
+            changeIsMade = true;
         }
 
         private void trackBarLeft_ValueChanged(object sender, EventArgs e)
         {
             trackBarRight.Value = 100 - trackBarLeft.Value;
             labelLeftTrack.Text = trackBarLeft.Value.ToString() + "%";
+            changeIsMade = true;
         }
 
         private void nudCapacity_ValueChanged(object sender, EventArgs e)
         {
+            changeIsMade = true;
         }
 
         private void nudFlow_ValueChanged(object sender, EventArgs e)
         {
-            if (nudFlow.Value > nudCapacity.Value)
+            if (nudFlow.Value > nudCapacity.Value && nudFlow.Enabled)
             {
                 nudFlow.Value = nudCapacity.Value;
+               
             }
+            changeIsMade = true;
+
         }
     }
     enum WorkingMode

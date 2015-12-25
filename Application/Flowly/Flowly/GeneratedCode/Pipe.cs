@@ -109,6 +109,24 @@ namespace Flowly
         {
             this.listOfConnectionPoints.Remove(cp);
         }
+
+        public ConnectionPoint GetStartConnectionPoint()
+        {
+            if (listOfConnectionPoints.Count < 1)
+            {
+                return null;
+            }
+            return listOfConnectionPoints[0];
+        }
+
+        public ConnectionPoint GetEndConnectionPoint()
+        {
+            if (listOfConnectionPoints.Count < 2)
+            {
+                return null;
+            }
+            return listOfConnectionPoints[1];
+        }
     }
 
 }

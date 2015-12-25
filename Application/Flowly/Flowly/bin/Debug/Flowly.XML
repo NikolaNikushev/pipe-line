@@ -110,13 +110,6 @@
             <param name="givenComponent"></param>
             <returns>True if successfull, false otherwise.</returns>
         </member>
-        <member name="T:Flowly.PropertiesEnum">
-            <summary>
-            Enumeration that contains the type of propertie that can be set, if it is possible you can adjust the flow that can pass.
-            If the component is an adjustable splitter it has the property of Adjustable.
-            Properties: FLOW and Adjustable
-            </summary>
-        </member>
         <member name="T:Flowly.SystemFlowly">
             <summary>
             Class named "SystemFlowly". Meant to possess many of the methods to manipulate, create, delete "ComponentDrawn"-s.

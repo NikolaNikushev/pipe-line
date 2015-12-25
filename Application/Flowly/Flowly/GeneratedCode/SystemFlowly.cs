@@ -105,9 +105,9 @@ namespace Flowly
             throw new System.NotImplementedException();
         }
 
-        internal bool DrawPipeline(Point start, Point end, ref Pipe currentPipe)
+        internal bool DrawPipeToCursor(Point start, Point end, ref Pipe currentPipe)
         {
-            return grid.DrawPipeLine(start,end, ref currentPipe);
+            return grid.DrawPipeToPoint(start,end, ref currentPipe);
         }
 
         internal void AddPipe(Pipe pipe)
@@ -174,6 +174,11 @@ namespace Flowly
 
         }
 
+        internal void DrawPipeline(Pipe pipe)
+        {
+            grid.DrawPipelineAndUpdateFLow(pipe);
+        }
+
         internal void AddComponentDrawn(Pipe pipe)
         {
             grid.AddComponentDrawnToGridList(pipe);
@@ -227,20 +232,9 @@ namespace Flowly
                     currentInputConnectionPoint.SetCurrentFlow(cGivenFlow);
 
                     //if adj splitter
-                    if (cGivenComponent.DiffCurrFlowPossible == true)
-                    {
-                        currentOutputConnectionPoints[0].SetCapacity((cGivenComponent.Capacity * cTbLeft) / 100);
-                        currentOutputConnectionPoints[0].SetCurrentFlow((cGivenComponent.CurrentFlow * cTbLeft)/100);
-                        currentOutputConnectionPoints[1].SetCapacity((cGivenComponent.Capacity * cTbRight)/100);
-                        currentOutputConnectionPoints[1].SetCurrentFlow((cGivenComponent.CurrentFlow * cTbRight)/100);
-                    }
-                    else
-                    {
-                        currentOutputConnectionPoints[0].SetCapacity(cGivenComponent.Capacity / 2);
-                        currentOutputConnectionPoints[0].SetCurrentFlow(cGivenComponent.CurrentFlow /2);
-                        currentOutputConnectionPoints[1].SetCapacity(cGivenComponent.Capacity / 2);
-                        currentOutputConnectionPoints[1].SetCurrentFlow(cGivenComponent.CurrentFlow /2);
-                    }
+                    (cGivenComponent as Splitter).TopOutputPercentage = cTbLeft;
+                    (cGivenComponent as Splitter).BottomOutputPercentage = cTbRight;
+                    (cGivenComponent as Splitter).UpdateOutputs();
                     
                 }
                 else if(cGivenComponent is Merger)
