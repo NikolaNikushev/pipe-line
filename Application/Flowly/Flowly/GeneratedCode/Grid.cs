@@ -241,7 +241,7 @@ namespace Flowly
             endPoint.SetCurrentFlow(startPoint.CurrentFlow);
             endPoint.ComponentDrawnBelong.UpdateComponentFlow();
             
-            if (((startPoint.CurrentFlow > endPoint.ComponentDrawnBelong.Capacity) &&(startPoint.CurrentFlow-endPoint.ComponentDrawnBelong.Capacity > 0.1F)) && endPoint.ComponentDrawnBelong is Sink)
+            if (((startPoint.CurrentFlow > endPoint.ComponentDrawnBelong.Capacity) &&(startPoint.CurrentFlow-endPoint.ComponentDrawnBelong.Capacity >= 0.1F)) && endPoint.ComponentDrawnBelong is Sink)
             {
                 colorOfPen.Color = Color.Red;
             }

@@ -56,6 +56,8 @@ namespace Flowly
             {
                 imageResource = Image.FromFile("images\\ad_splitter2.png");
                 this.EditableProperties.Add(GeneratedCode.EditablePropertiesEnum.splitterFlow);
+                TopOutputPercentage = 50;
+                BottomOutputPercentage= 50;
             }
             else
             {
