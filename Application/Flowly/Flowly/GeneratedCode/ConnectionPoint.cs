@@ -27,6 +27,8 @@ namespace Flowly
 
         private ComponentDrawn componentDrawnBelong;
 
+        
+
 
         public bool Available { get { return pipeConnection == null; } }
 

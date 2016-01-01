@@ -236,7 +236,7 @@ namespace Flowly
             {
                 MessageBox.Show("You are drawing the pipe too soon, you need to have an endpoint!");
             }
-            Pen colorOfPen = new Pen(Color.Gray, 3);
+            Pen colorOfPen = new Pen(Color.Black, 2);
 
             endPoint.SetCurrentFlow(startPoint.CurrentFlow);
             endPoint.ComponentDrawnBelong.UpdateComponentFlow();

@@ -75,7 +75,7 @@ namespace Flowly
 
         internal ConnectionPoint GetConnectionPointAt(Point newPoint)
         {
-           
+
             if (grid != null)
             {
                 return grid.IsInputOutput(newPoint);
@@ -107,7 +107,7 @@ namespace Flowly
 
         internal bool DrawPipeToCursor(Point start, Point end, ref Pipe currentPipe)
         {
-            return grid.DrawPipeToPoint(start,end, ref currentPipe);
+            return grid.DrawPipeToPoint(start, end, ref currentPipe);
         }
 
         internal void AddPipe(Pipe pipe)
@@ -199,11 +199,11 @@ namespace Flowly
         /// </summary>
         /// <param name="givenComponent"></param>
         /// <returns>True if successfull, false otherwise.</returns>
-        public virtual bool EditComponentDrawn(ComponentDrawn cGivenComponent,float cGivenFlow,float cGivenCapacity,int cTbLeft,int cTbRight)
+        public virtual bool EditComponentDrawn(ComponentDrawn cGivenComponent, float cGivenFlow, float cGivenCapacity, int cTbLeft, int cTbRight)
         {
             try
             {
-                if(cGivenFlow > cGivenCapacity)
+                if (cGivenFlow > cGivenCapacity)
                 {
                     cGivenFlow = cGivenCapacity;
                 }
@@ -214,18 +214,18 @@ namespace Flowly
                     List<ConnectionPoint> pumpOutput = cGivenComponent.GiveMeYourOutputConnectionPoints();
                     pumpOutput[0].SetCapacity(cGivenCapacity);
                     pumpOutput[0].SetCurrentFlow(cGivenFlow);
-                    
+
                 }
                 else if (cGivenComponent is Pipe)
                 {
                     cGivenComponent.SetCurrentFlow(cGivenFlow);
                 }
-                else if(cGivenComponent is Splitter)
+                else if (cGivenComponent is Splitter)
                 {
                     List<ConnectionPoint> currentOutputConnectionPoints = cGivenComponent.GiveMeYourOutputConnectionPoints();
                     ConnectionPoint currentInputConnectionPoint = cGivenComponent.GiveMeYourInputConnectionPoints()[0];
 
-                    
+
                     cGivenComponent.SetCapacity(cGivenCapacity);
                     cGivenComponent.SetCurrentFlow(cGivenFlow);
                     currentInputConnectionPoint.SetCapacity(cGivenCapacity);
@@ -235,17 +235,17 @@ namespace Flowly
                     (cGivenComponent as Splitter).TopOutputPercentage = cTbLeft;
                     (cGivenComponent as Splitter).BottomOutputPercentage = cTbRight;
                     (cGivenComponent as Splitter).UpdateOutputs();
-                    
+
                 }
-                else if(cGivenComponent is Merger)
+                else if (cGivenComponent is Merger)
                 {
                     cGivenComponent.SetCapacity(cGivenCapacity);
                     foreach (ConnectionPoint item in cGivenComponent.GiveMeYourOutputConnectionPoints())
                     {
-                        if(cGivenFlow == 0)
+                        if (cGivenFlow == 0)
                         {
                             item.SetCurrentFlow(0);
-                        }                     
+                        }
                     }
                     //Split the capacity
                     List<ConnectionPoint> inputTempConnPoints = cGivenComponent.GiveMeYourInputConnectionPoints();
@@ -263,7 +263,7 @@ namespace Flowly
 
                 }
                 return true;
-               
+
             }
             catch
             {
@@ -301,7 +301,7 @@ namespace Flowly
             bool success = false;
             SaveFileDialog saveFileDialog = new SaveFileDialog();
 
-            if(saveFileDialog.ShowDialog()==DialogResult.OK)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
 
                 FileStream myFileStream = null;
@@ -313,57 +313,9 @@ namespace Flowly
                     myBinaryFormatter = new BinaryFormatter();
                     givenGrid.Name = Path.GetFileNameWithoutExtension(saveFileDialog.FileName);
                     givenGrid.Destination = saveFileDialog.FileName;
-                    SerializationObject newObject = new SerializationObject(givenGrid.Name, givenGrid.ListOfComponents,givenGrid.Destination);
-                    myBinaryFormatter.Serialize(myFileStream, newObject);
-                    returnedName = givenGrid.Name;
-                    MessageBox.Show("Successfully saved - " + givenGrid.Name);
-                    success = true;
-                }
-
-               catch(Exception e)
-                {
-                    MessageBox.Show("Somethign went wrong while saving!");
-                    MessageBox.Show(e.Message);
-                    success = false;
-                }
-                finally
-                {
-                    if (myFileStream != null)
-                    { 
-  
-                    myFileStream.Close();
-                        
-                    }
-                }
-           
-
-            }
-          
-
-            return success;
-
-        }
-
-
-        public virtual bool SaveGrid(Grid givenGrid, out string returnedName)
-        {
-            bool success = false;
-
-            returnedName = givenGrid.Name;
-           
-
-                FileStream myFileStream = null;
-                BinaryFormatter myBinaryFormatter = null;
-
-                try
-                {
-                    myFileStream = new FileStream(givenGrid.Destination, FileMode.Create, FileAccess.Write);
-                    myBinaryFormatter = new BinaryFormatter();
-                
-                   
                     SerializationObject newObject = new SerializationObject(givenGrid.Name, givenGrid.ListOfComponents, givenGrid.Destination);
                     myBinaryFormatter.Serialize(myFileStream, newObject);
-               
+                    returnedName = givenGrid.Name;
                     MessageBox.Show("Successfully saved - " + givenGrid.Name);
                     success = true;
                 }
@@ -385,7 +337,55 @@ namespace Flowly
                 }
 
 
-            
+            }
+
+
+            return success;
+
+        }
+
+
+        public virtual bool SaveGrid(Grid givenGrid, out string returnedName)
+        {
+            bool success = false;
+
+            returnedName = givenGrid.Name;
+
+
+            FileStream myFileStream = null;
+            BinaryFormatter myBinaryFormatter = null;
+
+            try
+            {
+                myFileStream = new FileStream(givenGrid.Destination, FileMode.Create, FileAccess.Write);
+                myBinaryFormatter = new BinaryFormatter();
+
+
+                SerializationObject newObject = new SerializationObject(givenGrid.Name, givenGrid.ListOfComponents, givenGrid.Destination);
+                myBinaryFormatter.Serialize(myFileStream, newObject);
+
+                MessageBox.Show("Successfully saved - " + givenGrid.Name);
+                success = true;
+            }
+
+            catch (Exception e)
+            {
+                MessageBox.Show("Somethign went wrong while saving!");
+                MessageBox.Show(e.Message);
+                success = false;
+            }
+            finally
+            {
+                if (myFileStream != null)
+                {
+
+                    myFileStream.Close();
+
+                }
+            }
+
+
+
 
             return success;
 
@@ -415,7 +415,7 @@ namespace Flowly
                 MessageBox.Show("Something went wrong creating the new grid!");
             }
             return success;
-           
+
 
         }
 
@@ -438,21 +438,21 @@ namespace Flowly
         /// </summary>
         /// <returns>True if successfull, false otherwise.</returns>
         public virtual bool OpenFile(PictureBox givenPictureBox, out string returnedName)
-    {
-            
-            
+        {
+
+
             returnedName = "";
 
             bool success = false;
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            if(openFileDialog.ShowDialog()==DialogResult.OK)
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if(this.grid!=null)
+                if (this.grid != null)
                 {
                     ClearGrid();
                     CloseGrid();
                 }
-                
+
                 FileStream myFileStream = null;
                 BinaryFormatter myBinaryFormatter = null;
                 try
@@ -461,7 +461,7 @@ namespace Flowly
                     myBinaryFormatter = new BinaryFormatter();
 
                     SerializationObject myNewOpenObj = (SerializationObject)myBinaryFormatter.Deserialize(myFileStream);
-                  Grid   myNewGrid = new Grid(givenPictureBox);
+                    Grid myNewGrid = new Grid(givenPictureBox);
                     myNewGrid.Name = myNewOpenObj.Name;
                     myNewGrid.Destination = myNewOpenObj.Destionation;
                     myNewGrid.ListOfComponents = myNewOpenObj.listCompDrawn;
@@ -469,7 +469,7 @@ namespace Flowly
                     returnedName = myNewGrid.Name;
 
                     this.grid = myNewGrid;
-                    
+
                     this.grid.PaintAllComponents();
 
                     success = true;
@@ -491,32 +491,32 @@ namespace Flowly
                     }
                 }
             }
-           
+
             return success;
-    }
-    /// <summary>
-    /// Goes back to a state before a change is made.
-    /// </summary>
-    /// <returns>True if successfull, false otherwise.</returns>
-    public virtual bool UndoLastChange()
-    {
-        throw new System.NotImplementedException();
-    }
-    /// <summary>
-    /// Always the user makes a change, a new instance of "Change" class is created.
-    /// </summary>
-    /// <param name="givenDescription"></param>
-    /// <returns>True if successfull, false otherwise.</returns>
-    public virtual bool CreateChange(string givenDescription)
-    {
-        throw new System.NotImplementedException();
-    }
+        }
+        /// <summary>
+        /// Goes back to a state before a change is made.
+        /// </summary>
+        /// <returns>True if successfull, false otherwise.</returns>
+        public virtual bool UndoLastChange()
+        {
+            throw new System.NotImplementedException();
+        }
+        /// <summary>
+        /// Always the user makes a change, a new instance of "Change" class is created.
+        /// </summary>
+        /// <param name="givenDescription"></param>
+        /// <returns>True if successfull, false otherwise.</returns>
+        public virtual bool CreateChange(string givenDescription)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public bool CloseGrid()
         {
             try
             {
-                
+
                 this.grid = null;
                 return true;
             }
@@ -526,6 +526,6 @@ namespace Flowly
             }
         }
 
-}
+    }
 }
 
