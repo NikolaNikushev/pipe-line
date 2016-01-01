@@ -93,6 +93,20 @@ namespace Flowly
             }
         }
 
+        internal bool CheckComponentIntersectsWithPipe(Rectangle r)
+        {
+            foreach (ComponentDrawn p in ListOfComponents)
+            {
+                if (!(p is Pipe)) continue;
+                bool intersects =  CheckInteresectsWithPipe(r, p as Pipe);
+                if (intersects)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
 
         /// <summary>
         /// Adds a component to the listOfComponents list.
@@ -329,6 +343,42 @@ namespace Flowly
                     return true;
                 }
             }
+            return false;
+        }
+
+        private bool CheckInteresectsWithPipe(Rectangle r, Pipe pipe)
+        {
+
+            int pipeLinesCount = pipe.PipePoints.Count;
+            List<Point> pLines = pipe.PipePoints;
+            Point topLeft = r.Location;
+            Point topRight = new Point(r.X + r.Width, r.Y);
+            Point bottomRight = new Point(r.X + r.Width, r.Y + r.Height);
+            Point bottomLeft = new Point(r.X, r.Y+r.Height);
+            for (int j = 0; j < pipeLinesCount - 1; j++)
+            {
+                if (CheckPipeIntersects(topLeft, topRight, pLines[j], pLines[j + 1]))
+                {
+                   // MessageBox.Show("Intersects pipe");
+                    return true;
+                }
+                if (CheckPipeIntersects(topRight, bottomRight, pLines[j], pLines[j + 1]))
+                {
+                   // MessageBox.Show("Intersects pipe");
+                    return true;
+                }
+                if (CheckPipeIntersects(bottomRight, bottomLeft, pLines[j], pLines[j + 1]))
+                {
+                   // MessageBox.Show("Intersects pipe");
+                    return true;
+                }
+                if (CheckPipeIntersects(topLeft, bottomLeft, pLines[j], pLines[j + 1]))
+                {
+                    //MessageBox.Show("Intersects pipe");
+                    return true;
+                }
+            }
+
             return false;
         }
 

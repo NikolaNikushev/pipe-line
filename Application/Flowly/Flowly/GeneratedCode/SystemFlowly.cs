@@ -54,12 +54,15 @@ namespace Flowly
         /// <returns>True if it is, false otherwise.</returns>
         public virtual bool CheckFreeSpot(Rectangle r)
         {
+            
             List<Rectangle> rectangles = grid.GetComponentsRectangles();
             foreach (Rectangle rect in rectangles)
             {
                 if (r.IntersectsWith(rect)) return false;
             }
-            return true;
+
+            return !grid.CheckComponentIntersectsWithPipe(r);
+            
         }
 
         /// <summary>
