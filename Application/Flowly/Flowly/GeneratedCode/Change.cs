@@ -22,6 +22,17 @@ namespace Flowly
         /// A string which contaions the description of a change.
         /// </summary>
         private string description;
+        public string Desctiption
+        {
+            get
+            {
+                return description;
+            }
+        }
+        public Change(string theDescription)
+        {
+            description = theDescription;
+        }
 
     }
 }

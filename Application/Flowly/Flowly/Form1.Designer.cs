@@ -39,6 +39,8 @@
             this.clearGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonGoTo = new System.Windows.Forms.Button();
+            this.listBoxStates = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.labelRightTrack = new System.Windows.Forms.Label();
             this.labelLeftTrack = new System.Windows.Forms.Label();
@@ -64,6 +66,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.grid = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.buttonUndo = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -152,6 +155,9 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.PapayaWhip;
+            this.groupBox1.Controls.Add(this.buttonUndo);
+            this.groupBox1.Controls.Add(this.buttonGoTo);
+            this.groupBox1.Controls.Add(this.listBoxStates);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.toolSink);
             this.groupBox1.Controls.Add(this.toolSplitter);
@@ -163,11 +169,29 @@
             this.groupBox1.Controls.Add(this.toolEdit);
             this.groupBox1.Location = new System.Drawing.Point(-1, 24);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(152, 633);
+            this.groupBox1.Size = new System.Drawing.Size(152, 652);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Toolbox";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // buttonGoTo
+            // 
+            this.buttonGoTo.Location = new System.Drawing.Point(11, 307);
+            this.buttonGoTo.Name = "buttonGoTo";
+            this.buttonGoTo.Size = new System.Drawing.Size(117, 23);
+            this.buttonGoTo.TabIndex = 16;
+            this.buttonGoTo.Text = "Go before change";
+            this.buttonGoTo.UseVisualStyleBackColor = true;
+            this.buttonGoTo.Click += new System.EventHandler(this.buttonGoTo_Click);
+            // 
+            // listBoxStates
+            // 
+            this.listBoxStates.FormattingEnabled = true;
+            this.listBoxStates.Location = new System.Drawing.Point(11, 219);
+            this.listBoxStates.Name = "listBoxStates";
+            this.listBoxStates.Size = new System.Drawing.Size(123, 82);
+            this.listBoxStates.TabIndex = 15;
             // 
             // groupBox2
             // 
@@ -184,9 +208,9 @@
             this.groupBox2.Controls.Add(this.trackBarRight);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(0, 333);
+            this.groupBox2.Location = new System.Drawing.Point(0, 366);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(152, 302);
+            this.groupBox2.Size = new System.Drawing.Size(152, 291);
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Properties";
@@ -324,7 +348,7 @@
             // 
             this.toolSink.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.toolSink.Image = ((System.Drawing.Image)(resources.GetObject("toolSink.Image")));
-            this.toolSink.Location = new System.Drawing.Point(82, 194);
+            this.toolSink.Location = new System.Drawing.Point(82, 121);
             this.toolSink.Name = "toolSink";
             this.toolSink.Size = new System.Drawing.Size(46, 43);
             this.toolSink.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -335,7 +359,7 @@
             // 
             this.toolSplitter.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.toolSplitter.Image = ((System.Drawing.Image)(resources.GetObject("toolSplitter.Image")));
-            this.toolSplitter.Location = new System.Drawing.Point(11, 194);
+            this.toolSplitter.Location = new System.Drawing.Point(11, 121);
             this.toolSplitter.Name = "toolSplitter";
             this.toolSplitter.Size = new System.Drawing.Size(46, 43);
             this.toolSplitter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -346,7 +370,7 @@
             // 
             this.toolPipe.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.toolPipe.Image = ((System.Drawing.Image)(resources.GetObject("toolPipe.Image")));
-            this.toolPipe.Location = new System.Drawing.Point(82, 145);
+            this.toolPipe.Location = new System.Drawing.Point(82, 72);
             this.toolPipe.Name = "toolPipe";
             this.toolPipe.Size = new System.Drawing.Size(46, 43);
             this.toolPipe.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -358,7 +382,7 @@
             // 
             this.toolRemove.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.toolRemove.Image = ((System.Drawing.Image)(resources.GetObject("toolRemove.Image")));
-            this.toolRemove.Location = new System.Drawing.Point(80, 47);
+            this.toolRemove.Location = new System.Drawing.Point(80, 25);
             this.toolRemove.Name = "toolRemove";
             this.toolRemove.Size = new System.Drawing.Size(46, 43);
             this.toolRemove.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -370,7 +394,7 @@
             // 
             this.toolPump.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.toolPump.Image = ((System.Drawing.Image)(resources.GetObject("toolPump.Image")));
-            this.toolPump.Location = new System.Drawing.Point(11, 145);
+            this.toolPump.Location = new System.Drawing.Point(11, 72);
             this.toolPump.Name = "toolPump";
             this.toolPump.Size = new System.Drawing.Size(46, 43);
             this.toolPump.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -383,7 +407,7 @@
             // 
             this.toolSplitterAdj.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.toolSplitterAdj.Image = ((System.Drawing.Image)(resources.GetObject("toolSplitterAdj.Image")));
-            this.toolSplitterAdj.Location = new System.Drawing.Point(11, 243);
+            this.toolSplitterAdj.Location = new System.Drawing.Point(11, 170);
             this.toolSplitterAdj.Name = "toolSplitterAdj";
             this.toolSplitterAdj.Size = new System.Drawing.Size(46, 43);
             this.toolSplitterAdj.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -394,7 +418,7 @@
             // 
             this.toolMerger.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.toolMerger.Image = ((System.Drawing.Image)(resources.GetObject("toolMerger.Image")));
-            this.toolMerger.Location = new System.Drawing.Point(82, 243);
+            this.toolMerger.Location = new System.Drawing.Point(82, 170);
             this.toolMerger.Name = "toolMerger";
             this.toolMerger.Size = new System.Drawing.Size(46, 43);
             this.toolMerger.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -405,7 +429,7 @@
             // 
             this.toolEdit.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.toolEdit.Image = ((System.Drawing.Image)(resources.GetObject("toolEdit.Image")));
-            this.toolEdit.Location = new System.Drawing.Point(11, 47);
+            this.toolEdit.Location = new System.Drawing.Point(11, 25);
             this.toolEdit.Name = "toolEdit";
             this.toolEdit.Size = new System.Drawing.Size(46, 43);
             this.toolEdit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -432,7 +456,7 @@
             // 
             this.grid.Location = new System.Drawing.Point(147, 24);
             this.grid.Name = "grid";
-            this.grid.Size = new System.Drawing.Size(802, 627);
+            this.grid.Size = new System.Drawing.Size(802, 652);
             this.grid.TabIndex = 2;
             this.grid.TabStop = false;
             this.grid.Click += new System.EventHandler(this.grid_Click);
@@ -451,12 +475,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // buttonUndo
+            // 
+            this.buttonUndo.Location = new System.Drawing.Point(11, 337);
+            this.buttonUndo.Name = "buttonUndo";
+            this.buttonUndo.Size = new System.Drawing.Size(117, 23);
+            this.buttonUndo.TabIndex = 17;
+            this.buttonUndo.Text = "Undo ";
+            this.buttonUndo.UseVisualStyleBackColor = true;
+            this.buttonUndo.Click += new System.EventHandler(this.buttonUndo_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(949, 648);
+            this.ClientSize = new System.Drawing.Size(949, 680);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.grid);
             this.Controls.Add(this.groupBox1);
@@ -526,6 +560,9 @@
         private System.Windows.Forms.Label labelLeftTrack;
         private System.Windows.Forms.Label labelLeft;
         private System.Windows.Forms.TrackBar trackBarLeft;
+        private System.Windows.Forms.Button buttonGoTo;
+        private System.Windows.Forms.ListBox listBoxStates;
+        private System.Windows.Forms.Button buttonUndo;
     }
 }
 

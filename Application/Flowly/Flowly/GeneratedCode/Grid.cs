@@ -211,6 +211,8 @@ namespace Flowly
         internal void AddPipe(Pipe pipe)
         {
             this.listOfComponents.Add(pipe);
+
+
         }
 
         public static bool CheckPipeIntersects(Point a1, Point a2, Point b1, Point b2)
@@ -250,7 +252,7 @@ namespace Flowly
             {
                 MessageBox.Show("You are drawing the pipe too soon, you need to have an endpoint!");
             }
-            Pen colorOfPen = new Pen(Color.Black, 2);
+            Pen colorOfPen = new Pen(Color.Yellow, 2);
 
             endPoint.SetCurrentFlow(startPoint.CurrentFlow);
             endPoint.ComponentDrawnBelong.UpdateComponentFlow();
@@ -265,6 +267,9 @@ namespace Flowly
                 Point end= pipe.PipePoints[i+1];
                 graphic.DrawLine(colorOfPen, start, end);
             }
+
+
+          
         }
 
         private bool CheckIntersectAllOther(Point start, Point end, Pipe currentPipe)

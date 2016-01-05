@@ -34,3 +34,22 @@ G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debu
 G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.csproj.GenerateResource.Cache
 G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.exe
 G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.pdb
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.exe.config
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.XML
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.exe
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.pdb
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\images\Ad_splitter2.png
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\images\Editing-Edit-icon-pen.png
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\images\merger2.png
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\images\pipeline.png
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\images\remove_element.png
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\images\sink2.png
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\images\splitter2.png
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\images\start_point.png
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.exe
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.pdb
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.csprojResolveAssemblyReference.cache
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.Form1.resources
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.Properties.Resources.resources
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.csproj.GenerateResource.Cache
+E:\IMPORTANT!!!\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.TestFormcs.resources

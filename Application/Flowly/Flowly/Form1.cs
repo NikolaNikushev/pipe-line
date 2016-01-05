@@ -8,13 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Flowly
 {
     /// <summary>
     /// The main window form of the application.
     /// </summary>
-    public partial class Form1 : Form
+    public partial class Form1 : Form, IChangeOccured, IGridChanged
     {
         private int yPos;
         private int xPos;
@@ -34,6 +35,9 @@ namespace Flowly
         //for testingperposes
         PictureBox currentPB;
 
+        ListBox myChanges = new ListBox();
+       
+
         public Form1()
         {
 
@@ -45,6 +49,10 @@ namespace Flowly
 
             InitializeComponent();
 
+         
+
+          
+
             foreach (Control item in this.groupBox1.Controls)
             {
                 if (item != toolPipe && item != toolEdit && item != toolRemove)
@@ -55,14 +63,23 @@ namespace Flowly
                     }
             }
             theGrid = new Grid(grid);
-            flowly = new SystemFlowly(theGrid);
+            flowly = new SystemFlowly(theGrid,this,this);
             currentSelectedComponent = null;
             SetTrackBarVisibility(false);
+
+           
 
 
         }
 
-
+        public void GridChanged()
+        {
+            listBoxStates.Items.Clear();
+        }
+        public void ChangeOccured(Change theChange)
+        {
+            listBoxStates.Items.Add(theChange.Desctiption);
+        }
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
@@ -521,6 +538,7 @@ namespace Flowly
         private void button1_Click(object sender, EventArgs e)
         {
 
+       
         }
 
         private void clearGridToolStripMenuItem_Click(object sender, EventArgs e)
@@ -530,7 +548,7 @@ namespace Flowly
                 DialogResult dg = MessageBox.Show("Do you really want to clear the grid?", "Confirmation", MessageBoxButtons.YesNo);
                 if (dg == DialogResult.Yes)
                 {
-                    flowly.ClearGrid();
+                    flowly.ClearGrid(true);
 
                 }
             }
@@ -720,8 +738,8 @@ namespace Flowly
         {
             if (flowly.Grid != null)
             {
-                flowly.ClearGrid();
-                flowly.CloseGrid();
+                flowly.ClearGrid(false);
+                flowly.CloseGrid(true);
                 this.Text = "Flowly - flow system / (No name)";
             }
             else
@@ -799,8 +817,138 @@ namespace Flowly
                
             }
             changeIsMade = true;
+            
 
         }
+
+        private void buttonGoTo_Click(object sender, EventArgs e)
+        {
+            if (listBoxStates.SelectedItem != null)
+            {
+                flowly.UndoLastChange(grid, listBoxStates.SelectedItem.ToString());
+
+                int currNumber = listBoxStates.SelectedIndex;
+
+                string[] files = Directory.GetFiles("../../Changes")
+                                         .Select(path => Path.GetFileName(path))
+                                         .ToArray();
+
+                for (int counter = currNumber;counter<listBoxStates.Items.Count;counter++)
+                {
+                    File.Delete("../../Changes/" + files[counter]);
+                    
+                }
+                for(int counter = listBoxStates.Items.Count-1;counter>=currNumber;counter--)
+                {
+                    listBoxStates.Items.RemoveAt(listBoxStates.Items.Count - 1);
+                }
+                flowly.counterChange = currNumber;
+
+            }
+            else
+            {
+                MessageBox.Show("Select a change!");
+            }
+        }
+
+        private void buttonUndo_Click(object sender, EventArgs e)
+        {
+            if(listBoxStates.Items.Count==0)
+            {
+                MessageBox.Show("No changes!");
+            }
+            else
+            {
+                int total = listBoxStates.Items.Count;
+
+                flowly.UndoLastChange(grid, listBoxStates.Items[total - 1].ToString());
+
+                string[] files = Directory.GetFiles("../../Changes")
+                                          .Select(path => Path.GetFileName(path))
+                                          .ToArray();
+
+
+
+                File.Delete("../../Changes/" + files.Where(x => x.Contains((total - 1).ToString())).First());
+                listBoxStates.Items.RemoveAt(total - 1);
+                flowly.counterChange = total - 1;
+
+            }
+
+
+
+        }
+
+
+
+
+
+        //private void openLogWithChangesToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    Form logWithChanges = new Form();
+        //    logWithChanges.ClientSize = new System.Drawing.Size(349, 311);
+        //    logWithChanges.Text = "Changes";
+        //    logWithChanges.Show();
+
+        //    myChanges.Location = new System.Drawing.Point(57, 31);
+        //    myChanges.Size = new System.Drawing.Size(230, 186);
+
+        //    Button buttonRefresh = new Button();
+        //    buttonRefresh.Location = new System.Drawing.Point(29, 251);
+        //    buttonRefresh.Size = new System.Drawing.Size(101, 35);
+        //    buttonRefresh.Text = "Refresh";
+
+        //    Button buttonUndo = new Button();
+        //    buttonUndo.Location = new System.Drawing.Point(220, 251);
+        //    buttonUndo.Size =  new System.Drawing.Size(101, 35);
+        //    buttonUndo.Text = "Undo";
+
+
+
+
+
+
+        //    string[] changeNumbers = Directory.GetFiles("../../Changes")
+        //                                      .Select(path => Path.GetFileName(path))
+        //                                      .ToArray();
+        //    foreach (string number in changeNumbers)
+        //    {
+        //        myChanges.Items.Add(number);
+        //    }
+
+
+
+        //    logWithChanges.Controls.Add(buttonRefresh);
+        //    logWithChanges.Controls.Add(buttonUndo);
+        //    logWithChanges.Controls.Add(myChanges);
+
+        //   buttonUndo.Click += new EventHandler(buttonUndo_Click);
+        //    buttonRefresh.Click += new EventHandler(buttonRefresh_Click);
+
+        //}
+
+        //private void buttonUndo_Click(object sender, EventArgs e)
+        //{
+        //    if(myChanges.SelectedItem!=null)
+        //    {
+        //        flowly.UndoLastChange(grid, myChanges.SelectedItem.ToString());
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Select a change!");
+        //    }
+        //}
+        //private void buttonRefresh_Click(object sender, EventArgs e)
+        //{
+        //    myChanges.Items.Clear();
+        //    string[] changeNumbers = Directory.GetFiles("../../Changes")
+        //                                       .Select(path => Path.GetFileName(path))
+        //                                       .ToArray();
+        //    foreach (string number in changeNumbers)
+        //    {
+        //        myChanges.Items.Add(number);
+        //    }
+        //}
     }
     enum WorkingMode
     {

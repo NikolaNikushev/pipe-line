@@ -26,11 +26,19 @@ namespace Flowly
         /// <summary>
         /// toolbox of the program. Simpe list of "ToolboxComponent"-s. Make the difference between "ComponentDrawn" and "ToolboxComponent".
         /// </summary>
+        /// 
+
+        private IGridChanged gridChangedListener;
+
+        private IChangeOccured changeListener;
+
         private List<ToolboxComponent> listOfToolboxItems;
 
         private Grid grid;
 
         private List<Change> changes;
+
+        public int counterChange;
 
         public Grid Grid
         {
@@ -41,9 +49,14 @@ namespace Flowly
         }
 
 
-        public SystemFlowly(Grid grid)
+        public SystemFlowly(Grid grid,IChangeOccured theChangeListener, IGridChanged theGridChangedListener)
         {
             this.grid = grid;
+            counterChange = 0;
+            Array.ForEach(Directory.GetFiles("../../Changes"), File.Delete);
+            changeListener = theChangeListener;
+            gridChangedListener = theGridChangedListener;
+            changes = new List<Change>();
         }
 
         /// <summary>
@@ -110,17 +123,29 @@ namespace Flowly
 
         internal bool DrawPipeToCursor(Point start, Point end, ref Pipe currentPipe)
         {
+           
+
             return grid.DrawPipeToPoint(start, end, ref currentPipe);
         }
 
         internal void AddPipe(Pipe pipe)
         {
+            //save state
+            CreateChange("Add pipe.");
+            //end
             grid.AddPipe(pipe);
+
+         
         }
 
         internal void RemovePipe(Pipe pipe)
         {
+            //save state
+            CreateChange("Remove pipe.");
+            //end
             grid.RemovePipe(pipe);
+
+          
         }
 
         /// <summary>
@@ -132,6 +157,10 @@ namespace Flowly
         /// <returns>True if successfully created, false otherwise.</returns>
         public virtual bool CreateComponentDrawn(ComponentName cName, Rectangle rectangle)
         {
+            //save state
+            CreateChange("Create component.");
+            //end
+
             /* Pump newPump = new Pump(r);
              List<ConnectionPoint> testListOfConnectionPoints = newPump.GiveMeYourConnectionPoints();
              foreach (ConnectionPoint testCP in testListOfConnectionPoints)
@@ -172,6 +201,10 @@ namespace Flowly
             {
                 grid.AddComponentDrawnToGridList(cd);
                 grid.Paint(cd);
+
+
+               
+
                 return true;
             }
 
@@ -179,7 +212,12 @@ namespace Flowly
 
         internal void DrawPipeline(Pipe pipe)
         {
+            //save state
+            CreateChange("Draw pipeline.");
+            //end
+
             grid.DrawPipelineAndUpdateFLow(pipe);
+            
         }
 
         internal void AddComponentDrawn(Pipe pipe)
@@ -194,7 +232,14 @@ namespace Flowly
         /// <returns>True if successfull, false otherwise.</returns>
         public virtual bool DeleteComponent(ComponentDrawn givenComponent)
         {
+            //save state
+            CreateChange("Delete component.");
+            //end
+
             grid.RemoveComponentDrawnFromGridList(givenComponent);
+
+            
+
             return true;
         }
         /// <summary>
@@ -204,6 +249,11 @@ namespace Flowly
         /// <returns>True if successfull, false otherwise.</returns>
         public virtual bool EditComponentDrawn(ComponentDrawn cGivenComponent, float cGivenFlow, float cGivenCapacity, int cTbLeft, int cTbRight)
         {
+            //save state
+            CreateChange("Edit component.");
+            //end
+
+
             try
             {
                 if (cGivenFlow > cGivenCapacity)
@@ -265,6 +315,11 @@ namespace Flowly
                     sinkInput[0].SetCurrentFlow(cGivenFlow);
 
                 }
+
+
+
+                
+
                 return true;
 
             }
@@ -278,12 +333,23 @@ namespace Flowly
         /// </summary>
         /// <param name="givenGrid"></param>
         /// <returns>True for successfull, false otherwise.</returns>
-        public virtual bool ClearGrid()
+        public virtual bool ClearGrid(bool outside)
         {
+            if(outside)
+            {
+               // save state
+                CreateChange("Clear grid.");
+                //end
+            }
+
+
+
             try
             {
                 this.grid.Graphic.Clear(Color.White);
                 this.grid.ListOfComponents.Clear();
+
+               
                 return true;
             }
             catch
@@ -405,12 +471,22 @@ namespace Flowly
             {
                 if (this.grid != null)
                 {
-                    ClearGrid();
-                    CloseGrid();
+                    ClearGrid(false);
+                    CloseGrid(false);
                 }
                 Grid newlyCreatedGrid = new Grid(givenPictureBox);
                 this.grid = newlyCreatedGrid;
+
+                //save state
+                CreateChange("Newly created grid.");
+                //end
+
                 success = true;
+
+                Array.ForEach(Directory.GetFiles("../../Changes"), File.Delete);
+                changes.Clear();
+                gridChangedListener.GridChanged();
+                counterChange = 0;
             }
             catch
             {
@@ -452,8 +528,8 @@ namespace Flowly
             {
                 if (this.grid != null)
                 {
-                    ClearGrid();
-                    CloseGrid();
+                    ClearGrid(false);
+                    CloseGrid(false);
                 }
 
                 FileStream myFileStream = null;
@@ -475,7 +551,15 @@ namespace Flowly
 
                     this.grid.PaintAllComponents();
 
+                    //save state
+                    CreateChange("Newly opened grid.");
+                    //end
+
                     success = true;
+                    Array.ForEach(Directory.GetFiles("../../Changes"), File.Delete);
+                    changes.Clear();
+                    gridChangedListener.GridChanged();
+                    counterChange = 0;
                 }
 
                 catch (Exception e)
@@ -501,27 +585,142 @@ namespace Flowly
         /// Goes back to a state before a change is made.
         /// </summary>
         /// <returns>True if successfull, false otherwise.</returns>
-        public virtual bool UndoLastChange()
+        public virtual bool UndoLastChange(PictureBox givenPictureBox,string givenDescription)
         {
-            throw new System.NotImplementedException();
+
+            bool success = false;
+           
+                if (this.grid != null)
+                {
+                    ClearGrid(false);
+                    CloseGrid(false);
+                }
+
+                FileStream myFileStream = null;
+                BinaryFormatter myBinaryFormatter = null;
+                try
+                {
+                    myFileStream = new FileStream("../../Changes/"+givenDescription, FileMode.Open, FileAccess.Read);
+                    myBinaryFormatter = new BinaryFormatter();
+
+                    SerializationObject myNewOpenObj = (SerializationObject)myBinaryFormatter.Deserialize(myFileStream);
+                    Grid myNewGrid = new Grid(givenPictureBox);
+                    myNewGrid.Name = myNewOpenObj.Name;
+                    myNewGrid.Destination = myNewOpenObj.Destionation;
+                    myNewGrid.ListOfComponents = myNewOpenObj.listCompDrawn;
+                
+                    this.grid = myNewGrid;
+
+                    this.grid.PaintAllComponents();
+
+                    success = true;
+                }
+
+                catch (Exception e)
+                {
+                MessageBox.Show(e.Message);
+                    
+                    success = false;
+                }
+                finally
+                {
+                    if (myFileStream != null)
+                    {
+
+                        myFileStream.Close();
+
+                    }
+                }
+            
+
+            return success;
+            
+         
         }
         /// <summary>
         /// Always the user makes a change, a new instance of "Change" class is created.
         /// </summary>
         /// <param name="givenDescription"></param>
         /// <returns>True if successfull, false otherwise.</returns>
+        /// 
+
+      
+            
         public virtual bool CreateChange(string givenDescription)
         {
-            throw new System.NotImplementedException();
+            bool success = false;
+            FileStream myFileStream = null;
+            BinaryFormatter myBinaryFormatter = null;
+
+            try
+            {
+                //save state
+                //if(counterChange==10)
+                //{
+                //    Array.ForEach(Directory.GetFiles("../../Changes"), File.Delete);
+                //    counterChange = 0;
+                //    gridChangedListener.GridChanged();
+                //}
+                myFileStream = new FileStream("../../Changes/"+counterChange + " - " + givenDescription, FileMode.Create, FileAccess.Write);
+               
+               
+               
+
+                myBinaryFormatter = new BinaryFormatter();
+
+                SerializationObject newObject = new SerializationObject(grid.Name, grid.ListOfComponents, grid.Destination);
+                myBinaryFormatter.Serialize(myFileStream, newObject);
+
+                Change myNewChange = new Change(counterChange + " - " + givenDescription);
+                changes.Add(myNewChange);
+                changeListener.ChangeOccured(myNewChange);
+                counterChange++;
+                success = true;
+
+                //end
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+                success = false;
+            }
+            finally
+           {
+
+                if (myFileStream != null)
+                {
+
+                    myFileStream.Close();
+
+                }
+            }
+
+            return success;
         }
 
-        public bool CloseGrid()
+       
+
+        public bool CloseGrid(bool outside)
         {
             try
             {
 
-                this.grid = null;
-                return true;
+                if(outside)
+                {
+                    this.grid = null;
+                     Array.ForEach(Directory.GetFiles("../../Changes"), File.Delete);
+                    changes.Clear();
+                      gridChangedListener.GridChanged();
+                     counterChange = 0;
+                    return true;
+                }
+                else
+                {
+                    this.grid = null;
+                   
+                    return true;
+                }
+               
             }
             catch
             {

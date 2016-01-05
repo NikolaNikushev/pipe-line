@@ -117,10 +117,11 @@
             Has a list meant to be a toolbox.
             </summary>
         </member>
-        <member name="F:Flowly.SystemFlowly.listOfToolboxItems">
+        <member name="F:Flowly.SystemFlowly.gridChangedListener">
             <summary>
             toolbox of the program. Simpe list of "ToolboxComponent"-s. Make the difference between "ComponentDrawn" and "ToolboxComponent".
             </summary>
+            
         </member>
         <member name="M:Flowly.SystemFlowly.CheckFreeSpot(System.Drawing.Rectangle)">
             <summary>
@@ -169,7 +170,7 @@
             <param name="givenComponent"></param>
             <returns>True if successfull, false otherwise.</returns>
         </member>
-        <member name="M:Flowly.SystemFlowly.ClearGrid">
+        <member name="M:Flowly.SystemFlowly.ClearGrid(System.Boolean)">
             <summary>
             Deletes all "ComponentDrawn"-s from the grid.
             </summary>
@@ -195,7 +196,7 @@
             </summary>
             <returns>True if successfull, false otherwise.</returns>
         </member>
-        <member name="M:Flowly.SystemFlowly.UndoLastChange">
+        <member name="M:Flowly.SystemFlowly.UndoLastChange(System.Windows.Forms.PictureBox,System.String)">
             <summary>
             Goes back to a state before a change is made.
             </summary>
@@ -207,6 +208,7 @@
             </summary>
             <param name="givenDescription"></param>
             <returns>True if successfull, false otherwise.</returns>
+            
         </member>
         <member name="T:Flowly.ToolboxComponent">
             <summary>
@@ -222,6 +224,23 @@
         <member name="M:Flowly.Program.Main">
             <summary>
             The main entry point for the application.
+            </summary>
+        </member>
+        <member name="F:Flowly.TestFormcs.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Flowly.TestFormcs.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Flowly.TestFormcs.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
             </summary>
         </member>
         <member name="T:Flowly.Properties.Resources">
