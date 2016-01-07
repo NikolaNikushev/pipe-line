@@ -25,11 +25,11 @@ namespace Flowly
 
         protected Rectangle rectangleSmallRightDown;
 
-        public Splitter(Rectangle theRectangle,bool theDiffCurrFlowPossible) : base(theRectangle)
+        public Splitter(Rectangle theRectangle, bool theDiffCurrFlowPossible) : base(theRectangle)
         {
 
 
-            
+
             rectangleSmallRightUp = new Rectangle();
             rectangleSmallRightUp.X = rectangleBig.X + rectangleBig.Width / 2;
             rectangleSmallRightUp.Y = rectangleBig.Y;
@@ -50,14 +50,14 @@ namespace Flowly
             rectangleCombLeft.Height = rectangleBig.Height;
             rectangleCombLeft.Width = rectangleBig.Width / 2;
 
-            
+
             diffCurrFlowPossible = theDiffCurrFlowPossible;
             if (diffCurrFlowPossible)
             {
                 imageResource = Image.FromFile("images\\ad_splitter2.png");
                 this.EditableProperties.Add(GeneratedCode.EditablePropertiesEnum.splitterFlow);
                 TopOutputPercentage = 50;
-                BottomOutputPercentage= 50;
+                BottomOutputPercentage = 50;
             }
             else
             {
@@ -69,9 +69,11 @@ namespace Flowly
 
         public override bool SetCapacity(float givenCapacity)
         {
-            try {
+            try
+            {
                 base.SetCapacity(givenCapacity);
-                UpdateOutputs();
+                if (listOfConnectionPoints.Count > 0)
+                    UpdateOutputs();
                 return true;
             }
             catch (Exception e)
@@ -103,7 +105,7 @@ namespace Flowly
                 ConnectionPoint connRighttUp = new ConnectionPoint(rectangleSmallRightUp, this, true);
                 ConnectionPoint connRightDown = new ConnectionPoint(rectangleSmallRightDown, this, true);
                 ConnectionPoint connLeftComb = new ConnectionPoint(rectangleCombLeft, this, false);
-                if(connLeftComb.CurrentFlow == 0)
+                if (connLeftComb.CurrentFlow == 0)
                 {
                     connRightDown.SetCurrentFlow(0);
                     connRighttUp.SetCurrentFlow(0);
@@ -119,6 +121,7 @@ namespace Flowly
             }
         }
 
+        //CHECK ME BROH i give argumentoutofrangexception
         internal void UpdateOutputs()
         {
             List<ConnectionPoint> currentOutputs = GiveMeYourOutputConnectionPoints();
