@@ -478,7 +478,7 @@ namespace Flowly
                 this.grid = newlyCreatedGrid;
 
                 //save state
-                CreateChange("Newly created grid.");
+              //  CreateChange("Newly created grid.");
                 //end
 
                 success = true;

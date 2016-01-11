@@ -601,16 +601,16 @@ namespace Flowly
                         if (theGrid.Name != null)
                         {
                             flowly.SaveGrid(theGrid, out nameForForm);
-                            askMeSave = false;
+                           // askMeSave = false;
                         }
                         else
                         {
                             flowly.SaveAsGrid(theGrid, out nameForForm);
-                            askMeSave = false;
+                            //askMeSave = false;
                         }
                     }
-              
-                    
+                    askMeSave = false;
+
 
                     if (nameForForm == "")
                     {
@@ -658,17 +658,17 @@ namespace Flowly
                         if (theGrid.Name != null)
                         {
                             flowly.SaveGrid(theGrid, out nameForForm);
-                            askMeSave = false;
+                           // askMeSave = false;
                         }
                         else
                         {
                             flowly.SaveAsGrid(theGrid, out nameForForm);
-                            askMeSave = false;
+                          //  askMeSave = false;
                         }
                     }
-            
 
-                    
+                    askMeSave = false;
+
 
                     if (nameForForm == "")
                     {
