@@ -552,7 +552,7 @@ namespace Flowly
                     this.grid.PaintAllComponents();
 
                     //save state
-                    CreateChange("Newly opened grid.");
+                  //  CreateChange("Newly opened grid.");
                     //end
 
                     success = true;

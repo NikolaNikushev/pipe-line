@@ -21,6 +21,7 @@ namespace Flowly
         private int xPos;
         SystemFlowly flowly;
         Grid theGrid;
+        bool askMeSave;
 
 
         private WorkingMode currentWorkingMode;
@@ -49,6 +50,7 @@ namespace Flowly
 
             InitializeComponent();
 
+            askMeSave = false;
          
 
           
@@ -79,6 +81,7 @@ namespace Flowly
         public void ChangeOccured(Change theChange)
         {
             listBoxStates.Items.Add(theChange.Desctiption);
+            askMeSave = true;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -569,6 +572,7 @@ namespace Flowly
 
                 //save as
                 flowly.SaveAsGrid(theGrid, out nameForForm);
+                askMeSave = false;
                 if (nameForForm == "")
                 {
 
@@ -588,19 +592,25 @@ namespace Flowly
             if (flowly.Grid != null)
             {
                 // ask this if there are any changes!
-                DialogResult saveChanges = MessageBox.Show("Do you want to save before opening a new grid?", "Save before closing", MessageBoxButtons.YesNo);
-                if (saveChanges == DialogResult.Yes)
+                if(askMeSave==true)
                 {
-                    //save and open
-                    if (theGrid.Name != null)
+                    DialogResult saveChanges = MessageBox.Show("Do you want to save before opening a new grid?", "Save before closing", MessageBoxButtons.YesNo);
+                    if (saveChanges == DialogResult.Yes)
                     {
-                        flowly.SaveGrid(theGrid, out nameForForm);
+                        //save and open
+                        if (theGrid.Name != null)
+                        {
+                            flowly.SaveGrid(theGrid, out nameForForm);
+                            askMeSave = false;
+                        }
+                        else
+                        {
+                            flowly.SaveAsGrid(theGrid, out nameForForm);
+                            askMeSave = false;
+                        }
                     }
-                    else
-                    {
-                        flowly.SaveAsGrid(theGrid, out nameForForm);
-                    }
-
+              
+                    
 
                     if (nameForForm == "")
                     {
@@ -639,19 +649,26 @@ namespace Flowly
             if (flowly.Grid != null)
             {
                 // ask this if there are any changes!
-                DialogResult saveChanges = MessageBox.Show("Do you want to save before closing?", "Save before closing", MessageBoxButtons.YesNo);
-                if (saveChanges == DialogResult.Yes)
+                if(askMeSave==true)
                 {
-                    //save and open
-                    if (theGrid.Name != null)
+                    DialogResult saveChanges = MessageBox.Show("Do you want to save before closing?", "Save before closing", MessageBoxButtons.YesNo);
+                    if (saveChanges == DialogResult.Yes)
                     {
-                        flowly.SaveGrid(theGrid, out nameForForm);
+                        //save and open
+                        if (theGrid.Name != null)
+                        {
+                            flowly.SaveGrid(theGrid, out nameForForm);
+                            askMeSave = false;
+                        }
+                        else
+                        {
+                            flowly.SaveAsGrid(theGrid, out nameForForm);
+                            askMeSave = false;
+                        }
                     }
-                    else
-                    {
-                        flowly.SaveAsGrid(theGrid, out nameForForm);
-                    }
+            
 
+                    
 
                     if (nameForForm == "")
                     {
@@ -717,12 +734,14 @@ namespace Flowly
                 {
                     //save as 
                     flowly.SaveAsGrid(theGrid, out nameForForm);
+                    askMeSave = false;
                     this.Text = this.Text = "Flowly - flow system / " + nameForForm;
                 }
                 else
                 {
                     //save
                     flowly.SaveGrid(theGrid, out nameForForm);
+                    askMeSave = false;
                     this.Text = this.Text = "Flowly - flow system / " + nameForForm;
                 }
             }
