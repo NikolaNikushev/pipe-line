@@ -286,8 +286,6 @@ namespace Flowly
                 Point end= pipe.PipePoints[i+1];
                 graphic.DrawLine(colorOfPen, start, end);
             }
-
-
           
         }
 
@@ -311,7 +309,6 @@ namespace Flowly
                     }
                 }
             }
-            bool isColliding = false;
             for (int i = 0; i < listOfComponentsCount; i++)
             {
                 ComponentDrawn d = listOfComponents[i];
@@ -604,6 +601,8 @@ namespace Flowly
             }
             return rect;
         }
+
+
 
         public void PaintAllComponents()
         {

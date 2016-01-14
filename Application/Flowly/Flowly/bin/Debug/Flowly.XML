@@ -202,7 +202,7 @@
             </summary>
             <returns>True if successfull, false otherwise.</returns>
         </member>
-        <member name="M:Flowly.SystemFlowly.CreateChange(System.String)">
+        <member name="F:Flowly.SystemFlowly.locker">
             <summary>
             Always the user makes a change, a new instance of "Change" class is created.
             </summary>

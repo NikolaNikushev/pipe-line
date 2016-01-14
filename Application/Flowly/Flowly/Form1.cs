@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Threading;
 
 namespace Flowly
 {
@@ -37,7 +38,7 @@ namespace Flowly
         PictureBox currentPB;
 
         ListBox myChanges = new ListBox();
-       
+
 
         public Form1()
         {
@@ -53,7 +54,7 @@ namespace Flowly
             askMeSave = false;
          
 
-          
+
 
             foreach (Control item in this.groupBox1.Controls)
             {
@@ -65,7 +66,7 @@ namespace Flowly
                     }
             }
             theGrid = new Grid(grid);
-            flowly = new SystemFlowly(theGrid,this,this);
+            flowly = new SystemFlowly(theGrid, this, this);
             currentSelectedComponent = null;
             SetTrackBarVisibility(false);
 
@@ -166,14 +167,14 @@ namespace Flowly
                                     if (pipe.GiveMeYourConnectionPoints().Count == 2)
                                     {
                                         flowly.HighlightAllAvailableOutputs();
-                                      
+
                                         flowly.DrawPipeline(pipe);
                                         flowly.AddComponentDrawn(pipe);
                                         MessageBox.Show("Connected");
                                         pipe = null;
                                         lastPoint = new Point(-1, -1);
 
-                                    }                                   
+                                    }
                                 }
                             }
                         }
@@ -413,11 +414,7 @@ namespace Flowly
         private void grid_Paint(object sender, PaintEventArgs e)
         {
 
-
-            // Paint(item)
-
-
-
+           // flowly.UpdateGrid();
         }
 
 
@@ -504,7 +501,7 @@ namespace Flowly
 
         private void toolRemove_Click(object sender, EventArgs e)
         {
-            ResetProperties();
+           
             RefreshGridFromMode();
             currentWorkingMode = WorkingMode.remove;
             HighlightCurrentPB(sender as PictureBox);
@@ -539,7 +536,7 @@ namespace Flowly
         private void button1_Click(object sender, EventArgs e)
         {
 
-       
+
         }
 
         private void clearGridToolStripMenuItem_Click(object sender, EventArgs e)
@@ -590,7 +587,7 @@ namespace Flowly
             if (flowly.Grid != null)
             {
                 // ask this if there are any changes!
-                if(askMeSave==true)
+                if (askMeSave == true)
                 {
                     DialogResult saveChanges = MessageBox.Show("Do you want to save before opening a new grid?", "Save before closing", MessageBoxButtons.YesNo);
                     if (saveChanges == DialogResult.Yes)
@@ -599,7 +596,7 @@ namespace Flowly
                         if (theGrid.Name != null)
                         {
                             flowly.SaveGrid(theGrid, out nameForForm);
-                           // askMeSave = false;
+                            // askMeSave = false;
                         }
                         else
                         {
@@ -647,7 +644,7 @@ namespace Flowly
             if (flowly.Grid != null)
             {
                 // ask this if there are any changes!
-                if(askMeSave==true)
+                if (askMeSave == true)
                 {
                     DialogResult saveChanges = MessageBox.Show("Do you want to save before closing?", "Save before closing", MessageBoxButtons.YesNo);
                     if (saveChanges == DialogResult.Yes)
@@ -656,12 +653,12 @@ namespace Flowly
                         if (theGrid.Name != null)
                         {
                             flowly.SaveGrid(theGrid, out nameForForm);
-                           // askMeSave = false;
+                            // askMeSave = false;
                         }
                         else
                         {
                             flowly.SaveAsGrid(theGrid, out nameForForm);
-                          //  askMeSave = false;
+                            //  askMeSave = false;
                         }
                     }
 
@@ -769,7 +766,7 @@ namespace Flowly
         {
             //When user goes into Edit Mode
             //Update button is enabled and changes on selected component are possible
-           
+
             if (currentWorkingMode == WorkingMode.edit && changeIsMade)
             {
                 int x = xPos;
@@ -831,10 +828,10 @@ namespace Flowly
             if (nudFlow.Value > nudCapacity.Value && nudFlow.Enabled)
             {
                 nudFlow.Value = nudCapacity.Value;
-               
+
             }
             changeIsMade = true;
-            
+
 
         }
 
@@ -850,12 +847,12 @@ namespace Flowly
                                          .Select(path => Path.GetFileName(path))
                                          .ToArray();
 
-                for (int counter = currNumber;counter<listBoxStates.Items.Count;counter++)
+                for (int counter = currNumber; counter < listBoxStates.Items.Count; counter++)
                 {
                     File.Delete("../../Changes/" + files[counter]);
-                    
+
                 }
-                for(int counter = listBoxStates.Items.Count-1;counter>=currNumber;counter--)
+                for (int counter = listBoxStates.Items.Count - 1; counter >= currNumber; counter--)
                 {
                     listBoxStates.Items.RemoveAt(listBoxStates.Items.Count - 1);
                 }
@@ -870,7 +867,7 @@ namespace Flowly
 
         private void buttonUndo_Click(object sender, EventArgs e)
         {
-            if(listBoxStates.Items.Count==0)
+            if (listBoxStates.Items.Count == 0)
             {
                 MessageBox.Show("No changes!");
             }
@@ -891,14 +888,56 @@ namespace Flowly
                 flowly.counterChange = total - 1;
 
             }
-
-
-
         }
 
+        FormWindowState LastWindowState = FormWindowState.Minimized;
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            // When window state changes
+            if (WindowState != LastWindowState)
+            {
+                LastWindowState = WindowState;
 
 
+                if (WindowState == FormWindowState.Maximized)
+                {
 
+                }
+                if (WindowState == FormWindowState.Normal)
+                {
+
+
+                    ////Invalidate
+                    //Thread t = new Thread(() => {
+                    //    Thread.Sleep(10);
+                      
+                    //        try {
+                    //            flowly.UpdateGrid();
+                    //        }
+                    //        catch (Exception ex)
+                    //        {
+                    //            MessageBox.Show("Went wrong" + ex.ToString());
+                    //        MessageBox.Show("wong" + ex.Message);
+
+                    //    }
+                               
+                        
+                    //    MessageBox.Show("Finished");
+
+
+                    //});
+                    //t.Start();
+
+                }
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+            grid.Refresh();
+            flowly.UpdateGrid();
+        }
 
         //private void openLogWithChangesToolStripMenuItem_Click(object sender, EventArgs e)
         //{
