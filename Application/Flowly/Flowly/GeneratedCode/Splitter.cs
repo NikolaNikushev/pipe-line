@@ -66,6 +66,49 @@ namespace Flowly
             CreateConnectionPoints();
 
         }
+        //overloading
+
+        public Splitter(Rectangle theRectangle, bool theDiffCurrFlowPossible,int theTopPerc, int theBottomPerc) : base(theRectangle)
+        {
+
+
+
+            rectangleSmallRightUp = new Rectangle();
+            rectangleSmallRightUp.X = rectangleBig.X + rectangleBig.Width / 2;
+            rectangleSmallRightUp.Y = rectangleBig.Y;
+            rectangleSmallRightUp.Height = rectangleBig.Height / 2;
+            rectangleSmallRightUp.Width = rectangleBig.Width / 2;
+
+
+            rectangleSmallRightDown = new Rectangle();
+            rectangleSmallRightDown.X = rectangleBig.X + rectangleBig.Width / 2;
+            rectangleSmallRightDown.Y = rectangleBig.Y + rectangleBig.Height / 2;
+            rectangleSmallRightDown.Height = rectangleBig.Height / 2;
+            rectangleSmallRightDown.Width = rectangleBig.Width / 2;
+
+
+            rectangleCombLeft = new Rectangle();
+            rectangleCombLeft.X = rectangleBig.X;
+            rectangleCombLeft.Y = rectangleBig.Y;
+            rectangleCombLeft.Height = rectangleBig.Height;
+            rectangleCombLeft.Width = rectangleBig.Width / 2;
+
+
+            diffCurrFlowPossible = theDiffCurrFlowPossible;
+            if (diffCurrFlowPossible)
+            {
+                imageResource = Image.FromFile("images\\ad_splitter2.png");
+                this.EditableProperties.Add(GeneratedCode.EditablePropertiesEnum.splitterFlow);
+                TopOutputPercentage = theTopPerc;
+                BottomOutputPercentage = theBottomPerc;
+            }
+            else
+            {
+                imageResource = Image.FromFile("images\\splitter2.png");
+            }
+            CreateConnectionPoints();
+
+        }
 
         public override bool SetCapacity(float givenCapacity)
         {

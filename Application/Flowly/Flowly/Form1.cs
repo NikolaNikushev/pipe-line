@@ -51,9 +51,9 @@ namespace Flowly
             InitializeComponent();
 
             askMeSave = false;
-         
 
-          
+
+
 
             foreach (Control item in this.groupBox1.Controls)
             {
@@ -64,6 +64,9 @@ namespace Flowly
                         item.Click += (x, y) => ActivateCreating(pb);
                     }
             }
+
+
+
             theGrid = new Grid(grid);
             flowly = new SystemFlowly(theGrid,this,this);
             currentSelectedComponent = null;
@@ -105,6 +108,7 @@ namespace Flowly
 
         private void grid_Click(object sender, EventArgs e)
         {
+           
             if (currentPB != null)
             {
                 //if(theImageLocationIsValid)
@@ -180,7 +184,7 @@ namespace Flowly
 
                         break;
                     case WorkingMode.create:
-                        ResetProperties();
+                      //  ResetProperties();
 
                         x -= currentPB.Width / 2;
                         y -= currentPB.Height / 2;
@@ -224,11 +228,16 @@ namespace Flowly
                             {
                                 currentComponentName = ComponentName.Sink;
                             }
+
+                          
+
                             if (flowly.CheckFreeSpot(r))
                             {
 
-                                if (flowly.CreateComponentDrawn(currentComponentName, r))
+                                if (flowly.CreateComponentDrawn(currentComponentName, r,nudFlow.Value,nudCapacity.Value,trackBarLeft.Value,trackBarRight.Value))
                                 {
+                                  
+
                                     if (currentComponentName == ComponentName.Pump)
                                     {
 
@@ -250,6 +259,8 @@ namespace Flowly
                         // dictionary.Add(r, currentPB.Image);
 
                         // Paint(item);
+
+                      //    ResetProperties();
                         break;
                     case WorkingMode.remove:
                         ResetProperties();
@@ -283,6 +294,7 @@ namespace Flowly
 
                         break;
                     case WorkingMode.edit:
+                      
                         ResetProperties();
                         newPoint = new Point(x, y);
                         currentSelectedComponent = flowly.GetComponentPointAt(newPoint);
@@ -313,20 +325,23 @@ namespace Flowly
                                     currentOutputConnectionPoints.Add(item);
                                 }
                             }
-                            if (currentSelectedComponent.CurrentFlow == 0)
-                            {
-                                trackBarLeft.Value = 50;
-                                trackBarRight.Value = 50;
-                            }
-                            else
-                            {
-                                int maxFlow = Convert.ToInt32(currentSelectedComponent.CurrentFlow);
-                                trackBarLeft.Value = Convert.ToInt32((maxFlow - currentOutputConnectionPoints[1].CurrentFlow) * 100) / maxFlow;
-                                trackBarRight.Value = Convert.ToInt32((maxFlow - currentOutputConnectionPoints[0].CurrentFlow) * 100) / maxFlow;
-                            }
+                            //if (currentSelectedComponent.CurrentFlow == 0)
+                            //{
+                            //    trackBarLeft.Value = 50;
+                            //    trackBarRight.Value = 50;
+                            //}
+                            //else
+                            //{
+                            //    int maxFlow = Convert.ToInt32(currentSelectedComponent.CurrentFlow);
+                            //    trackBarLeft.Value = Convert.ToInt32((maxFlow - currentOutputConnectionPoints[1].CurrentFlow) * 100) / maxFlow;
+                            //    trackBarRight.Value = Convert.ToInt32((maxFlow - currentOutputConnectionPoints[0].CurrentFlow) * 100) / maxFlow;
+                            //}
 
-                            trackBarLeft.Enabled = true;
-                            trackBarRight.Enabled = true;
+                            Splitter testSplitter = (Splitter)currentSelectedComponent;
+                            trackBarLeft.Value = testSplitter.TopOutputPercentage;
+                            trackBarRight.Value = testSplitter.BottomOutputPercentage;
+
+                            SetTrackBarVisibility(true);
                         }
                         else
                         {
@@ -447,6 +462,7 @@ namespace Flowly
 
         private void toolPipe_Click(object sender, EventArgs e)
         {
+            SetTrackBarVisibility(false);
             currentWorkingMode = WorkingMode.pipe;
 
             HighlightCurrentPB(sender as PictureBox);
@@ -468,9 +484,87 @@ namespace Flowly
         private void ActivateCreating(PictureBox pb)
         {
             ResetProperties();
+           
             RefreshGridFromMode();
             currentWorkingMode = WorkingMode.create;
             HighlightCurrentPB(pb);
+
+            /*
+
+              switch (currentComponentName)
+                            {
+                                case ComponentName.Pump:
+                                    nudCapacity.Enabled = true;
+                                    nudFlow.Enabled = true;
+                                    btnUpdate.Enabled = true;
+                                    break;
+                                case ComponentName.Sink:
+                                    nudCapacity.Enabled = true;
+                                    btnUpdate.Enabled = true;
+                                    break;
+                                case ComponentName.SplitterAdj:
+                                    trackBarLeft.Enabled = true;
+                                    trackBarRight.Enabled = true;
+                                    trackBarRight.Visible = true;
+                                    trackBarLeft.Visible = true;
+                                    btnUpdate.Enabled = true;
+                                    break;
+
+                                default:
+                                    //
+                                    break;
+
+
+
+                            }
+              */
+
+            switch (pb.Name)
+            {
+                case "toolPump":
+                    nudCapacity.Enabled = true;
+                    nudFlow.Enabled = true;
+                    trackBarLeft.Enabled = false;
+                    trackBarRight.Enabled = false;
+                    trackBarRight.Visible = false;
+                    trackBarLeft.Visible = false;
+                    //   btnUpdate.Enabled = true;
+                    break;
+
+                case "toolSink":
+                    nudCapacity.Enabled = true;
+                    //  btnUpdate.Enabled = true;
+                    trackBarLeft.Enabled = false;
+                    trackBarRight.Enabled = false;
+                    trackBarRight.Visible = false;
+                    trackBarLeft.Visible = false;
+                    break;
+                case "toolSplitterAdj":
+                    trackBarLeft.Enabled = true;
+                    trackBarRight.Enabled = true;
+                    trackBarRight.Visible = true;
+                    trackBarLeft.Visible = true;
+                  //  btnUpdate.Enabled = true;
+                    break;
+               
+                case "toolSplitter":
+                    trackBarLeft.Enabled = false;
+                    trackBarRight.Enabled = false;
+                    trackBarRight.Visible = false;
+                    trackBarLeft.Visible = false;
+                    break;
+                case "toolMerger":
+                    trackBarLeft.Enabled = false;
+                    trackBarRight.Enabled = false;
+                    trackBarRight.Visible = false;
+                    trackBarLeft.Visible = false;
+                    break;
+                default:
+                   
+                    //
+                    break;
+
+            }
 
 
         }
@@ -499,6 +593,7 @@ namespace Flowly
         private void toolEdit_Click(object sender, EventArgs e)
 
         {
+            SetTrackBarVisibility(false);
             RefreshGridFromMode();
             currentWorkingMode = WorkingMode.edit;
             HighlightCurrentPB(sender as PictureBox);
@@ -506,6 +601,7 @@ namespace Flowly
 
         private void toolRemove_Click(object sender, EventArgs e)
         {
+            SetTrackBarVisibility(false);
             ResetProperties();
             RefreshGridFromMode();
             currentWorkingMode = WorkingMode.remove;

@@ -39,6 +39,7 @@
             this.clearGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonUndo = new System.Windows.Forms.Button();
             this.buttonGoTo = new System.Windows.Forms.Button();
             this.listBoxStates = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -66,7 +67,6 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.grid = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.buttonUndo = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -174,6 +174,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Toolbox";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // buttonUndo
+            // 
+            this.buttonUndo.Location = new System.Drawing.Point(11, 337);
+            this.buttonUndo.Name = "buttonUndo";
+            this.buttonUndo.Size = new System.Drawing.Size(117, 23);
+            this.buttonUndo.TabIndex = 17;
+            this.buttonUndo.Text = "Undo ";
+            this.buttonUndo.UseVisualStyleBackColor = true;
+            this.buttonUndo.Click += new System.EventHandler(this.buttonUndo_Click);
             // 
             // buttonGoTo
             // 
@@ -474,16 +484,6 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // buttonUndo
-            // 
-            this.buttonUndo.Location = new System.Drawing.Point(11, 337);
-            this.buttonUndo.Name = "buttonUndo";
-            this.buttonUndo.Size = new System.Drawing.Size(117, 23);
-            this.buttonUndo.TabIndex = 17;
-            this.buttonUndo.Text = "Undo ";
-            this.buttonUndo.UseVisualStyleBackColor = true;
-            this.buttonUndo.Click += new System.EventHandler(this.buttonUndo_Click);
             // 
             // Form1
             // 

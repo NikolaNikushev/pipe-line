@@ -155,7 +155,7 @@ namespace Flowly
         /// <param name="rectangle">The rectangle that the component will have</param>
         /// <param name="cCapacity">component capacity</param>
         /// <returns>True if successfully created, false otherwise.</returns>
-        public virtual bool CreateComponentDrawn(ComponentName cName, Rectangle rectangle)
+        public virtual bool CreateComponentDrawn(ComponentName cName, Rectangle rectangle,decimal theFlow, decimal theCapacity, int theTopPerc, int theBottomPerc)
         {
             //save state
             CreateChange("Create component.");
@@ -177,16 +177,24 @@ namespace Flowly
                     cd = new Pipe(rectangle);
                     break;
                 case ComponentName.Pump:
-                    cd = new Pump(rectangle);
+                    //  cd = new Pump(rectangle);
+                    cd = new Pump(rectangle, (float)theCapacity, (float)theFlow);
+                    cd.SetCapacity((float)theCapacity);
+                    cd.SetCurrentFlow((float)theFlow);
+                    List<ConnectionPoint> pumpOutput = cd.GiveMeYourOutputConnectionPoints();
+                    pumpOutput[0].SetCapacity((float)theCapacity);
+                    pumpOutput[0].SetCurrentFlow((float)theFlow);
                     break;
                 case ComponentName.Sink:
-                    cd = new Sink(rectangle);
+                    //  cd = new Sink(rectangle);
+                    cd = new Sink(rectangle, (float)theCapacity);
                     break;
                 case ComponentName.Splitter:
                     cd = new Splitter(rectangle, false);
                     break;
                 case ComponentName.SplitterAdj:
-                    cd = new Splitter(rectangle, true);
+                    // cd = new Splitter(rectangle, true);
+                    cd = new Splitter(rectangle, true, theTopPerc, theBottomPerc);
                     break;
 
                 default:
@@ -209,6 +217,20 @@ namespace Flowly
             }
 
         }
+
+
+        //public ComponentDrawn GetComponentAtRectangle(Rectangle theRectangle)
+        //{
+        //    foreach(ComponentDrawn cd in Grid.ListOfComponents)
+        //    {
+        //        if(cd.RectangleBig==theRectangle)
+        //        {
+        //            return cd;
+        //        }
+               
+        //    }
+        //    return null;
+        //}
 
         internal void DrawPipeline(Pipe pipe)
         {
@@ -378,7 +400,7 @@ namespace Flowly
 
                 try
                 {
-                    myFileStream = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write);
+                    myFileStream = new FileStream(saveFileDialog.FileName + ".fly", FileMode.Create, FileAccess.Write);
                     myBinaryFormatter = new BinaryFormatter();
                     givenGrid.Name = Path.GetFileNameWithoutExtension(saveFileDialog.FileName);
                     givenGrid.Destination = saveFileDialog.FileName;
@@ -426,7 +448,7 @@ namespace Flowly
 
             try
             {
-                myFileStream = new FileStream(givenGrid.Destination, FileMode.Create, FileAccess.Write);
+                myFileStream = new FileStream(givenGrid.Destination + ".fly", FileMode.Create, FileAccess.Write);
                 myBinaryFormatter = new BinaryFormatter();
 
 

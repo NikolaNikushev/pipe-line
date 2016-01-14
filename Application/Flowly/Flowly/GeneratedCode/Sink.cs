@@ -27,6 +27,18 @@ namespace Flowly
             this.EditableProperties.Add(GeneratedCode.EditablePropertiesEnum.capacity);
         }
 
+        //overloading
+
+        public Sink(Rectangle theRectangle,float theCapacity) : base(theRectangle)
+        {
+            imageResource = Image.FromFile("images\\sink2.png");
+            diffCurrFlowPossible = false;
+            CreateConnectionPoints();
+            this.EditableProperties.Add(GeneratedCode.EditablePropertiesEnum.capacity);
+
+            SetCapacity(theCapacity);
+        }
+
         public override bool CreateConnectionPoints()
         {
             try

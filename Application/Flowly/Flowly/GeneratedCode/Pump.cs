@@ -18,12 +18,25 @@ namespace Flowly
     /// </summary>
     public class Pump : ComponentDrawn
     {
-        public Pump(Rectangle theRectangle) :base(theRectangle)
+        public Pump(Rectangle theRectangle) : base(theRectangle)
         {
             imageResource = Image.FromFile("images\\start_point.png");
             CreateConnectionPoints();
             this.EditableProperties.Add(GeneratedCode.EditablePropertiesEnum.capacity);
             this.EditableProperties.Add(GeneratedCode.EditablePropertiesEnum.flow);
+        }
+
+        //overloading
+
+        public Pump(Rectangle theRectangle, float theCapacity, float theFlow) : base(theRectangle)
+        {
+            imageResource = Image.FromFile("images\\start_point.png");
+            CreateConnectionPoints();
+            this.EditableProperties.Add(GeneratedCode.EditablePropertiesEnum.capacity);
+            this.EditableProperties.Add(GeneratedCode.EditablePropertiesEnum.flow);
+
+            SetCapacity(theCapacity);
+            SetCurrentFlow(theFlow);
         }
 
         public override bool CreateConnectionPoints()
@@ -40,6 +53,6 @@ namespace Flowly
             }
         }
 
-        
+
     }
 }

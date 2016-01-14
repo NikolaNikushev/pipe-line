@@ -513,18 +513,65 @@ namespace Flowly
 
         private void DrawConnectionPointLimits(Brush color, ConnectionPoint cp)
         {
-            int width = cp.rectangle.Width;
-            int height = cp.rectangle.Height;
-            int x = cp.rectangle.X;
-            int y = cp.rectangle.Y;
-            Rectangle r = new Rectangle(new Point(x, y), new Size(width, 5));
-            graphic.FillRectangle(color, r);
-            r = new Rectangle(new Point(x + width, y), new Size(5, height + 5));
-            graphic.FillRectangle(color, r);
-            r = new Rectangle(new Point(x, y + height), new Size(width, 5));
-            graphic.FillRectangle(color, r);
-            r = new Rectangle(new Point(x, y), new Size(5, height));
-            graphic.FillRectangle(color, r);
+            //int width = cp.rectangle.Width;
+            //int height = cp.rectangle.Height;
+            //int x = cp.rectangle.X;
+            //int y = cp.rectangle.Y;
+            //Rectangle r = new Rectangle(new Point(x, y), new Size(width, 5));
+            //graphic.FillRectangle(color, r);
+            //r = new Rectangle(new Point(x + width, y), new Size(5, height + 5));
+            //graphic.FillRectangle(color, r);
+            //r = new Rectangle(new Point(x, y + height), new Size(width, 5));
+            //graphic.FillRectangle(color, r);
+            //r = new Rectangle(new Point(x, y), new Size(5, height));
+            //graphic.FillRectangle(color, r);
+
+            Pen myNewPen = new Pen(color, 2);
+            graphic.DrawRectangle(myNewPen,cp.rectangle);
+
+
+            //int width = cp.rectangle.Width / 2;
+            //int height = cp.rectangle.Height / 2;
+            //int x = cp.rectangle.X;
+            //int y = cp.rectangle.Y;
+            //Rectangle r = new Rectangle(new Point(x, y), new Size(width, 5));
+            //graphic.FillRectangle(color, r);
+            //r = new Rectangle(new Point(x + width, y), new Size(5, height + 5));
+            //graphic.FillRectangle(color, r);
+            ////r = new Rectangle(new Point(x, y + height), new Size(width, 5));
+            ////graphic.FillRectangle(color, r);
+            ////r = new Rectangle(new Point(x, y), new Size(5, height));
+            ////graphic.FillRectangle(color, r);
+
+            //if(cp.IsOutput)
+            //{
+            //    int width = cp.rectangle.Width / 2;
+            //    int height = cp.rectangle.Height / 2;
+            //    int x = cp.rectangle.X + width ;
+            //    int y = cp.rectangle.Y;
+            //    graphic.DrawRectangle(Pens.Black, x, y, width, height);
+
+            //    //int width = cp.rectangle.Width ;
+            //    //int height = cp.rectangle.Height;
+            //    //int x = cp.rectangle.X;
+            //    //int y = cp.rectangle.Y;
+            //    //graphic.DrawRectangle(Pens.Black, x, y, width, height);
+
+            //}
+            //else
+            //{
+            //    int width = cp.rectangle.Width / 2;
+            //    int height = cp.rectangle.Height / 2;
+            //    int x = cp.rectangle.X;
+            //    int y = cp.rectangle.Y + height / 2;
+            //    graphic.DrawRectangle(Pens.Black, x, y, width, height);
+            //}
+
+
+
+
+
+
         }
 
         private void HighlightPointsOfComponent(ComponentDrawn cd)
