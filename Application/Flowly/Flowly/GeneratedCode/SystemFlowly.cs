@@ -14,6 +14,8 @@ using System.Windows.Forms;
 using System.IO; //because of FileStream
 using System.Runtime.Serialization.Formatters.Binary; //because of BinaryFormatter
 using System.Runtime.Serialization;//because of SerializationException
+using System.Threading;
+
 namespace Flowly
 {
     /// <summary>
@@ -666,58 +668,66 @@ namespace Flowly
         /// <returns>True if successfull, false otherwise.</returns>
         /// 
 
-      
-            
+        Object locker = new Object();
+
         public virtual bool CreateChange(string givenDescription)
         {
-            bool success = false;
-            FileStream myFileStream = null;
-            BinaryFormatter myBinaryFormatter = null;
-
-            try
+            Thread worked = new Thread(() =>
             {
-                //save state
-                //if(counterChange==10)
-                //{
-                //    Array.ForEach(Directory.GetFiles("../../Changes"), File.Delete);
-                //    counterChange = 0;
-                //    gridChangedListener.GridChanged();
-                //}
-                myFileStream = new FileStream("../../Changes/"+counterChange + " - " + givenDescription, FileMode.Create, FileAccess.Write);
-               
-               
-               
-
-                myBinaryFormatter = new BinaryFormatter();
-
-                SerializationObject newObject = new SerializationObject(grid.Name, grid.ListOfComponents, grid.Destination);
-                myBinaryFormatter.Serialize(myFileStream, newObject);
-
-                Change myNewChange = new Change(counterChange + " - " + givenDescription);
-                changes.Add(myNewChange);
-                changeListener.ChangeOccured(myNewChange);
-                counterChange++;
-                success = true;
-
-                //end
-            }
-            catch(Exception e)
-            {
-                MessageBox.Show(e.Message);
-                success = false;
-            }
-            finally
-           {
-
-                if (myFileStream != null)
+                lock (locker)
                 {
+                    bool success = false;
+                    FileStream myFileStream = null;
+                    BinaryFormatter myBinaryFormatter = null;
 
-                    myFileStream.Close();
+                    try
+                    {
+                        //save state
+                        //if(counterChange==10)
+                        //{
+                        //    Array.ForEach(Directory.GetFiles("../../Changes"), File.Delete);
+                        //    counterChange = 0;
+                        //    gridChangedListener.GridChanged();
+                        //}
+                        myFileStream = new FileStream("../../Changes/" + counterChange + " - " + givenDescription, FileMode.Create, FileAccess.Write);
 
+
+
+
+                        myBinaryFormatter = new BinaryFormatter();
+
+                        SerializationObject newObject = new SerializationObject(grid.Name, grid.ListOfComponents, grid.Destination);
+                        myBinaryFormatter.Serialize(myFileStream, newObject);
+
+                        Change myNewChange = new Change(counterChange + " - " + givenDescription);
+                        changes.Add(myNewChange);
+                        changeListener.ChangeOccured(myNewChange);
+                        counterChange++;
+                        success = true;
+
+                        //end
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.Message);
+                        success = false;
+                    }
+                    finally
+                    {
+
+                        if (myFileStream != null)
+                        {
+
+                            myFileStream.Close();
+
+                        }
+                    }
                 }
             }
-
-            return success;
+            );
+            worked.Start();
+            
+            return true;
         }
 
        
