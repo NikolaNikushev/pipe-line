@@ -159,12 +159,26 @@ namespace Flowly
             foreach (ComponentDrawn item in ListOfComponents)
             {
                 Rectangle componentRect = item.RectangleBig;
-                Rectangle pointRect = new Rectangle(pointLocation, new Size(1, 1));
+                Rectangle pointRect = new Rectangle(pointLocation, new Size(4, 4));
+                if(item is Pipe)
+                {
+                    if (CheckInteresectsWithPipe(pointRect, item as Pipe))
+                    {
+                        return item;
+                    }
+                }
                 if (componentRect.IntersectsWith(pointRect))
                 {
                     return item;
                 }
             }
+
+            return null;
+        }
+
+        internal ComponentDrawn GetPipeLineAt(Point pointLocation)
+        {
+           
 
             return null;
         }
@@ -200,10 +214,15 @@ namespace Flowly
         {
 
             foreach (ConnectionPoint CP in pipe.GiveMeYourConnectionPoints())
-            {
+            {                
                 CP.PipeConnection = null;
+                if (!CP.IsOutput)
+                {
+                    CP.SetCurrentFlow(0);
+                    CP.ComponentDrawnBelong.UpdateComponentFlow();
+                }
+
             }
-            listOfComponents.Remove(pipe);
 
 
         }

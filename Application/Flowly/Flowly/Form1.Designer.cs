@@ -39,6 +39,7 @@
             this.clearGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonUndo = new System.Windows.Forms.Button();
             this.buttonGoTo = new System.Windows.Forms.Button();
             this.listBoxStates = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -65,8 +66,6 @@
             this.process1 = new System.Diagnostics.Process();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.grid = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.buttonUndo = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -174,6 +173,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Toolbox";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // buttonUndo
+            // 
+            this.buttonUndo.Location = new System.Drawing.Point(11, 337);
+            this.buttonUndo.Name = "buttonUndo";
+            this.buttonUndo.Size = new System.Drawing.Size(117, 23);
+            this.buttonUndo.TabIndex = 17;
+            this.buttonUndo.Text = "Undo ";
+            this.buttonUndo.UseVisualStyleBackColor = true;
+            this.buttonUndo.Click += new System.EventHandler(this.buttonUndo_Click);
             // 
             // buttonGoTo
             // 
@@ -465,33 +474,12 @@
             this.grid.MouseLeave += new System.EventHandler(this.grid_MouseLeave);
             this.grid.MouseMove += new System.Windows.Forms.MouseEventHandler(this.grid_MouseMove);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(600, 182);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // buttonUndo
-            // 
-            this.buttonUndo.Location = new System.Drawing.Point(11, 337);
-            this.buttonUndo.Name = "buttonUndo";
-            this.buttonUndo.Size = new System.Drawing.Size(117, 23);
-            this.buttonUndo.TabIndex = 17;
-            this.buttonUndo.Text = "Undo ";
-            this.buttonUndo.UseVisualStyleBackColor = true;
-            this.buttonUndo.Click += new System.EventHandler(this.buttonUndo_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(949, 680);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.grid);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
@@ -551,7 +539,6 @@
         private System.Windows.Forms.TrackBar trackBarRight;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox grid;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem closeGridToolStripMenuItem;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.NumericUpDown nudCapacity;

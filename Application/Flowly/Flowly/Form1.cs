@@ -195,7 +195,6 @@ namespace Flowly
                             int height = currentPB.Height;
                             Rectangle r = new Rectangle(x, y, width, height);
                             ComponentName currentComponentName;
-                            ComponentDrawn createdComponent;
                             if (currentPB.Image.Equals(toolPump.Image))
                             {
                                 currentComponentName = ComponentName.Pump;
@@ -234,7 +233,6 @@ namespace Flowly
 
                                     }
                                 }
-
 
                             }
                             else
