@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using System.IO; //because of FileStream
 using System.Runtime.Serialization.Formatters.Binary; //because of BinaryFormatter
 using System.Runtime.Serialization;//because of SerializationException
+using System.Threading;
 namespace Flowly
 {
     /// <summary>
@@ -49,7 +50,7 @@ namespace Flowly
         }
 
 
-        public SystemFlowly(Grid grid,IChangeOccured theChangeListener, IGridChanged theGridChangedListener)
+        public SystemFlowly(Grid grid, IChangeOccured theChangeListener, IGridChanged theGridChangedListener)
         {
             this.grid = grid;
             counterChange = 0;
@@ -67,7 +68,7 @@ namespace Flowly
         /// <returns>True if it is, false otherwise.</returns>
         public virtual bool CheckFreeSpot(Rectangle r)
         {
-            
+
             List<Rectangle> rectangles = grid.GetComponentsRectangles();
             foreach (Rectangle rect in rectangles)
             {
@@ -75,7 +76,7 @@ namespace Flowly
             }
 
             return !grid.CheckComponentIntersectsWithPipe(r);
-            
+
         }
 
         /// <summary>
@@ -123,7 +124,7 @@ namespace Flowly
 
         internal bool DrawPipeToCursor(Point start, Point end, ref Pipe currentPipe)
         {
-           
+
 
             return grid.DrawPipeToPoint(start, end, ref currentPipe);
         }
@@ -135,7 +136,7 @@ namespace Flowly
             //end
             grid.AddPipe(pipe);
 
-         
+
         }
 
         internal void RemovePipe(Pipe pipe)
@@ -145,7 +146,7 @@ namespace Flowly
             //end
             grid.RemovePipe(pipe);
 
-          
+
         }
 
         /// <summary>
@@ -155,7 +156,7 @@ namespace Flowly
         /// <param name="rectangle">The rectangle that the component will have</param>
         /// <param name="cCapacity">component capacity</param>
         /// <returns>True if successfully created, false otherwise.</returns>
-        public virtual bool CreateComponentDrawn(ComponentName cName, Rectangle rectangle)
+        public virtual bool CreateComponentDrawn(ComponentName cName, Rectangle rectangle, decimal theFlow, decimal theCapacity, int theTopPerc, int theBottomPerc)
         {
             //save state
             CreateChange("Create component.");
@@ -177,16 +178,24 @@ namespace Flowly
                     cd = new Pipe(rectangle);
                     break;
                 case ComponentName.Pump:
-                    cd = new Pump(rectangle);
+                    //  cd = new Pump(rectangle);
+                    cd = new Pump(rectangle, (float)theCapacity, (float)theFlow);
+                    cd.SetCapacity((float)theCapacity);
+                    cd.SetCurrentFlow((float)theFlow);
+                    List<ConnectionPoint> pumpOutput = cd.GiveMeYourOutputConnectionPoints();
+                    pumpOutput[0].SetCapacity((float)theCapacity);
+                    pumpOutput[0].SetCurrentFlow((float)theFlow);
                     break;
                 case ComponentName.Sink:
-                    cd = new Sink(rectangle);
+                    //  cd = new Sink(rectangle);
+                    cd = new Sink(rectangle, (float)theCapacity);
                     break;
                 case ComponentName.Splitter:
                     cd = new Splitter(rectangle, false);
                     break;
                 case ComponentName.SplitterAdj:
-                    cd = new Splitter(rectangle, true);
+                    // cd = new Splitter(rectangle, true);
+                    cd = new Splitter(rectangle, true, theTopPerc, theBottomPerc);
                     break;
 
                 default:
@@ -203,12 +212,26 @@ namespace Flowly
                 grid.Paint(cd);
 
 
-               
+
 
                 return true;
             }
 
         }
+
+
+        //public ComponentDrawn GetComponentAtRectangle(Rectangle theRectangle)
+        //{
+        //    foreach(ComponentDrawn cd in Grid.ListOfComponents)
+        //    {
+        //        if(cd.RectangleBig==theRectangle)
+        //        {
+        //            return cd;
+        //        }
+
+        //    }
+        //    return null;
+        //}
 
         internal void DrawPipeline(Pipe pipe)
         {
@@ -217,7 +240,7 @@ namespace Flowly
             //end
 
             grid.DrawPipelineAndUpdateFLow(pipe);
-            
+
         }
 
         internal void AddComponentDrawn(Pipe pipe)
@@ -238,7 +261,7 @@ namespace Flowly
 
             grid.RemoveComponentDrawnFromGridList(givenComponent);
 
-            
+
 
             return true;
         }
@@ -318,7 +341,7 @@ namespace Flowly
 
 
 
-                
+
 
                 return true;
 
@@ -335,9 +358,9 @@ namespace Flowly
         /// <returns>True for successfull, false otherwise.</returns>
         public virtual bool ClearGrid(bool outside)
         {
-            if(outside)
+            if (outside)
             {
-               // save state
+                // save state
                 CreateChange("Clear grid.");
                 //end
             }
@@ -349,7 +372,7 @@ namespace Flowly
                 this.grid.Graphic.Clear(Color.White);
                 this.grid.ListOfComponents.Clear();
 
-               
+
                 return true;
             }
             catch
@@ -378,7 +401,7 @@ namespace Flowly
 
                 try
                 {
-                    myFileStream = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write);
+                    myFileStream = new FileStream(saveFileDialog.FileName + ".fly", FileMode.Create, FileAccess.Write);
                     myBinaryFormatter = new BinaryFormatter();
                     givenGrid.Name = Path.GetFileNameWithoutExtension(saveFileDialog.FileName);
                     givenGrid.Destination = saveFileDialog.FileName;
@@ -426,7 +449,7 @@ namespace Flowly
 
             try
             {
-                myFileStream = new FileStream(givenGrid.Destination, FileMode.Create, FileAccess.Write);
+                myFileStream = new FileStream(givenGrid.Destination + ".fly", FileMode.Create, FileAccess.Write);
                 myBinaryFormatter = new BinaryFormatter();
 
 
@@ -478,7 +501,7 @@ namespace Flowly
                 this.grid = newlyCreatedGrid;
 
                 //save state
-              //  CreateChange("Newly created grid.");
+                //  CreateChange("Newly created grid.");
                 //end
 
                 success = true;
@@ -552,7 +575,7 @@ namespace Flowly
                     this.grid.PaintAllComponents();
 
                     //save state
-                  //  CreateChange("Newly opened grid.");
+                    //  CreateChange("Newly opened grid.");
                     //end
 
                     success = true;
@@ -585,57 +608,57 @@ namespace Flowly
         /// Goes back to a state before a change is made.
         /// </summary>
         /// <returns>True if successfull, false otherwise.</returns>
-        public virtual bool UndoLastChange(PictureBox givenPictureBox,string givenDescription)
+        public virtual bool UndoLastChange(PictureBox givenPictureBox, string givenDescription)
         {
 
             bool success = false;
-           
-                if (this.grid != null)
-                {
-                    ClearGrid(false);
-                    CloseGrid(false);
-                }
 
-                FileStream myFileStream = null;
-                BinaryFormatter myBinaryFormatter = null;
-                try
-                {
-                    myFileStream = new FileStream("../../Changes/"+givenDescription, FileMode.Open, FileAccess.Read);
-                    myBinaryFormatter = new BinaryFormatter();
+            if (this.grid != null)
+            {
+                ClearGrid(false);
+                CloseGrid(false);
+            }
 
-                    SerializationObject myNewOpenObj = (SerializationObject)myBinaryFormatter.Deserialize(myFileStream);
-                    Grid myNewGrid = new Grid(givenPictureBox);
-                    myNewGrid.Name = myNewOpenObj.Name;
-                    myNewGrid.Destination = myNewOpenObj.Destionation;
-                    myNewGrid.ListOfComponents = myNewOpenObj.listCompDrawn;
-                
-                    this.grid = myNewGrid;
+            FileStream myFileStream = null;
+            BinaryFormatter myBinaryFormatter = null;
+            try
+            {
+                myFileStream = new FileStream("../../Changes/" + givenDescription, FileMode.Open, FileAccess.Read);
+                myBinaryFormatter = new BinaryFormatter();
 
-                    this.grid.PaintAllComponents();
+                SerializationObject myNewOpenObj = (SerializationObject)myBinaryFormatter.Deserialize(myFileStream);
+                Grid myNewGrid = new Grid(givenPictureBox);
+                myNewGrid.Name = myNewOpenObj.Name;
+                myNewGrid.Destination = myNewOpenObj.Destionation;
+                myNewGrid.ListOfComponents = myNewOpenObj.listCompDrawn;
 
-                    success = true;
-                }
+                this.grid = myNewGrid;
 
-                catch (Exception e)
-                {
+                this.grid.PaintAllComponents();
+
+                success = true;
+            }
+
+            catch (Exception e)
+            {
                 MessageBox.Show(e.Message);
-                    
-                    success = false;
-                }
-                finally
+
+                success = false;
+            }
+            finally
+            {
+                if (myFileStream != null)
                 {
-                    if (myFileStream != null)
-                    {
 
-                        myFileStream.Close();
+                    myFileStream.Close();
 
-                    }
                 }
-            
+            }
+
 
             return success;
-            
-         
+
+
         }
         /// <summary>
         /// Always the user makes a change, a new instance of "Change" class is created.
@@ -644,8 +667,12 @@ namespace Flowly
         /// <returns>True if successfull, false otherwise.</returns>
         /// 
 
-      
+
             
+      
+         
+
+
         public virtual bool CreateChange(string givenDescription)
         {
             bool success = false;
@@ -661,10 +688,10 @@ namespace Flowly
                 //    counterChange = 0;
                 //    gridChangedListener.GridChanged();
                 //}
-                myFileStream = new FileStream("../../Changes/"+counterChange + " - " + givenDescription, FileMode.Create, FileAccess.Write);
-               
-               
-               
+                myFileStream = new FileStream("../../Changes/" + counterChange + " - " + givenDescription, FileMode.Create, FileAccess.Write);
+
+
+
 
                 myBinaryFormatter = new BinaryFormatter();
 
@@ -679,13 +706,13 @@ namespace Flowly
 
                 //end
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message);
                 success = false;
             }
             finally
-           {
+            {
 
                 if (myFileStream != null)
                 {
@@ -698,29 +725,29 @@ namespace Flowly
             return success;
         }
 
-       
+
 
         public bool CloseGrid(bool outside)
         {
             try
             {
 
-                if(outside)
+                if (outside)
                 {
                     this.grid = null;
-                     Array.ForEach(Directory.GetFiles("../../Changes"), File.Delete);
+                    Array.ForEach(Directory.GetFiles("../../Changes"), File.Delete);
                     changes.Clear();
-                      gridChangedListener.GridChanged();
-                     counterChange = 0;
+                    gridChangedListener.GridChanged();
+                    counterChange = 0;
                     return true;
                 }
                 else
                 {
                     this.grid = null;
-                   
+
                     return true;
                 }
-               
+
             }
             catch
             {

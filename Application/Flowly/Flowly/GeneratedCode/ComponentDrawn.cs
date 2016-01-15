@@ -54,8 +54,7 @@ namespace Flowly
             listOfConnectionPoints = new List<ConnectionPoint>();
             EditableProperties = new List<EditablePropertiesEnum>();
             listOfComponentDrawn = new List<ComponentDrawn>();
-            SetCapacity(0);
-            SetCurrentFlow(0);
+           
             rectangleBig = theRectangle;
             diffCurrFlowPossible = false;
 

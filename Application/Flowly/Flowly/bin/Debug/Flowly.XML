@@ -147,7 +147,7 @@
             <param name="y"></param>
             <returns>True for successfull, false otherwise.</returns>
         </member>
-        <member name="M:Flowly.SystemFlowly.CreateComponentDrawn(Flowly.GeneratedCode.ComponentName,System.Drawing.Rectangle)">
+        <member name="M:Flowly.SystemFlowly.CreateComponentDrawn(Flowly.GeneratedCode.ComponentName,System.Drawing.Rectangle,System.Decimal,System.Decimal,System.Int32,System.Int32)">
             <summary>
             Creates a new instance of class "ComponentDrawn". 
             </summary>
