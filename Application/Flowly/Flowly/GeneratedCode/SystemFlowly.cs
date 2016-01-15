@@ -15,6 +15,10 @@ using System.IO; //because of FileStream
 using System.Runtime.Serialization.Formatters.Binary; //because of BinaryFormatter
 using System.Runtime.Serialization;//because of SerializationException
 using System.Threading;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 66ddd030fa4bba73e0ada7a21e0280b15bf79427
 namespace Flowly
 {
     /// <summary>
@@ -156,7 +160,11 @@ namespace Flowly
         /// <param name="rectangle">The rectangle that the component will have</param>
         /// <param name="cCapacity">component capacity</param>
         /// <returns>True if successfully created, false otherwise.</returns>
+<<<<<<< HEAD
         public virtual bool CreateComponentDrawn(ComponentName cName, Rectangle rectangle, decimal theFlow, decimal theCapacity, int theTopPerc, int theBottomPerc)
+=======
+        public virtual bool CreateComponentDrawn(ComponentName cName, Rectangle rectangle,decimal theFlow, decimal theCapacity, int theTopPerc, int theBottomPerc)
+>>>>>>> 66ddd030fa4bba73e0ada7a21e0280b15bf79427
         {
             //save state
             CreateChange("Create component.");
@@ -228,7 +236,11 @@ namespace Flowly
         //        {
         //            return cd;
         //        }
+<<<<<<< HEAD
 
+=======
+               
+>>>>>>> 66ddd030fa4bba73e0ada7a21e0280b15bf79427
         //    }
         //    return null;
         //}
@@ -667,20 +679,21 @@ namespace Flowly
         /// <returns>True if successfull, false otherwise.</returns>
         /// 
 
+<<<<<<< HEAD
 
             
       
          
 
+=======
+        Object locker = new Object();
+>>>>>>> 66ddd030fa4bba73e0ada7a21e0280b15bf79427
 
         public virtual bool CreateChange(string givenDescription)
         {
-            bool success = false;
-            FileStream myFileStream = null;
-            BinaryFormatter myBinaryFormatter = null;
-
-            try
+            Thread worked = new Thread(() =>
             {
+<<<<<<< HEAD
                 //save state
                 //if(counterChange==10)
                 //{
@@ -692,18 +705,28 @@ namespace Flowly
 
 
 
+=======
+                lock (locker)
+                {
+                    bool success = false;
+                    FileStream myFileStream = null;
+                    BinaryFormatter myBinaryFormatter = null;
+>>>>>>> 66ddd030fa4bba73e0ada7a21e0280b15bf79427
 
-                myBinaryFormatter = new BinaryFormatter();
+                    try
+                    {
+                        //save state
+                        //if(counterChange==10)
+                        //{
+                        //    Array.ForEach(Directory.GetFiles("../../Changes"), File.Delete);
+                        //    counterChange = 0;
+                        //    gridChangedListener.GridChanged();
+                        //}
+                        myFileStream = new FileStream("../../Changes/" + counterChange + " - " + givenDescription, FileMode.Create, FileAccess.Write);
 
-                SerializationObject newObject = new SerializationObject(grid.Name, grid.ListOfComponents, grid.Destination);
-                myBinaryFormatter.Serialize(myFileStream, newObject);
 
-                Change myNewChange = new Change(counterChange + " - " + givenDescription);
-                changes.Add(myNewChange);
-                changeListener.ChangeOccured(myNewChange);
-                counterChange++;
-                success = true;
 
+<<<<<<< HEAD
                 //end
             }
             catch (Exception e)
@@ -713,16 +736,43 @@ namespace Flowly
             }
             finally
             {
+=======
+>>>>>>> 66ddd030fa4bba73e0ada7a21e0280b15bf79427
 
-                if (myFileStream != null)
-                {
+                        myBinaryFormatter = new BinaryFormatter();
 
-                    myFileStream.Close();
+                        SerializationObject newObject = new SerializationObject(grid.Name, grid.ListOfComponents, grid.Destination);
+                        myBinaryFormatter.Serialize(myFileStream, newObject);
 
+                        Change myNewChange = new Change(counterChange + " - " + givenDescription);
+                        changes.Add(myNewChange);
+                        changeListener.ChangeOccured(myNewChange);
+                        counterChange++;
+                        success = true;
+
+                        //end
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.Message);
+                        success = false;
+                    }
+                    finally
+                    {
+
+                        if (myFileStream != null)
+                        {
+
+                            myFileStream.Close();
+
+                        }
+                    }
                 }
             }
-
-            return success;
+            );
+            worked.Start();
+            
+            return true;
         }
 
 

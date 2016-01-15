@@ -477,13 +477,20 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(600, 182);
+            this.button1.Location = new System.Drawing.Point(772, 292);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+<<<<<<< HEAD
             this.button1.Click += new System.EventHandler(this.button1_Click);
+<<<<<<< HEAD
+=======
+=======
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+>>>>>>> 0f59eabaf74cf0c7e20955131f2bcc63675d2d4a
+>>>>>>> 66ddd030fa4bba73e0ada7a21e0280b15bf79427
             // 
             // Form1
             // 
@@ -501,6 +508,7 @@
             this.Name = "Form1";
             this.Text = "Flowly - flow system / (New grid)";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -551,7 +559,6 @@
         private System.Windows.Forms.TrackBar trackBarRight;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox grid;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem closeGridToolStripMenuItem;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.NumericUpDown nudCapacity;
@@ -563,6 +570,7 @@
         private System.Windows.Forms.Button buttonGoTo;
         private System.Windows.Forms.ListBox listBoxStates;
         private System.Windows.Forms.Button buttonUndo;
+        private System.Windows.Forms.Button button1;
     }
 }
 

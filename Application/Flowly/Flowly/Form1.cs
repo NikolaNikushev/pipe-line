@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Threading;
 
 namespace Flowly
 {
@@ -53,7 +54,14 @@ namespace Flowly
             askMeSave = false;
 
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 0f59eabaf74cf0c7e20955131f2bcc63675d2d4a
+>>>>>>> 66ddd030fa4bba73e0ada7a21e0280b15bf79427
 
             foreach (Control item in this.groupBox1.Controls)
             {
@@ -112,7 +120,11 @@ namespace Flowly
 
         private void grid_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
 
+=======
+           
+>>>>>>> 66ddd030fa4bba73e0ada7a21e0280b15bf79427
             if (currentPB != null)
             {
                 //if(theImageLocationIsValid)
@@ -188,7 +200,11 @@ namespace Flowly
 
                         break;
                     case WorkingMode.create:
+<<<<<<< HEAD
                         //  ResetProperties();
+=======
+                      //  ResetProperties();
+>>>>>>> 66ddd030fa4bba73e0ada7a21e0280b15bf79427
 
                         x -= currentPB.Width / 2;
                         y -= currentPB.Height / 2;
@@ -203,7 +219,6 @@ namespace Flowly
                             int height = currentPB.Height;
                             Rectangle r = new Rectangle(x, y, width, height);
                             ComponentName currentComponentName;
-                            ComponentDrawn createdComponent;
                             if (currentPB.Image.Equals(toolPump.Image))
                             {
                                 currentComponentName = ComponentName.Pump;
@@ -233,21 +248,30 @@ namespace Flowly
                                 currentComponentName = ComponentName.Sink;
                             }
 
+<<<<<<< HEAD
 
+=======
+                          
+>>>>>>> 66ddd030fa4bba73e0ada7a21e0280b15bf79427
 
                             if (flowly.CheckFreeSpot(r))
                             {
 
+<<<<<<< HEAD
                                 if (flowly.CreateComponentDrawn(currentComponentName, r, nudFlow.Value, nudCapacity.Value, trackBarLeft.Value, trackBarRight.Value))
                                 {
 
+=======
+                                if (flowly.CreateComponentDrawn(currentComponentName, r,nudFlow.Value,nudCapacity.Value,trackBarLeft.Value,trackBarRight.Value))
+                                {
+                                  
+>>>>>>> 66ddd030fa4bba73e0ada7a21e0280b15bf79427
 
                                     if (currentComponentName == ComponentName.Pump)
                                     {
 
                                     }
                                 }
-
 
                             }
                             else
@@ -264,7 +288,11 @@ namespace Flowly
 
                         // Paint(item);
 
+<<<<<<< HEAD
                         //    ResetProperties();
+=======
+                      //    ResetProperties();
+>>>>>>> 66ddd030fa4bba73e0ada7a21e0280b15bf79427
                         break;
                     case WorkingMode.remove:
                         ResetProperties();
@@ -298,7 +326,11 @@ namespace Flowly
 
                         break;
                     case WorkingMode.edit:
+<<<<<<< HEAD
 
+=======
+                      
+>>>>>>> 66ddd030fa4bba73e0ada7a21e0280b15bf79427
                         ResetProperties();
                         newPoint = new Point(x, y);
                         currentSelectedComponent = flowly.GetComponentPointAt(newPoint);
@@ -434,11 +466,7 @@ namespace Flowly
         private void grid_Paint(object sender, PaintEventArgs e)
         {
 
-
-            // Paint(item)
-
-
-
+           // flowly.UpdateGrid();
         }
 
 
@@ -467,8 +495,11 @@ namespace Flowly
         private void toolPipe_Click(object sender, EventArgs e)
         {
             SetTrackBarVisibility(false);
+<<<<<<< HEAD
             nudCapacity.Enabled = false;
             nudFlow.Enabled = false;
+=======
+>>>>>>> 66ddd030fa4bba73e0ada7a21e0280b15bf79427
             currentWorkingMode = WorkingMode.pipe;
 
             HighlightCurrentPB(sender as PictureBox);
@@ -490,7 +521,11 @@ namespace Flowly
         private void ActivateCreating(PictureBox pb)
         {
             ResetProperties();
+<<<<<<< HEAD
 
+=======
+           
+>>>>>>> 66ddd030fa4bba73e0ada7a21e0280b15bf79427
             RefreshGridFromMode();
             currentWorkingMode = WorkingMode.create;
             HighlightCurrentPB(pb);
@@ -550,9 +585,15 @@ namespace Flowly
                     trackBarRight.Enabled = true;
                     trackBarRight.Visible = true;
                     trackBarLeft.Visible = true;
+<<<<<<< HEAD
                     //  btnUpdate.Enabled = true;
                     break;
 
+=======
+                  //  btnUpdate.Enabled = true;
+                    break;
+               
+>>>>>>> 66ddd030fa4bba73e0ada7a21e0280b15bf79427
                 case "toolSplitter":
                     trackBarLeft.Enabled = false;
                     trackBarRight.Enabled = false;
@@ -566,7 +607,11 @@ namespace Flowly
                     trackBarLeft.Visible = false;
                     break;
                 default:
+<<<<<<< HEAD
 
+=======
+                   
+>>>>>>> 66ddd030fa4bba73e0ada7a21e0280b15bf79427
                     //
                     break;
 
@@ -607,8 +652,15 @@ namespace Flowly
 
         private void toolRemove_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 66ddd030fa4bba73e0ada7a21e0280b15bf79427
             SetTrackBarVisibility(false);
             ResetProperties();
+=======
+           
+>>>>>>> 0f59eabaf74cf0c7e20955131f2bcc63675d2d4a
             RefreshGridFromMode();
             currentWorkingMode = WorkingMode.remove;
             HighlightCurrentPB(sender as PictureBox);
@@ -995,14 +1047,56 @@ namespace Flowly
                 flowly.counterChange = total - 1;
 
             }
-
-
-
         }
 
+        FormWindowState LastWindowState = FormWindowState.Minimized;
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            // When window state changes
+            if (WindowState != LastWindowState)
+            {
+                LastWindowState = WindowState;
 
 
+                if (WindowState == FormWindowState.Maximized)
+                {
 
+                }
+                if (WindowState == FormWindowState.Normal)
+                {
+
+
+                    ////Invalidate
+                    //Thread t = new Thread(() => {
+                    //    Thread.Sleep(10);
+                      
+                    //        try {
+                    //            flowly.UpdateGrid();
+                    //        }
+                    //        catch (Exception ex)
+                    //        {
+                    //            MessageBox.Show("Went wrong" + ex.ToString());
+                    //        MessageBox.Show("wong" + ex.Message);
+
+                    //    }
+                               
+                        
+                    //    MessageBox.Show("Finished");
+
+
+                    //});
+                    //t.Start();
+
+                }
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+            grid.Refresh();
+            flowly.UpdateGrid();
+        }
 
         //private void openLogWithChangesToolStripMenuItem_Click(object sender, EventArgs e)
         //{
