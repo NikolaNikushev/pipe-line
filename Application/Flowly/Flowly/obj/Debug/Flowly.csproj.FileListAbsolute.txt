@@ -36,3 +36,22 @@ C:\Users\Bilger Yahov\Desktop\pipe-line\Application\Flowly\Flowly\obj\Debug\Flow
 C:\Users\Bilger Yahov\Desktop\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.Properties.Resources.resources
 C:\Users\Bilger Yahov\Desktop\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.TestFormcs.resources
 C:\Users\Bilger Yahov\Desktop\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.csproj.GenerateResource.Cache
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\bin\Debug\images\Ad_splitter2.png
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\bin\Debug\images\Editing-Edit-icon-pen.png
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\bin\Debug\images\merger2.png
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\bin\Debug\images\pipeline.png
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\bin\Debug\images\remove_element.png
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\bin\Debug\images\sink2.png
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\bin\Debug\images\splitter2.png
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\bin\Debug\images\start_point.png
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.exe.config
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.XML
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.exe
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\bin\Debug\Flowly.pdb
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.csprojResolveAssemblyReference.cache
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.Form1.resources
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.Properties.Resources.resources
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.TestFormcs.resources
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.csproj.GenerateResource.Cache
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.exe
+G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\Flowly\obj\Debug\Flowly.pdb

@@ -38,8 +38,18 @@ namespace Flowly
         public float CurrentCapacity
         {   get { return currentCapacity; }}
 
-        public ConnectionPoint(Rectangle theRectangle, ComponentDrawn theComponentDrawnBelong, bool theIsOutput)
+        private Point pipeConnectionPoint;
+
+        public Point PipeStartPoint
         {
+            get { return pipeConnectionPoint; }
+            set { pipeConnectionPoint = value; }
+        }
+
+
+        public ConnectionPoint(Rectangle theRectangle, ComponentDrawn theComponentDrawnBelong, bool theIsOutput, Point pipeConnectionPoint)
+        {
+            this.PipeStartPoint = pipeConnectionPoint;
             rectangle = theRectangle;
             SetCurrentFlow(0);
             isOutput = theIsOutput;
@@ -111,8 +121,7 @@ namespace Flowly
             set { pipeConnection = value; }
         }
 
-
-
+       
     }
 
 }

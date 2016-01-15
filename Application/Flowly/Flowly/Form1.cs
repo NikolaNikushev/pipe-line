@@ -135,17 +135,17 @@ namespace Flowly
                         if (currentPB.Image.Equals(toolPipe.Image))
                         {
                             newPoint = new Point(x, y);
-
+                          //  MessageBox.Show(newPoint.ToString() + "\nx:" + newPoint.X + " y:" + newPoint.Y);
                             //start drawing pipeline.
                             if (lastPoint.X == -1 || lastPoint.Y == -1)
                             {
                                 ConnectionPoint cp = flowly.GetConnectionPointAt(newPoint);
                                 if (cp != null)
                                 {
-
+                                    
                                     if (cp.IsOutput)
                                     {
-
+                                        newPoint = cp.PipeStartPoint;
                                         // cp.SetAvailable(false);
                                         pipe = new Pipe();
                                         pipe.SetConnection(cp);
@@ -174,7 +174,8 @@ namespace Flowly
                                     if (pipe.GiveMeYourConnectionPoints().Count == 2)
                                     {
                                         flowly.HighlightAllAvailableOutputs();
-
+                                        pipe.PipePoints.RemoveAt(pipe.PipePoints.Count - 1);
+                                        pipe.PipePoints.Add(pipe.GiveMeYourConnectionPoints().Last().PipeStartPoint);
                                         flowly.DrawPipeline(pipe);
                                         flowly.AddComponentDrawn(pipe);
                                         MessageBox.Show("Connected");

@@ -145,9 +145,20 @@ namespace Flowly
         {
             try
             {
-                ConnectionPoint connRighttUp = new ConnectionPoint(rectangleSmallRightUp, this, true);
-                ConnectionPoint connRightDown = new ConnectionPoint(rectangleSmallRightDown, this, true);
-                ConnectionPoint connLeftComb = new ConnectionPoint(rectangleCombLeft, this, false);
+                ConnectionPoint connRighttUp, connRightDown, connLeftComb;
+
+                if (diffCurrFlowPossible)
+                {
+                     connRighttUp = new ConnectionPoint(rectangleSmallRightUp, this, true, new Point(rectangleBig.X + 43, rectangleBig.Y + 13));
+                     connRightDown = new ConnectionPoint(rectangleSmallRightDown, this, true, new Point(rectangleBig.X + 39, rectangleBig.Y + 39));
+                     connLeftComb = new ConnectionPoint(rectangleCombLeft, this, false, new Point(rectangleBig.X, rectangleBig.Y + 25));
+                }
+                else
+                {
+                     connRighttUp = new ConnectionPoint(rectangleSmallRightUp, this, true, new Point(rectangleBig.X + 40, rectangleBig.Y + 5));
+                     connRightDown = new ConnectionPoint(rectangleSmallRightDown, this, true, new Point(rectangleBig.X + 40, rectangleBig.Y + 35));
+                     connLeftComb = new ConnectionPoint(rectangleCombLeft, this, false, new Point(rectangleBig.X, rectangleBig.Y + 20));
+                }
                 if (connLeftComb.CurrentFlow == 0)
                 {
                     connRightDown.SetCurrentFlow(0);

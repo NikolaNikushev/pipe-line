@@ -65,8 +65,10 @@ namespace Flowly
         {
             try
             {
-                ConnectionPoint connLeft = new ConnectionPoint(rectanglePipeLeft, this, false);
-                ConnectionPoint connRight = new ConnectionPoint(rectanglePipeRight, this, true);
+                //TODO check point 0,0 
+
+                ConnectionPoint connLeft = new ConnectionPoint(rectanglePipeLeft, this, false, new Point(0,0));
+                ConnectionPoint connRight = new ConnectionPoint(rectanglePipeRight, this, true, new Point(0,0));
                 
 
                 listOfConnectionPoints.Add(connLeft);

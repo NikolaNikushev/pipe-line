@@ -43,7 +43,7 @@ namespace Flowly
         {
             try
             {
-                ConnectionPoint conn1 = new ConnectionPoint(rectangleBig, this, true);
+                ConnectionPoint conn1 = new ConnectionPoint(rectangleBig, this, true, new Point(rectangleBig.X+10,rectangleBig.Y+35));
                 listOfConnectionPoints.Add(conn1);
                 return true;
             }

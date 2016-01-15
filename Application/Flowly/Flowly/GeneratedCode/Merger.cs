@@ -62,9 +62,9 @@ namespace Flowly
 
             try
             {
-                ConnectionPoint connLeftUp = new ConnectionPoint(rectangleSmallLeftUp, this, false);
-                ConnectionPoint connLeftDown = new ConnectionPoint(rectangleSmallLeftDown, this, false);
-                ConnectionPoint connRightComb = new ConnectionPoint(rectangleCombRight, this, true);
+                ConnectionPoint connLeftUp = new ConnectionPoint(rectangleSmallLeftUp, this, false, new Point(rectangleBig.X + 2, rectangleBig.Y+5));
+                ConnectionPoint connLeftDown = new ConnectionPoint(rectangleSmallLeftDown, this, false, new Point(rectangleBig.X + 4, rectangleBig.Y+35));
+                ConnectionPoint connRightComb = new ConnectionPoint(rectangleCombRight, this, true, new Point(rectangleBig.X+45, rectangleBig.Y + 20));
                 
                 listOfConnectionPoints.Add(connLeftUp);
                 listOfConnectionPoints.Add(connLeftDown);

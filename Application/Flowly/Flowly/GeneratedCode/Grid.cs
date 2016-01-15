@@ -19,6 +19,9 @@ namespace Flowly
     /// </summary>
     public class Grid
     {
+        private const int PIPE_SIZE = 5;
+
+
         private List<ComponentDrawn> listOfComponents;
 
 
@@ -252,7 +255,7 @@ namespace Flowly
             {
                 MessageBox.Show("You are drawing the pipe too soon, you need to have an endpoint!");
             }
-            Pen colorOfPen = new Pen(Color.Yellow, 2);
+            Pen colorOfPen = new Pen(Color.Gray, PIPE_SIZE);
 
             if (endPoint.CurrentCapacity >= startPoint.CurrentFlow)
             {
@@ -499,8 +502,8 @@ namespace Flowly
                                             currentPipe.RemoveConnection(cp);
                                             return false;
                                         }
-                                        Pen myPen2 = new Pen(Color.Gray, 3);
-                                        graphic.DrawLine(myPen2, start, end);
+                                       // Pen myPen2 = new Pen(Color.Gray, PIPE_SIZE);
+                                       // graphic.DrawLine(myPen2, start, end);
 
                                         currentPipe.AddPointToList(end);
                                         curPipe = currentPipe;
@@ -520,7 +523,7 @@ namespace Flowly
                 }
 
             }
-            Pen myPen = new Pen(Color.Gray, 3);
+            Pen myPen = new Pen(Color.Gray, PIPE_SIZE);
             graphic.DrawLine(myPen, start, end);
 
             currentPipe.AddPointToList(end);
