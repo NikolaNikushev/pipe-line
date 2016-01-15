@@ -1,0 +1,263 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Flowly</name>
+    </assembly>
+    <members>
+        <member name="T:Flowly.Form1">
+            <summary>
+            The main window form of the application.
+            </summary>
+        </member>
+        <member name="F:Flowly.Form1.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Flowly.Form1.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Flowly.Form1.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Flowly.Change">
+            <summary>
+            Class "Change" is meant to be used for the changes that will be made during runtime. For each activity of the
+            user new "Change" will be created. So the "Undo" option will be available to the user.
+            </summary>
+        </member>
+        <member name="F:Flowly.Change.description">
+            <summary>
+            A string which contaions the description of a change.
+            </summary>
+        </member>
+        <member name="M:Flowly.ComponentDrawn.AddComponentDrawnToList(Flowly.ComponentDrawn)">
+            <summary>
+            Adds neighbour component to listOfComponentDrawn list. 
+            </summary>
+            <param name="givenComponent"></param>
+            <returns>True if successfull, false otherwise</returns>
+        </member>
+        <member name="M:Flowly.ComponentDrawn.CreateConnectionPoints">
+            <summary>
+            Automatically creates connection points of a component depending on its type.
+            </summary>
+            <returns>True if successfull, false otherwise.</returns>
+        </member>
+        <member name="M:Flowly.ComponentDrawn.SetCurrentFlow(System.Single)">
+            <summary>
+            Sets the current flow (the amount of gas/liquid) going through the component.
+            </summary>
+            <param name="givenFlow"></param>
+            <returns>True if successfull, false otherwise.</returns>
+        </member>
+        <member name="M:Flowly.ComponentDrawn.RemoveComponentDrawnFromList(Flowly.ComponentDrawn)">
+            <summary>
+            The opposite action of method AddComponentDrawnToList.
+            </summary>
+            <param name="givenComponent"></param>
+            <returns>True if successfull, false otherwise.</returns>
+        </member>
+        <member name="M:Flowly.ComponentDrawn.SetCapacity(System.Single)">
+            <summary>
+            Sets the diffCurrFlowPossible attribute to true or false.
+            </summary>
+            <param name="givenPosibility"></param>
+            <returns>True if successfull, false otherwise</returns>
+        </member>
+        <member name="M:Flowly.ConnectionPoint.SetCurrentFlow(System.Single)">
+            <summary>
+            Sets the current flow going through the "ConnectionPoint". Current flow means the amount of gas
+            or liquid going through at the moment.
+            </summary>
+            <param name="givenFlow"></param>
+            <returns>True if successfull, false otherwise</returns>
+        </member>
+        <member name="T:Flowly.DialogWindow">
+            <summary>
+            Meant to be used for Dialog Windows that will be opened during runtime.
+            </summary>
+        </member>
+        <member name="M:Flowly.DialogWindow.SetPlaceAndLocation(System.String)">
+            <summary>
+            Sets information to the DialogWindow's info attribute. Info as location, name...
+            </summary>
+            <param name="givenInfo"></param>
+            <returns>True if successfull, false otherwise.</returns>
+        </member>
+        <member name="T:Flowly.Grid">
+            <summary>
+            Objects of this class will be the "drawing" place of the user. A grid will contain components in it.
+            </summary>
+        </member>
+        <member name="M:Flowly.Grid.AddComponentDrawnToGridList(Flowly.ComponentDrawn)">
+            <summary>
+            Adds a component to the listOfComponents list.
+            </summary>
+            <param name="givenComponent"></param>
+            <returns>True if successfull, false otherwise</returns>
+        </member>
+        <member name="M:Flowly.Grid.RemoveComponentDrawnFromGridList(Flowly.ComponentDrawn)">
+            <summary>
+            Opposite of the other method.
+            </summary>
+            <param name="givenComponent"></param>
+            <returns>True if successfull, false otherwise.</returns>
+        </member>
+        <member name="T:Flowly.SystemFlowly">
+            <summary>
+            Class named "SystemFlowly". Meant to possess many of the methods to manipulate, create, delete "ComponentDrawn"-s.
+            Has a list for "Change"-s to keep track of them.
+            Has a list meant to be a toolbox.
+            </summary>
+        </member>
+        <member name="F:Flowly.SystemFlowly.gridChangedListener">
+            <summary>
+            toolbox of the program. Simpe list of "ToolboxComponent"-s. Make the difference between "ComponentDrawn" and "ToolboxComponent".
+            </summary>
+            
+        </member>
+        <member name="M:Flowly.SystemFlowly.CheckFreeSpot(System.Drawing.Rectangle)">
+            <summary>
+            Checks if a particular area is free.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns>True if it is, false otherwise.</returns>
+        </member>
+        <member name="M:Flowly.SystemFlowly.MakeSpotFree(System.Int32,System.Int32)">
+            <summary>
+            After deleting a component makes a spot free.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns>True if successfull, false otherwise.</returns>
+        </member>
+        <member name="M:Flowly.SystemFlowly.MakeSpotBusy(System.Int32,System.Int32)">
+            <summary>
+            Opposite of the above method.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns>True for successfull, false otherwise.</returns>
+        </member>
+        <member name="M:Flowly.SystemFlowly.CreateComponentDrawn(Flowly.GeneratedCode.ComponentName,System.Drawing.Rectangle,System.Decimal,System.Decimal,System.Int32,System.Int32)">
+            <summary>
+            Creates a new instance of class "ComponentDrawn". 
+            </summary>
+            <param name="cName">component name</param>
+            <param name="rectangle">The rectangle that the component will have</param>
+            <param name="cCapacity">component capacity</param>
+            <returns>True if successfully created, false otherwise.</returns>
+        </member>
+        <member name="M:Flowly.SystemFlowly.DeleteComponent(Flowly.ComponentDrawn)">
+            <summary>
+            Deletes a given "ComponentDrawn".
+            </summary>
+            <param name="givenComponent"></param>
+            <returns>True if successfull, false otherwise.</returns>
+        </member>
+        <member name="M:Flowly.SystemFlowly.EditComponentDrawn(Flowly.ComponentDrawn,System.Single,System.Single,System.Int32,System.Int32)">
+            <summary>
+            A "ComponentDrawn" is passed and the particular componentDrawn's properties should be changed.
+            </summary>
+            <param name="givenComponent"></param>
+            <returns>True if successfull, false otherwise.</returns>
+        </member>
+        <member name="M:Flowly.SystemFlowly.ClearGrid(System.Boolean)">
+            <summary>
+            Deletes all "ComponentDrawn"-s from the grid.
+            </summary>
+            <param name="givenGrid"></param>
+            <returns>True for successfull, false otherwise.</returns>
+        </member>
+        <member name="M:Flowly.SystemFlowly.SaveAsGrid(Flowly.Grid,System.String@)">
+            <summary>
+            Saves the current grid as a file.
+            </summary>
+            <param name="givenGrid"></param>
+            <returns>True if successfull, false otherwise.</returns>
+        </member>
+        <member name="M:Flowly.SystemFlowly.NewFile(System.Windows.Forms.PictureBox)">
+            <summary>
+            Creates a new grid.
+            </summary>
+            <returns>True if successfull, false otherwise.</returns>
+        </member>
+        <member name="M:Flowly.SystemFlowly.OpenFile(System.Windows.Forms.PictureBox,System.String@)">
+            <summary>
+            Opens already created and saved grid.
+            </summary>
+            <returns>True if successfull, false otherwise.</returns>
+        </member>
+        <member name="M:Flowly.SystemFlowly.UndoLastChange(System.Windows.Forms.PictureBox,System.String)">
+            <summary>
+            Goes back to a state before a change is made.
+            </summary>
+            <returns>True if successfull, false otherwise.</returns>
+        </member>
+        <member name="M:Flowly.SystemFlowly.CreateChange(System.String)">
+            <summary>
+            Always the user makes a change, a new instance of "Change" class is created.
+            </summary>
+            <param name="givenDescription"></param>
+            <returns>True if successfull, false otherwise.</returns>
+            
+        </member>
+        <member name="T:Flowly.ToolboxComponent">
+            <summary>
+            Not a "ComponentDrawn"! This is a Component from the Toolbox! Can be just used to CREATE an instance of "ComponentDrawn"!
+            </summary>
+        </member>
+        <member name="T:Flowly.NamespaceDoc">
+            <summary>
+            This namespace contains all the classes that the Flowly Windows forms uses. 
+            Inside there are brief descriptions of each class and their methods.
+            </summary>
+        </member>
+        <member name="M:Flowly.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="F:Flowly.TestFormcs.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Flowly.TestFormcs.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Flowly.TestFormcs.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Flowly.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Flowly.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Flowly.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

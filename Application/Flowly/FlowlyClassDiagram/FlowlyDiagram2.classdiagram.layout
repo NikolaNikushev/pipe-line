@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="FlowlyDiagram2">
+  <logicalClassDesignerModelMoniker Id="3dfde3fb-7bae-4fd8-a1ca-c4284d4a5921" />
+  <nestedChildShapes>
+    <classShape Id="52210178-e0ba-4265-a4fd-78567cbc7be3" absoluteBounds="2.5, 1.375, 2.125, 1.2226562251647315" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="94f18324-b7a8-4d55-ae96-7e21067f423f" LastKnownName="System1" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="2aea9b60-9249-46e7-a947-4d727605c7eb" absoluteBounds="2.5149999999999997, 1.7650000000000001, 2.0949999999999998, 0.52148435761531187" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="922213a1-e88f-4f1c-9b79-7fa8299de8c9" absoluteBounds="2.5149999999999997, 2.296484357615312, 2.0949999999999998, 0.20117186754941951" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</logicalClassDesignerDiagram>
