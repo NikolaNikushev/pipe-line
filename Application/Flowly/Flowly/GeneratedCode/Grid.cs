@@ -49,7 +49,7 @@ namespace Flowly
             }
         }
 
-
+        object b = new object();
 
         public string Name
         {
@@ -66,6 +66,7 @@ namespace Flowly
         {
             get
             {
+              
                 return listOfComponents;
             }
             set
@@ -73,6 +74,8 @@ namespace Flowly
                 listOfComponents = value;
             }
         }
+
+       
 
         public Grid(PictureBox grid)
         {
@@ -101,7 +104,7 @@ namespace Flowly
             foreach (ComponentDrawn p in ListOfComponents)
             {
                 if (!(p is Pipe)) continue;
-                bool intersects =  CheckInteresectsWithPipe(r, p as Pipe);
+                bool intersects = CheckInteresectsWithPipe(r, p as Pipe);
                 if (intersects)
                 {
                     return true;
@@ -120,7 +123,7 @@ namespace Flowly
         {
             try
             {
-                this.listOfComponents.Add(givenComponent);
+                this.ListOfComponents.Add(givenComponent);
                 return true;
             }
             catch (Exception e)
@@ -159,10 +162,16 @@ namespace Flowly
 
         internal ComponentDrawn GetComponentAt(Point pointLocation)
         {
+            Rectangle pointRect = new Rectangle(pointLocation, new Size(5, 5));
             foreach (ComponentDrawn item in ListOfComponents)
             {
                 Rectangle componentRect = item.RectangleBig;
-                Rectangle pointRect = new Rectangle(pointLocation, new Size(1, 1));
+                if (item is Pipe)
+                {
+                    Pipe pipe = item as Pipe;
+                    if (CheckInteresectsWithPipe(pointRect, pipe)) return pipe;
+                }
+
                 if (componentRect.IntersectsWith(pointRect))
                 {
                     return item;
@@ -179,24 +188,25 @@ namespace Flowly
         /// <returns>True if successfull, false otherwise.</returns>
         public virtual bool RemoveComponentDrawnFromGridList(ComponentDrawn givenComponent)
         {
-            try
+            //try
+            //  {
+            foreach (ConnectionPoint cp in givenComponent.GiveMeYourConnectionPoints())
             {
-                foreach (ConnectionPoint cp in givenComponent.GiveMeYourConnectionPoints())
+                if (cp.PipeConnection != null)
                 {
-                    if (cp.PipeConnection != null)
-                    {
-                        RemovePipe(cp.PipeConnection);
-                    }
+                    RemovePipe(cp.PipeConnection);
                 }
-                this.listOfComponents.Remove(givenComponent);
-                PaintAllComponents();
-                return true;
             }
-            catch (Exception e)
-            {
-                MessageBox.Show("There are a problem removing the component to the grid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
+
+            this.ListOfComponents.Remove(givenComponent);
+            PaintAllComponents();
+            return true;
+            //  }
+            //catch (Exception e)
+            //{
+            //    MessageBox.Show("There are a problem removing the component to the grid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return false;
+            //}
         }
 
         internal void RemovePipe(Pipe pipe)
@@ -206,14 +216,14 @@ namespace Flowly
             {
                 CP.PipeConnection = null;
             }
-            listOfComponents.Remove(pipe);
+            ListOfComponents.Remove(pipe);
 
 
         }
 
         internal void AddPipe(Pipe pipe)
         {
-            this.listOfComponents.Add(pipe);
+            this.ListOfComponents.Add(pipe);
 
 
         }
@@ -264,7 +274,7 @@ namespace Flowly
             }
             else
             {
-                if(endPoint.ComponentDrawnBelong is Splitter || endPoint.ComponentDrawnBelong is Merger)
+                if (endPoint.ComponentDrawnBelong is Splitter || endPoint.ComponentDrawnBelong is Merger)
                 {
                     endPoint.SetCurrentFlow(startPoint.CurrentFlow);
                     endPoint.ComponentDrawnBelong.UpdateComponentFlow();
@@ -275,22 +285,22 @@ namespace Flowly
                     endPoint.ComponentDrawnBelong.UpdateComponentFlow();
 
                 }
-               
+
             }
 
-            if (((startPoint.CurrentFlow > endPoint.ComponentDrawnBelong.Capacity) &&(startPoint.CurrentFlow-endPoint.ComponentDrawnBelong.Capacity >= 0.1F)) && endPoint.ComponentDrawnBelong is Sink)
+            if (((startPoint.CurrentFlow > endPoint.ComponentDrawnBelong.Capacity) && (startPoint.CurrentFlow - endPoint.ComponentDrawnBelong.Capacity >= 0.1F)) && endPoint.ComponentDrawnBelong is Sink)
             {
                 colorOfPen.Color = Color.Red;
             }
-            for(int i = 0; i < pipe.PipePoints.Count - 1; i++)
+            for (int i = 0; i < pipe.PipePoints.Count - 1; i++)
             {
                 Point start = pipe.PipePoints[i];
-                Point end= pipe.PipePoints[i+1];
+                Point end = pipe.PipePoints[i + 1];
                 graphic.DrawLine(colorOfPen, start, end);
             }
 
 
-          
+
         }
 
         private bool CheckIntersectAllOther(Point start, Point end, Pipe currentPipe)
@@ -380,22 +390,22 @@ namespace Flowly
             Point topLeft = r.Location;
             Point topRight = new Point(r.X + r.Width, r.Y);
             Point bottomRight = new Point(r.X + r.Width, r.Y + r.Height);
-            Point bottomLeft = new Point(r.X, r.Y+r.Height);
+            Point bottomLeft = new Point(r.X, r.Y + r.Height);
             for (int j = 0; j < pipeLinesCount - 1; j++)
             {
                 if (CheckPipeIntersects(topLeft, topRight, pLines[j], pLines[j + 1]))
                 {
-                   // MessageBox.Show("Intersects pipe");
+                    // MessageBox.Show("Intersects pipe");
                     return true;
                 }
                 if (CheckPipeIntersects(topRight, bottomRight, pLines[j], pLines[j + 1]))
                 {
-                   // MessageBox.Show("Intersects pipe");
+                    // MessageBox.Show("Intersects pipe");
                     return true;
                 }
                 if (CheckPipeIntersects(bottomRight, bottomLeft, pLines[j], pLines[j + 1]))
                 {
-                   // MessageBox.Show("Intersects pipe");
+                    // MessageBox.Show("Intersects pipe");
                     return true;
                 }
                 if (CheckPipeIntersects(topLeft, bottomLeft, pLines[j], pLines[j + 1]))
@@ -502,12 +512,12 @@ namespace Flowly
                                             currentPipe.RemoveConnection(cp);
                                             return false;
                                         }
-                                       // Pen myPen2 = new Pen(Color.Gray, PIPE_SIZE);
-                                       // graphic.DrawLine(myPen2, start, end);
+                                        // Pen myPen2 = new Pen(Color.Gray, PIPE_SIZE);
+                                        // graphic.DrawLine(myPen2, start, end);
 
                                         currentPipe.AddPointToList(end);
                                         curPipe = currentPipe;
-                                        
+
                                         return true;
                                     }
                                     MessageBox.Show("Intersects component");
@@ -548,7 +558,7 @@ namespace Flowly
             //graphic.FillRectangle(color, r);
 
             Pen myNewPen = new Pen(color, 2);
-            graphic.DrawRectangle(myNewPen,cp.rectangle);
+            graphic.DrawRectangle(myNewPen, cp.rectangle);
 
 
             //int width = cp.rectangle.Width / 2;
@@ -597,7 +607,7 @@ namespace Flowly
 
         private void HighlightPointsOfComponent(ComponentDrawn cd)
         {
-            
+
         }
 
         internal void HighightAllAvailableInputs(ComponentDrawn currentComponent)
@@ -646,7 +656,7 @@ namespace Flowly
         public List<Rectangle> GetComponentsRectangles()
         {
             List<Rectangle> rect = new List<Rectangle>();
-            foreach (ComponentDrawn component in this.listOfComponents)
+            foreach (ComponentDrawn component in this.ListOfComponents)
             {
 
                 rect.Add(component.RectangleBig);
@@ -657,7 +667,7 @@ namespace Flowly
         public void PaintAllComponents()
         {
             graphic.Clear(Color.White);
-            foreach (ComponentDrawn item in this.listOfComponents)
+            foreach (ComponentDrawn item in this.ListOfComponents)
             {
                 Paint(item);
             }
@@ -672,7 +682,7 @@ namespace Flowly
                 return;
             }
             Rectangle r = drawn.RectangleBig;
-          //  graphic.DrawRectangle(Pens.Red, r);
+            //  graphic.DrawRectangle(Pens.Red, r);
             graphic.DrawImage(drawn.Image, r);
 
         }

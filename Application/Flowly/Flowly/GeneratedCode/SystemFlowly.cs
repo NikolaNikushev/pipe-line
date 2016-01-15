@@ -666,16 +666,11 @@ namespace Flowly
         /// <param name="givenDescription"></param>
         /// <returns>True if successfull, false otherwise.</returns>
         /// 
-
-
-            
-      
-         
-
-
         public virtual bool CreateChange(string givenDescription)
         {
             bool success = false;
+
+
             FileStream myFileStream = null;
             BinaryFormatter myBinaryFormatter = null;
 
@@ -688,11 +683,8 @@ namespace Flowly
                 //    counterChange = 0;
                 //    gridChangedListener.GridChanged();
                 //}
+
                 myFileStream = new FileStream("../../Changes/" + counterChange + " - " + givenDescription, FileMode.Create, FileAccess.Write);
-
-
-
-
                 myBinaryFormatter = new BinaryFormatter();
 
                 SerializationObject newObject = new SerializationObject(grid.Name, grid.ListOfComponents, grid.Destination);
@@ -701,9 +693,9 @@ namespace Flowly
                 Change myNewChange = new Change(counterChange + " - " + givenDescription);
                 changes.Add(myNewChange);
                 changeListener.ChangeOccured(myNewChange);
-                counterChange++;
-                success = true;
 
+                success = true;
+                counterChange++;
                 //end
             }
             catch (Exception e)
@@ -724,6 +716,11 @@ namespace Flowly
 
             return success;
         }
+
+
+
+
+
 
 
 

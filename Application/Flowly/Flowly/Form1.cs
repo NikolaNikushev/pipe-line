@@ -22,7 +22,7 @@ namespace Flowly
         SystemFlowly flowly;
         Grid theGrid;
         bool askMeSave;
-
+       
 
         private WorkingMode currentWorkingMode;
 
@@ -82,13 +82,17 @@ namespace Flowly
             listBoxStates.Items.Clear();
         }
 
-       
+
         public void ChangeOccured(Change theChange)
         {
-         
-           
-            listBoxStates.Items.Add(theChange.Desctiption);
-            askMeSave = true;
+
+            Invoke( new Action( () =>
+            {
+                listBoxStates.Items.Add(theChange.Desctiption);
+                askMeSave = true;
+            }
+            ));
+            
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -135,14 +139,14 @@ namespace Flowly
                         if (currentPB.Image.Equals(toolPipe.Image))
                         {
                             newPoint = new Point(x, y);
-                          //  MessageBox.Show(newPoint.ToString() + "\nx:" + newPoint.X + " y:" + newPoint.Y);
+                            //  MessageBox.Show(newPoint.ToString() + "\nx:" + newPoint.X + " y:" + newPoint.Y);
                             //start drawing pipeline.
                             if (lastPoint.X == -1 || lastPoint.Y == -1)
                             {
                                 ConnectionPoint cp = flowly.GetConnectionPointAt(newPoint);
                                 if (cp != null)
                                 {
-                                    
+
                                     if (cp.IsOutput)
                                     {
                                         newPoint = cp.PipeStartPoint;
@@ -203,41 +207,43 @@ namespace Flowly
                             int width = currentPB.Width;
                             int height = currentPB.Height;
                             Rectangle r = new Rectangle(x, y, width, height);
-                            ComponentName currentComponentName;
-                            ComponentDrawn createdComponent;
-                            if (currentPB.Image.Equals(toolPump.Image))
-                            {
-                                currentComponentName = ComponentName.Pump;
 
-
-                            }
-
-
-                            else if (currentPB.Image.Equals(toolPipe.Image))
-                            {
-                                currentComponentName = ComponentName.Pipe;
-                            }
-                            else if (currentPB.Image.Equals(toolSplitter.Image))
-                            {
-                                currentComponentName = ComponentName.Splitter;
-                            }
-                            else if (currentPB.Image.Equals(toolSplitterAdj.Image))
-                            {
-                                currentComponentName = ComponentName.SplitterAdj;
-                            }
-                            else if (currentPB.Image.Equals(toolMerger.Image))
-                            {
-                                currentComponentName = ComponentName.Merger;
-                            }
-                            else //then it's a sink
-                            {
-                                currentComponentName = ComponentName.Sink;
-                            }
 
 
 
                             if (flowly.CheckFreeSpot(r))
                             {
+                                ComponentName currentComponentName;
+                                ComponentDrawn createdComponent;
+                                if (currentPB.Image.Equals(toolPump.Image))
+                                {
+                                    currentComponentName = ComponentName.Pump;
+
+
+                                }
+
+
+                                else if (currentPB.Image.Equals(toolPipe.Image))
+                                {
+                                    currentComponentName = ComponentName.Pipe;
+                                }
+                                else if (currentPB.Image.Equals(toolSplitter.Image))
+                                {
+                                    currentComponentName = ComponentName.Splitter;
+                                }
+                                else if (currentPB.Image.Equals(toolSplitterAdj.Image))
+                                {
+                                    currentComponentName = ComponentName.SplitterAdj;
+                                }
+                                else if (currentPB.Image.Equals(toolMerger.Image))
+                                {
+                                    currentComponentName = ComponentName.Merger;
+                                }
+                                else //then it's a sink
+                                {
+                                    currentComponentName = ComponentName.Sink;
+                                }
+
 
                                 if (flowly.CreateComponentDrawn(currentComponentName, r, nudFlow.Value, nudCapacity.Value, trackBarLeft.Value, trackBarRight.Value))
                                 {
