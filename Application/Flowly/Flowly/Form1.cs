@@ -397,6 +397,8 @@ namespace Flowly
 
         public void SetTrackBarVisibility(Boolean value)
         {
+            trackBarLeft.Enabled = true;
+            trackBarRight.Enabled = true;
             trackBarLeft.Visible = value;
             trackBarRight.Visible = value;
             labelLeftTrack.Visible = value;
@@ -530,40 +532,22 @@ namespace Flowly
                 case "toolPump":
                     nudCapacity.Enabled = true;
                     nudFlow.Enabled = true;
-                    trackBarLeft.Enabled = false;
-                    trackBarRight.Enabled = false;
-                    trackBarRight.Visible = false;
-                    trackBarLeft.Visible = false;
-                    //   btnUpdate.Enabled = true;
+                    SetTrackBarVisibility(false);
                     break;
 
                 case "toolSink":
                     nudCapacity.Enabled = true;
-                    //  btnUpdate.Enabled = true;
-                    trackBarLeft.Enabled = false;
-                    trackBarRight.Enabled = false;
-                    trackBarRight.Visible = false;
-                    trackBarLeft.Visible = false;
+                    SetTrackBarVisibility(false);
                     break;
                 case "toolSplitterAdj":
-                    trackBarLeft.Enabled = true;
-                    trackBarRight.Enabled = true;
-                    trackBarRight.Visible = true;
-                    trackBarLeft.Visible = true;
-                    //  btnUpdate.Enabled = true;
+                    SetTrackBarVisibility(true);
                     break;
 
                 case "toolSplitter":
-                    trackBarLeft.Enabled = false;
-                    trackBarRight.Enabled = false;
-                    trackBarRight.Visible = false;
-                    trackBarLeft.Visible = false;
+                    SetTrackBarVisibility(false);
                     break;
                 case "toolMerger":
-                    trackBarLeft.Enabled = false;
-                    trackBarRight.Enabled = false;
-                    trackBarRight.Visible = false;
-                    trackBarLeft.Visible = false;
+                    SetTrackBarVisibility(false);
                     break;
                 default:
 

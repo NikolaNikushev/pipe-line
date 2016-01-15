@@ -261,8 +261,18 @@ namespace Flowly
             }
             else
             {
-                endPoint.SetCurrentFlow(startPoint.CurrentFlow - (startPoint.CurrentFlow - endPoint.CurrentCapacity));
-                endPoint.ComponentDrawnBelong.UpdateComponentFlow();
+                if(endPoint.ComponentDrawnBelong is Splitter || endPoint.ComponentDrawnBelong is Merger)
+                {
+                    endPoint.SetCurrentFlow(startPoint.CurrentFlow);
+                    endPoint.ComponentDrawnBelong.UpdateComponentFlow();
+                }
+                else
+                {
+                    endPoint.SetCurrentFlow(startPoint.CurrentFlow - (startPoint.CurrentFlow - endPoint.CurrentCapacity));
+                    endPoint.ComponentDrawnBelong.UpdateComponentFlow();
+
+                }
+               
             }
 
             if (((startPoint.CurrentFlow > endPoint.ComponentDrawnBelong.Capacity) &&(startPoint.CurrentFlow-endPoint.ComponentDrawnBelong.Capacity >= 0.1F)) && endPoint.ComponentDrawnBelong is Sink)
