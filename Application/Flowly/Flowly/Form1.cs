@@ -177,14 +177,14 @@ namespace Flowly
                                     //when connected to a component stops
                                     if (pipe.GiveMeYourConnectionPoints().Count == 2)
                                     {
-                                        flowly.HighlightAllAvailableOutputs();
+                                        
                                         pipe.PipePoints.RemoveAt(pipe.PipePoints.Count - 1);
                                         pipe.PipePoints.Add(pipe.GiveMeYourConnectionPoints().Last().PipeStartPoint);
                                         flowly.DrawPipeline(pipe);
                                         flowly.AddComponentDrawn(pipe);
 
                                         flowly.UpdateGrid();
-
+                                        flowly.HighlightAllAvailableOutputs();
                                         MessageBox.Show("Connected");
                                         pipe = null;
                                         lastPoint = new Point(-1, -1);
