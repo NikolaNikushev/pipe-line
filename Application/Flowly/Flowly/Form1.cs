@@ -182,6 +182,9 @@ namespace Flowly
                                         pipe.PipePoints.Add(pipe.GiveMeYourConnectionPoints().Last().PipeStartPoint);
                                         flowly.DrawPipeline(pipe);
                                         flowly.AddComponentDrawn(pipe);
+
+                                        flowly.UpdateGrid();
+
                                         MessageBox.Show("Connected");
                                         pipe = null;
                                         lastPoint = new Point(-1, -1);

@@ -189,6 +189,12 @@ namespace Flowly
                 case ComponentName.Sink:
                     //  cd = new Sink(rectangle);
                     cd = new Sink(rectangle, (float)theCapacity);
+                    
+                    cd.SetCurrentFlow((float)theFlow);
+                    List<ConnectionPoint> sinkInput = cd.GiveMeYourInputConnectionPoints();
+                    sinkInput[0].SetCapacity((float)theCapacity);
+                    sinkInput[0].SetCurrentFlow((float)theFlow);
+
                     break;
                 case ComponentName.Splitter:
                     cd = new Splitter(rectangle, false);
@@ -209,8 +215,9 @@ namespace Flowly
             else
             {
                 grid.AddComponentDrawnToGridList(cd);
-                grid.Paint(cd);
-
+                // grid.Paint(cd);
+                grid.PaintAllComponents();
+               
 
 
 
@@ -240,6 +247,9 @@ namespace Flowly
             //end
 
             grid.DrawPipelineAndUpdateFLow(pipe);
+
+
+           
 
         }
 
@@ -341,7 +351,7 @@ namespace Flowly
 
 
 
-
+                grid.PaintAllComponents();
 
                 return true;
 

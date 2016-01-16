@@ -300,6 +300,14 @@ namespace Flowly
             }
 
 
+            //int index = listOfComponents.IndexOf(endPoint.ComponentDrawnBelong);
+            //ListOfComponents.Insert(index, endPoint.ComponentDrawnBelong);
+            //ListOfComponents.RemoveAt(index+1);
+           
+            //Paint(endPoint.ComponentDrawnBelong);
+            //PaintAllComponents();
+
+
 
         }
 
@@ -679,11 +687,13 @@ namespace Flowly
             {
                 Pipe d = drawn as Pipe;
                 DrawPipelineAndUpdateFLow(d);
+               
                 return;
             }
             Rectangle r = drawn.RectangleBig;
             //  graphic.DrawRectangle(Pens.Red, r);
             graphic.DrawImage(drawn.Image, r);
+            graphic.DrawString("C: " + drawn.Capacity.ToString() + " / F: " + drawn.CurrentFlow.ToString(), SystemFonts.DefaultFont, Brushes.Black, r.X, r.Y - r.Width/2);
 
         }
 

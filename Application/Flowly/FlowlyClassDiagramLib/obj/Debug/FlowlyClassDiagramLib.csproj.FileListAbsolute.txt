@@ -3,3 +3,8 @@ G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\FlowlyClassDiag
 G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\FlowlyClassDiagramLib\obj\Debug\FlowlyClassDiagramLib.csprojResolveAssemblyReference.cache
 G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\FlowlyClassDiagramLib\obj\Debug\FlowlyClassDiagramLib.dll
 G:\Fontys\Fontys\Year2\OOD2\GitRepo\pipe-line\Application\Flowly\FlowlyClassDiagramLib\obj\Debug\FlowlyClassDiagramLib.pdb
+E:\IMPORTANT!!! - s\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\FlowlyClassDiagramLib\bin\Debug\FlowlyClassDiagramLib.dll
+E:\IMPORTANT!!! - s\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\FlowlyClassDiagramLib\bin\Debug\FlowlyClassDiagramLib.pdb
+E:\IMPORTANT!!! - s\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\FlowlyClassDiagramLib\obj\Debug\FlowlyClassDiagramLib.csprojResolveAssemblyReference.cache
+E:\IMPORTANT!!! - s\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\FlowlyClassDiagramLib\obj\Debug\FlowlyClassDiagramLib.dll
+E:\IMPORTANT!!! - s\Fontys\Second Year\Block 6\OOD 2\pipe-line\Application\Flowly\FlowlyClassDiagramLib\obj\Debug\FlowlyClassDiagramLib.pdb
