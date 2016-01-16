@@ -21,7 +21,7 @@ namespace Flowly
     {
         protected List<ConnectionPoint> listOfConnectionPoints;
 
-
+        
 
         protected List<ComponentDrawn> listOfComponentDrawn;
 
@@ -34,6 +34,16 @@ namespace Flowly
         protected float currentFlow;
 
         protected Rectangle rectangleBig;
+
+        private bool flowWasUpdated;
+
+        public bool FlowWasUpdated
+        {
+            get { return flowWasUpdated; }
+            set { flowWasUpdated = value; }
+        }
+
+
 
         private List<EditablePropertiesEnum> editableProperties;
 

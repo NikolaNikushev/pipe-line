@@ -190,6 +190,10 @@ namespace Flowly
         {
             //try
             //  {
+            foreach (ComponentDrawn cd in this.ListOfComponents)
+            {
+                cd.FlowWasUpdated = false;
+            }
             foreach (ConnectionPoint cp in givenComponent.GiveMeYourConnectionPoints())
             {
                 if (cp.PipeConnection != null)
@@ -214,6 +218,38 @@ namespace Flowly
 
             foreach (ConnectionPoint CP in pipe.GiveMeYourConnectionPoints())
             {
+                if (!CP.IsOutput)
+                {
+                    Queue<ComponentDrawn> elements = new Queue<ComponentDrawn>();
+                   
+                    ComponentDrawn drawnComponent = CP.ComponentDrawnBelong;
+                     CP.PipeConnection.GetEndConnectionPoint().SetCurrentFlow(drawnComponent.CurrentFlow - CP.CurrentFlow);
+                    elements.Enqueue(drawnComponent);
+                    
+                    while (elements.Count > 0)
+                    {
+                        drawnComponent = elements.Dequeue();
+                        
+                        drawnComponent.UpdateComponentFlow();
+                        drawnComponent.FlowWasUpdated = true;
+                        List<ConnectionPoint> lcp = drawnComponent.GiveMeYourOutputConnectionPoints();
+                        
+                        foreach (ConnectionPoint output in lcp)
+                        {
+                           
+                            if(output.PipeConnection != null)
+                            {
+                                if (!output.PipeConnection.GetEndConnectionPoint().ComponentDrawnBelong.FlowWasUpdated)
+                                {
+                                    output.PipeConnection.GetEndConnectionPoint().SetCurrentFlow(drawnComponent.CurrentFlow - CP.CurrentFlow);
+                                    
+                                    elements.Enqueue(output.PipeConnection.GetEndConnectionPoint().ComponentDrawnBelong);
+                                }
+                            }
+                        }
+                    }
+
+                }
                 CP.PipeConnection = null;
             }
             ListOfComponents.Remove(pipe);

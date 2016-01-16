@@ -486,6 +486,14 @@ namespace Flowly
             {
                 if (currentWorkingMode == WorkingMode.pipe)
                 {
+                    
+                        if (pipe != null)
+                        {
+                            flowly.RemovePipe(pipe);
+                            pipe = null;
+                            lastPoint = new Point(-1, -1);
+                        }
+                    
                     ResetProperties();
                     flowly.UpdateGrid();
                 }
