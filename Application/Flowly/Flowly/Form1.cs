@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Threading;
 
 namespace Flowly
 {
@@ -23,7 +24,7 @@ namespace Flowly
         Grid theGrid;
         bool askMeSave;
        
-
+    
         private WorkingMode currentWorkingMode;
 
         string nameForForm;
@@ -221,11 +222,7 @@ namespace Flowly
                                 if (currentPB.Image.Equals(toolPump.Image))
                                 {
                                     currentComponentName = ComponentName.Pump;
-
-
                                 }
-
-
                                 else if (currentPB.Image.Equals(toolPipe.Image))
                                 {
                                     currentComponentName = ComponentName.Pipe;
@@ -257,14 +254,10 @@ namespace Flowly
 
                                     }
                                 }
-
-
                             }
                             else
                             {
                                 MessageBox.Show("The element is coliding with another element.");
-
-
                             }
 
                         }
@@ -992,6 +985,30 @@ namespace Flowly
 
 
 
+        }
+        FormWindowState LastWindowState = FormWindowState.Minimized;
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+           
+            if (WindowState != LastWindowState)
+            {
+                LastWindowState = WindowState;
+
+
+                if (WindowState == FormWindowState.Maximized)
+                {
+                    //Thread th = new Thread(() => { Thread.Sleep(1000); flowly.UpdateGrid(); });
+                    //th.Start();
+                    // Maximized!
+                }
+                if (WindowState == FormWindowState.Normal)
+                {
+                    Thread th = new Thread(() => { Thread.Sleep(200); flowly.UpdateGrid(); });
+                    th.Start();
+                    // Restored!
+                }
+            }
         }
 
 

@@ -501,6 +501,7 @@
             this.Name = "Form1";
             this.Text = "Flowly - flow system / (New grid)";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
