@@ -190,10 +190,7 @@ namespace Flowly
         {
             //try
             //  {
-            foreach (ComponentDrawn cd in this.ListOfComponents)
-            {
-                cd.FlowWasUpdated = false;
-            }
+           
             foreach (ConnectionPoint cp in givenComponent.GiveMeYourConnectionPoints())
             {
                 if (cp.PipeConnection != null)
@@ -218,31 +215,35 @@ namespace Flowly
 
             foreach (ConnectionPoint CP in pipe.GiveMeYourConnectionPoints())
             {
+                foreach (ComponentDrawn cd in this.ListOfComponents)
+                {
+                    cd.FlowWasUpdated = false;
+                }
                 if (!CP.IsOutput)
                 {
                     Queue<ComponentDrawn> elements = new Queue<ComponentDrawn>();
-                   
+
                     ComponentDrawn drawnComponent = CP.ComponentDrawnBelong;
-                     CP.PipeConnection.GetEndConnectionPoint().SetCurrentFlow(drawnComponent.CurrentFlow - CP.CurrentFlow);
+                    CP.PipeConnection.GetEndConnectionPoint().SetCurrentFlow(0);
                     elements.Enqueue(drawnComponent);
-                    
+
                     while (elements.Count > 0)
                     {
                         drawnComponent = elements.Dequeue();
-                        
+
                         drawnComponent.UpdateComponentFlow();
                         drawnComponent.FlowWasUpdated = true;
                         List<ConnectionPoint> lcp = drawnComponent.GiveMeYourOutputConnectionPoints();
-                        
+
                         foreach (ConnectionPoint output in lcp)
                         {
-                           
-                            if(output.PipeConnection != null)
+
+                            if (output.PipeConnection != null)
                             {
                                 if (!output.PipeConnection.GetEndConnectionPoint().ComponentDrawnBelong.FlowWasUpdated)
                                 {
                                     output.PipeConnection.GetEndConnectionPoint().SetCurrentFlow(drawnComponent.CurrentFlow - CP.CurrentFlow);
-                                    
+
                                     elements.Enqueue(output.PipeConnection.GetEndConnectionPoint().ComponentDrawnBelong);
                                 }
                             }
@@ -533,6 +534,13 @@ namespace Flowly
                                     if (!cp.IsOutput)
                                     {
                                         cp.PipeConnection = currentPipe;
+                                        if (IsMakingCircularFlow(cp))
+                                        {
+                                            cp.PipeConnection = null;
+                                            return false;
+
+                                        }
+
                                         currentPipe.SetConnection(cp);
 
                                         if (CheckIntersectAllOther(start, end, currentPipe))
@@ -570,6 +578,24 @@ namespace Flowly
             curPipe = currentPipe;
             return true;
 
+        }
+
+        private bool IsMakingCircularFlow(ConnectionPoint cp)
+        {
+            foreach (ConnectionPoint conPon in cp.ComponentDrawnBelong.GiveMeYourOutputConnectionPoints())
+            {
+                if (conPon.PipeConnection != null)
+                {
+                    ComponentDrawn end = conPon.PipeConnection.GetEndConnectionPoint().ComponentDrawnBelong;
+                    ComponentDrawn start = cp.PipeConnection.GetStartConnectionPoint().ComponentDrawnBelong;
+                    if (end == start)
+                    {
+                        MessageBox.Show("Making circular flow!");
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private void DrawConnectionPointLimits(Brush color, ConnectionPoint cp)
