@@ -66,7 +66,7 @@ namespace Flowly
         {
             get
             {
-              
+
                 return listOfComponents;
             }
             set
@@ -75,7 +75,7 @@ namespace Flowly
             }
         }
 
-       
+
 
         public Grid(PictureBox grid)
         {
@@ -259,34 +259,20 @@ namespace Flowly
             if (startPoint == null)
             {
                 MessageBox.Show("What did you do? grid-drawpipeline");
+                return;
             }
             ConnectionPoint endPoint = pipe.GetEndConnectionPoint();
             if (endPoint == null)
             {
                 MessageBox.Show("You are drawing the pipe too soon, you need to have an endpoint!");
+                return;
             }
             Pen colorOfPen = new Pen(Color.Gray, PIPE_SIZE);
 
-            if (endPoint.CurrentCapacity >= startPoint.CurrentFlow)
-            {
-                endPoint.SetCurrentFlow(startPoint.CurrentFlow);
-                endPoint.ComponentDrawnBelong.UpdateComponentFlow();
-            }
-            else
-            {
-                if (endPoint.ComponentDrawnBelong is Splitter || endPoint.ComponentDrawnBelong is Merger)
-                {
-                    endPoint.SetCurrentFlow(startPoint.CurrentFlow);
-                    endPoint.ComponentDrawnBelong.UpdateComponentFlow();
-                }
-                else
-                {
-                    endPoint.SetCurrentFlow(startPoint.CurrentFlow - (startPoint.CurrentFlow - endPoint.CurrentCapacity));
-                    endPoint.ComponentDrawnBelong.UpdateComponentFlow();
+            endPoint.SetCurrentFlow(startPoint.CurrentFlow);
+            // endPoint.SetCurrentFlow(startPoint.CurrentFlow - (startPoint.CurrentFlow - endPoint.CurrentCapacity));
+            endPoint.ComponentDrawnBelong.UpdateComponentFlow();
 
-                }
-
-            }
 
             if (((startPoint.CurrentFlow > endPoint.ComponentDrawnBelong.Capacity) && (startPoint.CurrentFlow - endPoint.ComponentDrawnBelong.Capacity >= 0.1F)) && endPoint.ComponentDrawnBelong is Sink)
             {
@@ -303,9 +289,9 @@ namespace Flowly
             //int index = listOfComponents.IndexOf(endPoint.ComponentDrawnBelong);
             //ListOfComponents.Insert(index, endPoint.ComponentDrawnBelong);
             //ListOfComponents.RemoveAt(index+1);
-           
+
             //Paint(endPoint.ComponentDrawnBelong);
-            //PaintAllComponents();
+            // PaintAllComponents();
 
 
 
@@ -687,13 +673,13 @@ namespace Flowly
             {
                 Pipe d = drawn as Pipe;
                 DrawPipelineAndUpdateFLow(d);
-               
+
                 return;
             }
             Rectangle r = drawn.RectangleBig;
             //  graphic.DrawRectangle(Pens.Red, r);
             graphic.DrawImage(drawn.Image, r);
-            graphic.DrawString("C: " + drawn.Capacity.ToString() + " / F: " + drawn.CurrentFlow.ToString(), SystemFonts.DefaultFont, Brushes.Black, r.X, r.Y - r.Width/2);
+            graphic.DrawString("C: " + drawn.Capacity.ToString() + " / F: " + drawn.CurrentFlow.ToString(), SystemFonts.DefaultFont, Brushes.Black, r.X, r.Y - r.Width / 2);
 
         }
 

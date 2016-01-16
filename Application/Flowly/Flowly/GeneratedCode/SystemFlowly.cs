@@ -248,7 +248,7 @@ namespace Flowly
 
             grid.DrawPipelineAndUpdateFLow(pipe);
 
-
+            grid.PaintAllComponents();
            
 
         }
