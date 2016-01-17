@@ -124,6 +124,7 @@ namespace Flowly
 
         internal bool DrawPipeToCursor(Point start, Point end, ref Pipe currentPipe)
         {
+          
 
 
             return grid.DrawPipeToPoint(start, end, ref currentPipe);
@@ -243,7 +244,7 @@ namespace Flowly
         internal void DrawPipeline(Pipe pipe)
         {
             //save state
-            CreateChange("Draw pipeline.");
+           // CreateChange("Draw pipeline.");
             //end
 
             grid.DrawPipelineAndUpdateFLow(pipe);
@@ -255,6 +256,8 @@ namespace Flowly
 
         internal void AddComponentDrawn(Pipe pipe)
         {
+           
+
             grid.AddComponentDrawnToGridList(pipe);
         }
 

@@ -89,8 +89,10 @@ namespace Flowly
 
             Invoke( new Action( () =>
             {
-                listBoxStates.Items.Add(theChange.Desctiption);
-                askMeSave = true;
+                
+                    listBoxStates.Items.Add(theChange.Desctiption);
+                    askMeSave = true;
+                
             }
             ));
             
@@ -150,6 +152,7 @@ namespace Flowly
 
                                     if (cp.IsOutput)
                                     {
+                                        flowly.CreateChange("Pipeline");////////////////////////////////
                                         newPoint = cp.PipeStartPoint;
                                         // cp.SetAvailable(false);
                                         pipe = new Pipe();
@@ -471,6 +474,7 @@ namespace Flowly
 
         private void toolPipe_Click(object sender, EventArgs e)
         {
+            //flowly.CreateChange("0");
             SetTrackBarVisibility(false);
             nudCapacity.Enabled = false;
             nudFlow.Enabled = false;
