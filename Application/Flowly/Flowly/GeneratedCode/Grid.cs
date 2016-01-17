@@ -741,7 +741,7 @@ namespace Flowly
             Rectangle r = drawn.RectangleBig;
             //  graphic.DrawRectangle(Pens.Red, r);
             graphic.DrawImage(drawn.Image, r);
-            graphic.DrawString("C: " + drawn.Capacity.ToString() + " / F: " + drawn.CurrentFlow.ToString(), SystemFonts.DefaultFont, Brushes.Black, r.X, r.Y - r.Width / 2);
+            graphic.DrawString("C: " + drawn.Capacity.ToString() + " / F: " + drawn.CurrentFlow.ToString(), SystemFonts.DefaultFont, Brushes.Black, r.X, r.Y - r.Width / 3);
 
         }
 
